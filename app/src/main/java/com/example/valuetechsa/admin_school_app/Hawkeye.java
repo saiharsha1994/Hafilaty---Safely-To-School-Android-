@@ -181,8 +181,8 @@ public class Hawkeye extends FragmentActivity implements OnMapReadyCallback,OnMa
                                       String Latlong=(Latitude+","+Langitude);
                                       Log.e("LatLong.......",Latlong);
                                       buslatlist.add(Latlong);
-                                      buslat.add(Latitude);
-                                      buslong.add(Langitude);
+                                      /*buslat.add(Latitude);
+                                      buslong.add(Langitude);*/
                                 }
 
 
