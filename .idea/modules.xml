@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Admin_School_App.iml" filepath="$PROJECT_DIR$/Admin_School_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/schooly-transport-admin.iml" filepath="$PROJECT_DIR$/schooly-transport-admin.iml" />
     </modules>
   </component>
 </project>
