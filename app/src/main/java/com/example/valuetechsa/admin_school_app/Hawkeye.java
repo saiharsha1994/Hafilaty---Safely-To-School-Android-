@@ -140,6 +140,7 @@ public class Hawkeye extends FragmentActivity implements OnMapReadyCallback,OnMa
         results.add(sr1);*/
 
         int x=1;
+        int x2=3;
         return results;
     }
     class getMapDataToServerAllBuses extends AsyncTask<Void,Void,Void>
