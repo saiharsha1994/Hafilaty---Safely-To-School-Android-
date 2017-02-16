@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single"
+        android:id="@+id/dummy">
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/dashboardgroup">
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@drawable/dashboardimage"
+            android:title="@string/st_dashboard"
+            />
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/routeimagegroup">
+        <item
+            android:id="@+id/routes"
+            android:icon="@drawable/routeimage"
+            android:title="@string/st_routes" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/attendencegroup">
+        <item
+            android:id="@+id/attendence"
+            android:icon="@drawable/attendanceimage"
+            android:title="@string/st_attendance" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/transfergroup">
+        <item
+            android:id="@+id/transfer"
+            android:icon="@drawable/transferimage"
+            android:title="@string/st_transfer" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/drivermeritgroup">
+        <item
+            android:id="@+id/driverrating"
+            android:icon="@drawable/driverratingimage"
+            android:title="@string/st_driver_rating" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/messageinggroup">
+        <item
+            android:id="@+id/messaging"
+            android:icon="@drawable/messagingimage"
+            android:title="@string/st_messaging" />
+    </group>
+    <!--<group android:checkableBehavior="single">
+        <item
+            android:id="@+id/accidents"
+            android:icon="@drawable/logout1"
+            android:title="@string/st_accidents"
+            />
+    </group>-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/studentmisbehaviour"
+            android:icon="@drawable/incident"
+            android:title="@string/st_student_misbehaviour"
+            />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/contractgroup">
+        <item
+            android:id="@+id/contractcreation"
+            android:icon="@drawable/contract"
+            android:title="@string/st_manage_contract" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/buscreation">
+        <item
+            android:id="@+id/buscreationclick"
+            android:icon="@drawable/icon_bus"
+            android:title="@string/st_manage_bus" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/drivercreation">
+        <item
+            android:id="@+id/drivercreationclick"
+            android:icon="@drawable/icondriver"
+            android:title="@string/st_manage_driver" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/changelanguagegroup">
+        <item
+            android:id="@+id/changelanguage"
+            android:icon="@drawable/logout1"
+            android:title="@string/st_change_language" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/logoutgroup">
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout1"
+            android:title="@string/st_logout" />
+    </group>
+</menu>

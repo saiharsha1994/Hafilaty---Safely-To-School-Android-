@@ -1,0 +1,322 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Selection_Route_Admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"  >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="350dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="@dimen/activity_vertical_margin">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="2"
+            android:background="@drawable/tableborder">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/tablecolorblue">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/stv_create_new_route"
+                    android:id="@+id/selectcriteria" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:text="@string/stv_route_name"
+                    android:id="@+id/routename" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="93dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:text="@string/stv_trip_type"
+                    android:id="@+id/triptype" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:text="@string/stv_start_time"
+                    android:id="@+id/starttime" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:text="@string/stv_end_time"
+                    android:id="@+id/endtime" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="190dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/routenamebox"
+                        android:background="@drawable/spinnerborder"/>
+
+                <RelativeLayout
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/spinnerborder">
+                    <Spinner
+                        android:id="@+id/selecttriptypespinner"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="150dp"
+                        android:layout_height="45dp"
+                        android:textSize="40sp"
+                        android:gravity="center"
+                        />
+                </RelativeLayout>
+                <EditText
+                    android:layout_marginLeft="33dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/starttimebox"
+                    android:onClick="selectTimerd"
+                    android:background="@drawable/spinnerborder"/>
+                <EditText
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/endtimebox"
+                    android:onClick="selectTimerdend"
+                    android:background="@drawable/spinnerborder"/>
+                <Button
+                    android:layout_width="160dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:background="#2196f3"
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:onClick="gotoselection"
+                    android:textColor="@android:color/white"
+                    android:text="@string/sb_add_route"
+                    android:id="@+id/addroute" />
+            </LinearLayout>
+        </TableLayout>
+    </LinearLayout>
+    <!--
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray"/>-->
+
+        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/routelist"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            </ListView>
+
+        </LinearLayout>-->
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/darker_gray"/>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="180dp"
+        android:layout_marginBottom="247dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="2"
+            android:background="@drawable/tableborder">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/tablecolorblue">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/stv_attendance_report"
+                    android:id="@+id/attendancereport" />
+            </LinearLayout>
+            <TableLayout
+                android:id="@+id/attendencetable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="8">
+                <TableRow
+                    android:id="@+id/attedencerowid"
+                    android:background="@drawable/borderwithlightblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/stv_route_name_trip_type"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:id="@+id/routenametextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:text="@string/stv_start_end_time"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:id="@+id/Startendtimetextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/stv_no_of_stops"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:id="@+id/noofstopstextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="220dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/stv_driver_name"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:id="@+id/drivernametextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/stv_bus_no"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:id="@+id/busnotextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/stv_edit_route"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:id="@+id/editroutetextbox" />
+                </TableRow>
+            </TableLayout>
+        </TableLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:background="@drawable/tableborderlightblue">
+
+        <ListView
+            android:id="@+id/routecreatedlist"
+            android:layout_marginTop="0dp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:divider="#000000">
+        </ListView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

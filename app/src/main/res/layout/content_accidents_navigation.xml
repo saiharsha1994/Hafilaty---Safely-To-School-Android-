@@ -1,0 +1,190 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Selection_Route_Admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"  >
+    <Button
+        android:layout_width="190sp"
+        android:layout_height="45sp"
+        android:layout_marginLeft="60sp"
+        android:layout_marginTop="70sp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:background="#2196f3"
+        android:padding="8sp"
+        android:textSize="20sp"
+        android:onClick="getpopupaccident"
+        android:textColor="@android:color/white"
+        android:text="@string/sb_add_accident"
+        android:id="@+id/addaccident" />
+    <!--
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3sp"
+        android:background="@android:color/darker_gray"/>-->
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300sp"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/routelist"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        </ListView>
+
+    </LinearLayout>-->
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="3sp"
+        android:background="@android:color/darker_gray"/>-->
+
+    <RelativeLayout
+        android:id="@+id/relativelayoutdrivercreeation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120sp"
+        android:layout_marginBottom="307sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="2"
+            android:background="@drawable/tableborder">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:orientation="horizontal"
+                android:background="@drawable/tablecolorblue">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="10sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/stv_accidents_list"
+                    android:id="@+id/accidentlisttextbox" />
+            </LinearLayout>
+            <TableLayout
+                android:id="@+id/drivertable"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:stretchColumns="8">
+                <TableRow
+                    android:id="@+id/accidentrowid"
+                    android:background="@drawable/borderwithlightblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="150sp"
+                        android:layout_height="50sp"
+                        android:layout_marginTop="10sp"
+                        android:text="@string/stv_date"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/accidentdatetextbox"
+                        />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="220sp"
+                        android:layout_height="50sp"
+                        android:text="@string/stv_driver_name"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10sp"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/accidentdrivernametextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="250sp"
+                        android:layout_height="50sp"
+                        android:layout_marginTop="10sp"
+                        android:text="@string/stv_details"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/accidentdetailstextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="220sp"
+                        android:layout_height="50sp"
+                        android:layout_marginTop="10sp"
+                        android:text="@string/stv_fine_status"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/accidentfinetextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="80sp"
+                        android:layout_height="50sp"
+                        android:layout_marginTop="10sp"
+                        android:text="@string/stv_options"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/accidentoptionstextbox" />
+                </TableRow>
+            </TableLayout>
+        </TableLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="220sp"
+        android:layout_marginBottom="1sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:paddingLeft="0sp"
+        android:paddingRight="0sp">
+
+        <ListView
+            android:id="@+id/accidentselectedlist"
+            android:layout_marginTop="0sp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:longClickable="true"
+            android:divider="#000000">
+        </ListView>
+    </RelativeLayout>
+
+
+</RelativeLayout>

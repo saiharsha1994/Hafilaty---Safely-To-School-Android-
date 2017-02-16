@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Transport Admin</string>
+    <string name="title_activity_student__selection__route__admin">Map</string>
+    <string name="title_activity_students__selection__search__admin">Map</string>
+    <string name="title_activity_hawkeye">Map</string>
+
+    <color name="bgColor">#FAFEFF</color>
+    <color name="LoginPageColor">#36d7b7</color>
+    <string name="title_activity_drivermeritnavigation">drivermeritnavigation</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_student__selection__search__admin__navigation">
+        Student_Selection_Search_Admin_Navigation
+    </string>
+    <string name="title_activity_hawkeye_navigation">Hawkeye_navigation</string>
+    <string name="title_activity_student__attendence__navigation">Student_Attendence_Navigation
+    </string>
+    <string name="title_activity_transfer__student__navigation">Transfer_Student_Navigation</string>
+    <string name="title_activity_messaging__navigation">Messaging_Navigation</string>
+    <string name="title_activity_accidents_navigation">Accidents_Navigation</string>
+    <string name="title_activity_student_misbehaviour_navigation">Student_Misbehaviour_Navigation</string>
+    <string name="title_activity_student__route__creation__navigation">
+        Student_Route_Creation_Navigation
+    </string>
+    <string name="title_activity_bus__creation__navigation">Bus_Creation_Navigation</string>
+    <string name="title_activity_driver__create__navigation">Driver_Create_Navigation</string>
+    <string name="title_activity_contract__creation__navigation">Contract_Creation_Navigation
+    </string>
+
+
+    <!--String values for translation-->
+    <!--TextView-->
+    <string name="stv_select_criteria">SELECT CRITERIA</string>
+    <string name="stv_select_month">Select Month:</string>
+    <string name="stv_bus_list">BUS LIST</string>
+    <string name="stv_live_map">LIVE MAP</string>
+    <string name="stv_transport">Transport</string>
+    <string name="stv_admin">Admin</string>
+    <string name="stv_username">Username</string>
+    <string name="stv_password">Password</string>
+    <string name="stv_route_name">Route Name :</string>
+    <string name="stv_start_time">Start Time :</string>
+    <string name="stv_trip">Trip :</string>
+    <string name="stv_departure_time">Departure Time :</string>
+    <string name="stv_search_location">Search Location :</string>
+    <string name="stv_create_new_route">CREATE NEW ROUTE</string>
+    <string name="stv_trip_type">Trip Type:</string>
+    <string name="stv_end_time">End Time:</string>
+    <string name="stv_attendance_report">ATTENDANCE REPORT</string>
+    <string name="stv_route_name_trip_type">Route Name-Trip Type</string>
+    <string name="stv_start_end_time">Start-End Time</string>
+    <string name="stv_no_of_stops">No. Of Stops</string>
+    <string name="stv_driver_name">Driver Name</string>
+    <string name="stv_bus_no">Bus No.</string>
+    <string name="stv_edit_route">Edit Route</string>
+    <string name="stv_select_route">Select Route:</string>
+    <string name="stv_select_trip_type">Select Trip Type:</string>
+    <string name="stv_select_date">Select Date:</string>
+    <string name="stv_student_name">Student Name</string>
+    <string name="stv_studentid">StudentID</string>
+    <string name="stv_parent_name">Parent Name</string>
+    <string name="stv_contact_details">Contact Details</string>
+    <string name="stv_select_student_location_for_route">SELECT STUDENT LOCATION FOR ROUTE</string>
+    <string name="stv_selected_students">SELECTED STUDENTS</string>
+    <string name="stv_bus_id">Bus Id</string>
+    <string name="stv_bus_name">Bus Name</string>
+    <string name="stv_chassis_number">Chassis Number</string>
+    <string name="stv_plate_number">Plate Number</string>
+    <string name="stv_fahas">Fahas</string>
+    <string name="stv_contract_list">CONTRACT LIST </string>
+    <string name="stv_vendor_name">Vendor Name</string>
+    <string name="stv_vendor_email">Vendor Email</string>
+    <string name="stv_bus_driver_provided">Bus-Driver Provided</string>
+    <string name="stv_expiry_date">Expiry Date</string>
+    <string name="stv_driver_list">DRIVER LIST</string>
+    <string name="stv_nationality">Nationality</string>
+    <string name="stv_mobile_number">Mobile Number</string>
+    <string name="stv_assigned_bus">Assigned Bus</string>
+    <string name="stv_options">Options</string>
+    <string name="stv_select_recipient_criteria">SELECT RECIPIENT CRITERIA</string>
+    <string name="stv_student_teacher">Student/Teacher:</string>
+    <string name="stv_individual_selection">INDIVIDUAL SELECTION</string>
+    <string name="stv_type">Type</string>
+    <string name="stv_name">Name</string>
+    <string name="stv_id">ID</string>
+    <string name="stv_location">Location</string>
+    <string name="stv_check_in">In</string>
+    <string name="stv_check_out">Out</string>
+    <string name="stv_route_list">ROUTE LIST </string>
+    <string name="stv_transfer_from_route">Transfer From Route:</string>
+    <string name="stv_transfer_to_route">Transfer To Route:</string>
+    <string name="stv_teacher_student">Teacher/Student</string>
+    <string name="stv_manage_transfer">MANAGE TRANSFER</string>
+    <string name="stv_speed_limit">Speed Limit :</string>
+    <string name="stv_rash_driving">Rash Driving :</string>
+    <string name="stv_time_maintenance">Time Maintenance :</string>
+    <string name="stv_welcome_admin">Welcome Admin</string>
+    <string name="stv_do_you_want_to_add">Do You Want To Add?</string>
+    <string name="stv_manage_bus">Manage Bus</string>
+    <string name="stv_bus_name2">Bus Name:     </string>
+    <string name="stv_bus_type2">Bus Type:    </string>
+    <string name="stv_chassis_number2">Chassis Number:     </string>
+    <string name="stv_plate_number2">Plate Number:     </string>
+    <string name="stv_fahas2">Fahas:     </string>
+    <string name="stv_upload_license">Upload License:     </string>
+    <string name="stv_no_file_chosen">No File Chosen</string>
+    <string name="stv_license_expiry_date">License Expiry Date:     </string>
+    <string name="stv_license_renewal_date">License Renewal Date:     </string>
+    <string name="stv_upload_mvpi">Upload MVPI:     </string>
+    <string name="stv_mvpi_expiry_date">MVPI Expiry Date:     </string>
+    <string name="stv_manage_contract">    Manage Contract</string>
+    <string name="stv_contract_date">Contract Date:     </string>
+    <string name="stv_vendor_name2">Vendor Name:     </string>
+    <string name="stv_vendor_email2">Vendor Email:     </string>
+    <string name="stv_vendor_mobile">Vendor Mobile:     </string>
+    <string name="stv_bus_provided">Bus Provided:     </string>
+    <string name="stv_driver_provided">Driver Provided:     </string>
+    <string name="stv_expiry_date2">Expiry Date:     </string>
+    <string name="stv_additional_details">Additional Details:    </string>
+    <string name="stv_upload_contract">Upload Contract:     </string>
+    <string name="stv_manage_driver">Manage Driver</string>
+    <string name="stv_name2">Name:     </string>
+    <string name="stv_mobile">Mobile:     </string>
+    <string name="stv_password2">Password:     </string>
+    <string name="stv_nationality2">Nationality:     </string>
+    <string name="stv_iqama_number">Iqama Number:     </string>
+    <string name="stv_iqama_expiry_date">Iqama Expiry Date:     </string>
+    <string name="stv_passport_number">Passport Number:     </string>
+    <string name="stv_passport_expiry_date">Passport Expiry Date:     </string>
+    <string name="stv_license_number">License Number:     </string>
+    <string name="stv_assign_bus">Assign Bus:     </string>
+    <string name="stv_upload_iqama">Upload Iqama:     </string>
+    <string name="stv_upload_passport">Upload Passport:     </string>
+    <string name="stv_upload_image">Upload Image:     </string>
+    <string name="stv_contact_no">Contact No</string>
+    <string name="stv_do_you_want_to_remove">Do you want to remove?</string>
+    <string name="stv_view_add_records">VIEW / ADD RECORDS</string>
+    <string name="stv_select_bus">Select Bus:</string>
+    <string name="stv_student_misbehaviour_records">STUDENT MISBEHAVIOUR RECORDS</string>
+    <string name="stv_details">Details</string>
+    <string name="stv_add_record">Add Record</string>
+    <string name="stv_select_student">Select Student:</string>
+    <string name="stv_details2">Details:</string>
+    <string name="stv_accidents_list">ACCIDENTS LIST</string>
+    <string name="stv_date">Date</string>
+    <string name="stv_fine_status">Fine Amount-Status</string>
+
+    <!--Button-->
+    <string name="sb_apply">Apply</string>
+    <string name="sb_submit">SUBMIT</string>
+    <string name="sb_forgot_password">Forgot Password</string>
+    <string name="sb_send_password">SEND PASSWORD</string>
+    <string name="sb_login">Login111111</string>
+    <string name="sb_add_details">Add Details</string>
+    <string name="sb_add_route">ADD ROUTE</string>
+    <string name="sb_save">Save</string>
+    <string name="sb_cancel">Cancel</string>
+    <string name="sb_add_bus">ADD BUS111</string>
+    <string name="sb_add_contract">ADD CONTRACT111</string>
+    <string name="sb_add_drivers">ADD DRIVERS111</string>
+    <string name="sb_previous_month">&lt;PREVIOUS MONTH</string>
+    <string name="sb_next_month">NEXT MONTH&gt;</string>
+    <string name="sb_get_list">GET LIST</string>
+    <string name="sb_send_message">SEND MESSAGE</string>
+    <string name="sb_select">SELECT</string>
+    <string name="sb_transfer_selected">TRANSFER SELECTED</string>
+    <string name="sb_add">Add</string>
+    <string name="sb_choose_file">CHOOSE FILE</string>
+    <string name="sb_add_driver">ADD DRIVER</string>
+    <string name="sb_send_alert">Send Alert</string>
+    <string name="sb_delete">Delete</string>
+    <string name="sb_view_records">VIEW RECORDS</string>
+    <string name="sb_add_new_record">ADD NEW RECORD</string>
+    <string name="sb_add_accident">ADD ACCIDENT</string>
+    <string name="sb_close">CLOSE</string>
+
+    <!--EditText-->
+    <string name="set_email_id">Email Id</string>
+    <string name="set_enter_code">Enter your Code</string>
+    <string name="set_enter_password">Enter New Password</string>
+    <string name="set_enter_route_name">Enter The Route name</string>
+    <string name="set_time">Time</string>
+    <string name="set_search">Search</string>
+    <string name="set_enter_message_here">Enter message here</string>
+
+
+    <string name="st_dashboard">DASHBOARD1</string>
+    <string name="st_routes">ROUTES</string>
+    <string name="st_attendance">ATTENDANCE1</string>
+    <string name="st_transfer">TRANSFER1</string>
+    <string name="st_driver_rating">DRIVER RATING</string>
+    <string name="st_messaging">MESSAGING</string>
+    <string name="st_add_new_bus">ADD NEW BUS</string>
+    <string name="st_add_new_driver">ADD NEW DRIVER</string>
+    <string name="st_logout">LOGOUT</string>
+    <string name="st_change_language">CHANGE LANGUAGE</string>
+    <string name="st_manage_contract">MANAGE CONTRACT</string>
+    <string name="st_manage_bus">MANAGE BUS</string>
+    <string name="st_manage_driver">MANAGE DRIVER</string>
+    <string name="st_student_misbehaviour">MISBEHAVIOUR</string>
+    <string name="st_accidents">ACCIDENTS</string>
+
+</resources>

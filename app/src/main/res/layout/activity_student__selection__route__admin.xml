@@ -1,0 +1,156 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Selection_Route_Admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"  >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="@string/stv_route_name"
+            android:id="@+id/routename" />
+        <EditText
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:id="@+id/routenamebox"
+            android:hint="@string/set_enter_route_name" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="@string/stv_trip"
+            android:id="@+id/trip" />
+        <Spinner
+            android:id="@+id/tripbox"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="@string/stv_start_time"
+            android:id="@+id/starttime" />
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:onClick="selectTimer"
+            android:id="@+id/starttimebox"
+            android:hint="@string/set_time" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="@string/stv_departure_time"
+            android:id="@+id/depaturetime" />
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:onClick="selectTimerd"
+            android:id="@+id/starttimeboxd"
+            android:hint="@string/set_time" />
+        <Button
+            android:layout_marginLeft="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sb_add_details"
+            android:id="@+id/adddetails" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/routelist"
+            android:layout_height="80dp"
+            android:layout_width="match_parent">
+        </ListView>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="@string/stv_search_location"
+            android:id="@+id/search" />
+        <EditText
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="selectTimerd"
+            android:id="@+id/searchbox"
+            android:hint="@string/set_search" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/darker_gray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ListView
+            android:id="@+id/studentlist"
+            android:layout_height="match_parent"
+            android:layout_width="200dp">
+        </ListView>
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"/>
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.valuetechsa.admin_school_app.Student_Selection_Route_Admin" />
+    </LinearLayout>
+</LinearLayout>
