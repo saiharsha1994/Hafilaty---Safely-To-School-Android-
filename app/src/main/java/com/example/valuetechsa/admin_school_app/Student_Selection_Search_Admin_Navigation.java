@@ -688,7 +688,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                                     String droprouteid=obj.getString("drop_route_id");
                                     if(routetypenavigation.equalsIgnoreCase("1")){
                                         if(pickuprouteid.equalsIgnoreCase("0")){
-                                            Log.e("!!!!!","!!!!!!!312312!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+teachernamee);
+                                            Log.e("!!!!!","!!!!!!!3123122312312!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+teachernamee);
                                             teacherid.add(teacheridfrom);
                                             teachername.add(teachernamee);
                                             teacherlat.add(Latitude);
