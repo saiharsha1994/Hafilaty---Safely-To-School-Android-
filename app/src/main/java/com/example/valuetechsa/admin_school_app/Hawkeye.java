@@ -139,6 +139,7 @@ public class Hawkeye extends FragmentActivity implements OnMapReadyCallback,OnMa
         sr1.setPhone("612-555-8214");
         results.add(sr1);*/
 
+        int x=1;
         return results;
     }
     class getMapDataToServerAllBuses extends AsyncTask<Void,Void,Void>
