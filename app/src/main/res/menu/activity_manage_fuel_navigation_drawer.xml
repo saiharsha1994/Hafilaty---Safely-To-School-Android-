@@ -55,13 +55,6 @@
             android:icon="@drawable/messagingimage"
             android:title="@string/st_messaging" />
     </group>
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/studentmisbehaviour"
-            android:icon="@drawable/logout1"
-            android:title="@string/st_student_misbehaviour"
-            />
-    </group>
     <!--<group android:checkableBehavior="single">
         <item
             android:id="@+id/accidents"
@@ -69,19 +62,12 @@
             android:title="@string/st_accidents"
             />
     </group>-->
-    <group android:checkableBehavior="single"
-        android:id="@+id/buscreation">
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/buscreationclick"
-            android:icon="@drawable/logout1"
-            android:title="@string/st_add_new_bus" />
-    </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/drivercreation">
-        <item
-            android:id="@+id/drivercreationclick"
-            android:icon="@drawable/logout1"
-            android:title="@string/st_add_new_driver" />
+            android:id="@+id/studentmisbehaviour"
+            android:icon="@drawable/incident"
+            android:title="@string/st_student_misbehaviour"
+            />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/managefuelgroup">
@@ -89,6 +75,34 @@
             android:id="@+id/managefuel"
             android:icon="@drawable/manage_fuel_image"
             android:title="@string/st_manage_fuel" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/contractgroup">
+        <item
+            android:id="@+id/contractcreation"
+            android:icon="@drawable/contract"
+            android:title="@string/st_manage_contract" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/buscreation">
+        <item
+            android:id="@+id/buscreationclick"
+            android:icon="@drawable/icon_bus"
+            android:title="@string/st_manage_bus" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/drivercreation">
+        <item
+            android:id="@+id/drivercreationclick"
+            android:icon="@drawable/icondriver"
+            android:title="@string/st_manage_driver" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/changelanguagegroup">
+        <item
+            android:id="@+id/changelanguage"
+            android:icon="@drawable/logout1"
+            android:title="@string/st_change_language" />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/logoutgroup">

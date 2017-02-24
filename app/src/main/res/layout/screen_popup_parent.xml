@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_element"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@drawable/tablecolorblue">
+            <TextView
+                android:id="@+id/blueStudentnameremovetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="30dp"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/white"
+                android:text="@string/stv_add_new_parent"
+                android:gravity="center"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50sp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:layout_marginLeft="280sp"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="@string/stv_name2"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    />
+                <EditText
+                    android:layout_width="200sp"
+                    android:layout_height="50sp"
+                    android:id="@+id/parentnameedit"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/spinnerborder"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp"
+                android:layout_marginLeft="285sp">
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="@string/stv_email"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    />
+                <EditText
+                    android:layout_width="200sp"
+                    android:layout_height="50sp"
+                    android:id="@+id/parentemailedit"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/spinnerborder"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp"
+                android:layout_marginLeft="227sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="@string/stv_password2"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    />
+
+                <EditText
+                    android:layout_width="200sp"
+                    android:layout_height="50sp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/parentpasswordedit"
+                    android:background="@drawable/spinnerborder"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp"
+                android:layout_marginLeft="273sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="@string/stv_phone"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    />
+
+                <EditText
+                    android:layout_width="200sp"
+                    android:layout_height="50sp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/parentphoneedit"
+                    android:background="@drawable/spinnerborder"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp"
+                android:layout_marginLeft="250sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="@string/stv_address"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    />
+
+                <EditText
+                    android:layout_width="200sp"
+                    android:layout_height="50sp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/parentaddressedit"
+                    android:background="@drawable/spinnerborder"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp"
+                android:layout_marginLeft="215sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="@string/stv_profession"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    />
+
+                <EditText
+                    android:layout_width="200sp"
+                    android:layout_height="50sp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/parentprofessionedit"
+                    android:background="@drawable/spinnerborder"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center">
+                    <Button
+                        android:id="@+id/btn_add_popup_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sb_add_parent"
+
+                        android:background="#2196f3"
+                        android:padding="8dp"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"/>
+                    <Button
+                        android:id="@+id/btn_close_popup_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sb_cancel"
+                        android:layout_marginLeft="120sp"
+                        android:background="#2196f3"
+                        android:padding="8dp"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

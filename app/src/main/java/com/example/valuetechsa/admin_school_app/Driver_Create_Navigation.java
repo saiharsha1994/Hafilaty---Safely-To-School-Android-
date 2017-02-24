@@ -2347,6 +2347,10 @@ public class Driver_Create_Navigation extends AppCompatActivity
             startActivity(intent);
 
         }
+        else if (id == R.id.managefuel) {
+            Intent intent = new Intent(this, Manage_Fuel_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
         }

@@ -1084,6 +1084,14 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
             mDrawerLayout.closeDrawers();
 
         }
+        else if (id == R.id.managefuel) {
+            Intent intent = new Intent(this, Manage_Fuel_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.parents) {
+            Intent intent = new Intent(this, Parent_Creation_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.contractcreation) {
             Intent intent = new Intent(this, Contract_Creation_Navigation.class);
             startActivity(intent);

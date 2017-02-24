@@ -1159,6 +1159,10 @@ public class Transfer_Student_Navigation extends AppCompatActivity
             Intent intent = new Intent(this, Driver_Create_Navigation.class);
             startActivity(intent);
         }
+        else if (id == R.id.managefuel) {
+            Intent intent = new Intent(this, Manage_Fuel_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.studentmisbehaviour) {
             Intent intent = new Intent(this, Student_Misbehaviour_Navigation.class);
             startActivity(intent);

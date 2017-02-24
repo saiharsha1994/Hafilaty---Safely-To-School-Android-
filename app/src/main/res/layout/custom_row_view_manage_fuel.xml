@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:id="@+id/colorlistchangebus"
+    android:background="@drawable/spinnerborder">
+
+
+    <TextView android:id="@+id/fueldatelisttext"
+        android:minHeight="50dp"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"/>
+    <LinearLayout
+        android:layout_width="1.5dp"
+        android:layout_height="match_parent"
+        android:id="@+id/secondlinebus"
+        android:background="@drawable/tablerowcolorblack"
+        android:orientation="horizontal">
+    </LinearLayout>
+    <TextView android:id="@+id/drivernamelisttext"
+        android:minHeight="50dp"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical|center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="1.5dp"
+        android:layout_height="match_parent"
+        android:id="@+id/thirdlinebus"
+        android:background="@drawable/tablerowcolorblack"
+        android:orientation="horizontal">
+    </LinearLayout>
+    <TextView android:id="@+id/amountlisttext"
+        android:minHeight="50dp"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical|center_horizontal"/>
+    <LinearLayout
+        android:layout_width="1.5dp"
+        android:layout_height="match_parent"
+        android:id="@+id/fourthlinebus"
+        android:background="@drawable/tablerowcolorblack"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <TextView android:id="@+id/amountspentlisttext"
+        android:minHeight="50dp"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical|center_horizontal"/>
+    <LinearLayout
+        android:layout_width="1.5dp"
+        android:layout_height="match_parent"
+        android:id="@+id/fifthlinebus"
+        android:background="@drawable/tablerowcolorblack"
+        android:orientation="horizontal">
+    </LinearLayout>
+    <TextView android:id="@+id/balancelisttext"
+        android:minHeight="50dp"
+        android:layout_width="120sp"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical|center_horizontal"/>
+    <LinearLayout
+        android:layout_width="1.5dp"
+        android:layout_height="match_parent"
+        android:id="@+id/linebus2"
+        android:background="@drawable/tablerowcolorblack"
+        android:orientation="horizontal">
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/spinnerborder">
+        <Spinner
+            android:id="@+id/fueloption"
+            android:layout_marginTop="5dp"
+            android:layout_width="110dp"
+            android:layout_height="35dp"
+            android:textSize="25sp"
+            android:gravity="center|center_horizontal"
+            />
+    </RelativeLayout>
+</LinearLayout>
