@@ -1185,8 +1185,8 @@ public class Contract_Creation_Navigation extends AppCompatActivity
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             mDrawerLayout.closeDrawers();
         }
-        else if (id == R.id.buscreationclick) {
-            Intent intent = new Intent(this, Bus_Creation_Navigation.class);
+        else if (id == R.id.managefuel) {
+            Intent intent = new Intent(this, Manage_Fuel_Navigation.class);
             startActivity(intent);
         }
         else if (id == R.id.drivercreationclick) {
