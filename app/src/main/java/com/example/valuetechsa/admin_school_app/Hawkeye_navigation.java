@@ -1309,12 +1309,25 @@ public class Hawkeye_navigation extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.studentmisbehaviour) {
+            threadloop=false;
             Intent intent = new Intent(this, Student_Misbehaviour_Navigation.class);
+            startActivity(intent);
+
+        }
+        else if (id == R.id.accident) {
+            threadloop=false;
+            Intent intent = new Intent(this, Accident_Navigation.class);
             startActivity(intent);
 
         }
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
+        }
+        else if (id == R.id.leave) {
+            threadloop=false;
+            Intent intent = new Intent(this, Leave_Navigation.class);
+            startActivity(intent);
+
         }
         else if (id == R.id.logout) {
             threadloop=false;

@@ -77,8 +77,10 @@
                     android:paddingRight="38dp"
                     />
                 <EditText
-                    android:layout_width="200sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50sp"
+                    android:minWidth="200sp"
+                    android:singleLine="true"
                     android:id="@+id/vendornameedit"
                     android:background="@drawable/spinnerborder"/>
             </LinearLayout>
@@ -98,8 +100,10 @@
                     android:paddingRight="38dp"
                     />
                 <EditText
-                    android:layout_width="200sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50sp"
+                    android:minWidth="200sp"
+                    android:singleLine="true"
                     android:id="@+id/vendoremailedit"
                     android:background="@drawable/spinnerborder"/>
             </LinearLayout>
@@ -119,9 +123,11 @@
                     android:paddingRight="38dp"
                     />
                 <EditText
-                    android:layout_width="200sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50sp"
                     android:inputType="number"
+                    android:minWidth="200sp"
+                    android:singleLine="true"
                     android:id="@+id/vendormobileedit"
                     android:background="@drawable/spinnerborder"/>
 
@@ -142,8 +148,10 @@
                     android:paddingRight="38dp"
                     />
                 <EditText
-                    android:layout_width="200sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50sp"
+                    android:minWidth="200sp"
+                    android:singleLine="true"
                     android:id="@+id/bussesprovidededit"
                     android:inputType="number"
                     android:background="@drawable/spinnerborder"/>
@@ -164,8 +172,10 @@
                     android:paddingRight="38dp"
                     />
                 <EditText
-                    android:layout_width="200sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50sp"
+                    android:minWidth="200sp"
+                    android:singleLine="true"
                     android:id="@+id/driverprovidededit"
                     android:inputType="number"
                     android:background="@drawable/spinnerborder"/>
@@ -223,6 +233,7 @@
                     android:background="@drawable/spinnerborder"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/afterthis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -247,7 +258,7 @@
                     android:textColor="@android:color/white"/>
                 <TextView
                     android:layout_width="300sp"
-                    android:layout_height="50sp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10sp"
                     android:id="@+id/uploadcontractfilenametext"
                     android:textSize="20sp"

@@ -79,9 +79,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Hawkeye_navigation"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_hawkeye_navigation"
             android:screenOrientation="landscape"
-            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Student_Attendence_Navigation"
@@ -154,21 +154,29 @@
             android:name=".Contract_Creation_Navigation"
             android:label="@string/title_activity_contract__creation__navigation"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service
-            android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service
-            android:name=".MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+        <activity
+            android:name=".Accident_Navigation"
+            android:label="@string/title_activity_accident__navigation"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Leave_Navigation"
+            android:label="@string/title_activity_leave__navigation"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

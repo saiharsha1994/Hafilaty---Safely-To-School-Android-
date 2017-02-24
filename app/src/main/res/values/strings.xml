@@ -32,6 +32,8 @@
     <string name="title_activity_driver__create__navigation">Driver_Create_Navigation</string>
     <string name="title_activity_contract__creation__navigation">Contract_Creation_Navigation
     </string>
+     <string name="title_activity_accident__navigation">Accident_Navigation</string>
+    <string name="title_activity_leave__navigation">Leave_Navigation</string>
 
 
     <!--String values for translation-->
@@ -172,6 +174,22 @@
     <string name="stv_email2">Email</string>
     <string name="stv_children">Children</string>
 
+    <string name="stv_incident_date">Date</string>
+    <string name="stv_incident_details">Details</string>
+    <string name="stv_incident_upload_report">Upload Reports</string>
+    <string name="stv_incident_select_bus">Select Bus</string>
+    <string name="stv_incident_select_driver">Select Driver</string>
+    <string name="stv_incident_fine_amount">Fine Amount</string>
+    <string name="stv_incident_fine_status">Status</string>
+    <string name="stv_incident_upload_documents">Upload Document</string>
+    <string name="stv_incident_submit">Submit</string>
+
+    <string name="stv_Leave_Two_list">STUDENTS LIST</string>
+    <string name="stv_Leave_Two_student_name">Name</string>
+    <string name="stv_Leave_Two_from_date">From Date</string>
+    <string name="stv_Leave_Two_to_date">To Date</string>
+    <string name="stv_Leave_Two_reason">Reason</string>
+    <string name="stv_Leave_Two_status">Status</string>
     <!--Button-->
     <string name="sb_apply">Apply</string>
     <string name="sb_submit">SUBMIT</string>
@@ -223,13 +241,19 @@
     <string name="st_add_new_bus">ADD NEW BUS</string>
     <string name="st_add_new_driver">ADD NEW DRIVER</string>
     <string name="st_logout">LOGOUT</string>
+    <string name="st_leave">MANAGE LEAVES</string>
     <string name="st_change_language">CHANGE LANGUAGE</string>
+    <string name="st_accident">ACCIDENT</string>
     <string name="st_manage_contract">MANAGE CONTRACT</string>
     <string name="st_manage_bus">MANAGE BUS</string>
     <string name="st_manage_driver">MANAGE DRIVER</string>
     <string name="st_student_misbehaviour">MISBEHAVIOUR</string>
     <string name="st_accidents">ACCIDENTS</string>
+<<<<<<< app/src/main/res/values/strings.xml
+   
+=======
     <string name="st_manage_fuel">MANAGE FUEL</string>
     <string name="st_parents">PARENTS</string>
+>>>>>>> app/src/main/res/values/strings.xml
 
 </resources>
