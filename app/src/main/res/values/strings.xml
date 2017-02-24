@@ -249,11 +249,7 @@
     <string name="st_manage_driver">MANAGE DRIVER</string>
     <string name="st_student_misbehaviour">MISBEHAVIOUR</string>
     <string name="st_accidents">ACCIDENTS</string>
-<<<<<<< app/src/main/res/values/strings.xml
-   
-=======
     <string name="st_manage_fuel">MANAGE FUEL</string>
     <string name="st_parents">PARENTS</string>
->>>>>>> app/src/main/res/values/strings.xml
 
 </resources>
