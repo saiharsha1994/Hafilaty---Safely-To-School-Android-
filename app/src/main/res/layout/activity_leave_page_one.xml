@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:background="@drawable/spinnerborder">
+        <Spinner
+            android:id="@+id/leaveonespinneroption"
+            android:layout_marginTop="5dp"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
+            android:textSize="25sp"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayoutleaveonecreeation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="2">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:orientation="horizontal"
+                android:background="@drawable/tablecolorblue">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="10sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/stv_Leave_Two_list"
+                    android:id="@+id/leaveonelisttextbox" />
+            </LinearLayout>
+            <TableLayout
+                android:id="@+id/leaeonetable"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:stretchColumns="8">
+                <TableRow
+                    android:id="@+id/leaveonerowid"
+                    android:background="@drawable/borderwithlightblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0sp"
+                        android:layout_height="50sp"
+                        android:text="@string/stv_Leave_Two_student_name"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/leaveonestudentnametextbox"
+                        />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0sp"
+                        android:layout_height="50sp"
+                        android:text="@string/stv_Leave_Two_from_date"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/leaveonefromdatetextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0sp"
+                        android:layout_height="50sp"
+                        android:text="@string/stv_Leave_Two_to_date"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/leaveonetodatetextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0sp"
+                        android:layout_height="50sp"
+                        android:text="@string/stv_Leave_Two_reason"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/leaveonereasontextbox" />
+                    <LinearLayout
+                        android:layout_width="1.5sp"
+                        android:layout_height="match_parent" >
+
+                        <View style="@style/Divider" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="0sp"
+                        android:layout_height="50sp"
+                        android:text="@string/stv_Leave_Two_status"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:id="@+id/leaveonestatustextbox" />
+                </TableRow>
+            </TableLayout>
+        </TableLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/leaveonelist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150sp"
+        android:layout_marginBottom="1sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:paddingLeft="0sp"
+        android:paddingRight="0sp">
+
+        <ListView
+            android:id="@+id/leaveoneselectedlist"
+            android:layout_marginTop="0sp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:longClickable="true"
+            android:divider="#000000">
+        </ListView>
+    </RelativeLayout>
+
+
+</RelativeLayout>

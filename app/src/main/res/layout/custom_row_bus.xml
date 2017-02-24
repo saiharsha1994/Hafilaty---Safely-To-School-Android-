@@ -8,10 +8,9 @@
 
     <TextView android:id="@+id/busidtext"
         android:layout_width="80sp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="20dp"
-        android:minHeight="50dp"
-        android:layout_marginTop="5dp"
+        android:minHeight="55dp"
         android:gravity="center_vertical|center_horizontal"
         />
     <LinearLayout
@@ -22,12 +21,10 @@
         android:orientation="horizontal">
     </LinearLayout>
     <TextView android:id="@+id/routenamebustext"
-        android:minHeight="50dp"
         android:layout_width="230sp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center_vertical|center_horizontal"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"/>
+        android:textSize="20dp" />
     <LinearLayout
         android:layout_width="1.5dp"
         android:layout_height="match_parent"
@@ -36,11 +33,9 @@
         android:orientation="horizontal">
     </LinearLayout>
     <TextView android:id="@+id/chassisnumbertext"
-        android:minHeight="50dp"
         android:layout_width="180sp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="20dp"
-        android:layout_marginTop="5dp"
         android:gravity="center_vertical|center_horizontal"/>
 
     <LinearLayout
@@ -51,11 +46,9 @@
         android:orientation="horizontal">
     </LinearLayout>
     <TextView android:id="@+id/platenotext"
-        android:minHeight="50dp"
         android:layout_width="180sp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="20dp"
-        android:layout_marginTop="5dp"
         android:gravity="center_vertical|center_horizontal"/>
     <LinearLayout
         android:layout_width="1.5dp"
@@ -72,11 +65,9 @@
         android:layout_marginTop="5dp"
         android:gravity="center_vertical|center_horizontal"/>-->
     <TextView android:id="@+id/fahastext"
-        android:minHeight="50dp"
-        android:layout_width="120sp"
-        android:layout_height="wrap_content"
+        android:layout_width="180sp"
+        android:layout_height="match_parent"
         android:textSize="20dp"
-        android:layout_marginTop="5dp"
         android:gravity="center_vertical|center_horizontal"/>
     <LinearLayout
         android:layout_width="1.5dp"
@@ -86,10 +77,13 @@
         android:orientation="horizontal">
     </LinearLayout>
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal">
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
-        android:layout_marginTop="5dp"
         android:background="@drawable/spinnerborder">
         <Spinner
             android:id="@+id/busoption"
@@ -99,5 +93,6 @@
             android:textSize="25sp"
             android:gravity="center"
             />
+    </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

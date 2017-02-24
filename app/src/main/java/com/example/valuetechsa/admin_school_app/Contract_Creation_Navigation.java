@@ -109,6 +109,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
     static String dateusergiven="empty";
     static String dateprintgiven="empty";
     static int iii=0;
+    int globaldeletecontractid=0;
     String contractdateintosserver,expiredateintoserver;
     static EditText contractdateedit,expiredateedit;
     Button uploadbutton;
@@ -733,6 +734,72 @@ public class Contract_Creation_Navigation extends AppCompatActivity
             startActivity(intent);
         }
     }
+
+    class getContractDeleteServer extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected void onPreExecute(){
+            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, "Please wait.",
+                    "", true);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try
+            {
+                try
+                {
+                    Jsonfunctions sh = new Jsonfunctions();
+                    ServiceModel reg=new ServiceModel();
+                    Log.e("url", Config.ip+"Contracts_api/deleteContract/contract_id/"+globaldeletecontractid);
+                    String jsonStr1 = sh.makeServiceCall(Config.ip+"Contracts_api/deleteContract/contract_id/"+globaldeletecontractid,Jsonfunctions.GET);
+
+                    if (jsonStr1 != null)
+                    {
+                        try
+                        {
+                            JSONObject Jobj = new JSONObject(jsonStr1);
+
+                            if(Jobj.getString("responsecode").equals("1"))
+                            {
+                                JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+
+
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        Log.e("ServiceHandler", "Couldn't get any data from the url");
+                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+            progressDialog2.dismiss();
+        }
+    }
+
     public void uploadfirst(){
         Intent intent1 = new Intent(this, FileChooser.class);
         startActivityForResult(intent1,REQUEST_PATH);
@@ -1205,6 +1272,10 @@ public class Contract_Creation_Navigation extends AppCompatActivity
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
         }
+        else if (id == R.id.leave) {
+            Intent intent = new Intent(this, Leave_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.logout) {
             db.delete("OneTimeLogin", null, null);
             Intent intent = new Intent(this, LoginAdmin.class);
@@ -1309,6 +1380,8 @@ public class Contract_Creation_Navigation extends AppCompatActivity
                     }
                     if(item.equalsIgnoreCase("Delete")){
                         Log.e("position",""+position);
+                        globaldeletecontractid=Integer.parseInt(vendoridfromserver.get(position));
+                        new getContractDeleteServer().execute();
                         //deletedriverid=Integer.parseInt(driveridfromserver.get(position));
                         //new getDeleteServer().execute();
                     }

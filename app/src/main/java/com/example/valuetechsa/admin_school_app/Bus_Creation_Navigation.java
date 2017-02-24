@@ -1538,6 +1538,10 @@ public class Bus_Creation_Navigation extends AppCompatActivity
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
         }
+        else if (id == R.id.leave) {
+            Intent intent = new Intent(this, Leave_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.logout) {
             db.delete("OneTimeLogin", null, null);
             Intent intent = new Intent(this, LoginAdmin.class);
