@@ -119,7 +119,7 @@ public class Leave_Navigation extends ActionBarActivity
         }
 
         TextView TextViewNewFont = new TextView(Leave_Navigation.this);
-        TextViewNewFont.setText("LEAVE");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_leaves));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Leave_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Leave_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");

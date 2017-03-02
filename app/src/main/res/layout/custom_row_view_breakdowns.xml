@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:id="@+id/colorlistchangebus"
+    android:background="@drawable/spinnerborder">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/text_busid"
+            android:layout_width="0dp"
+            android:minHeight="50dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            />
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent"
+            android:id="@+id/firstlinebus"
+            android:background="@drawable/tablerowcolorblack"
+            android:orientation="horizontal">
+        </LinearLayout>
+        <TextView android:id="@+id/text_busname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"/>
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent"
+            android:id="@+id/secondlinebus"
+            android:background="@drawable/tablerowcolorblack"
+            android:orientation="horizontal">
+        </LinearLayout>
+        <TextView android:id="@+id/text_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="2"/>
+
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent"
+            android:id="@+id/thirdlinebus"
+            android:background="@drawable/tablerowcolorblack"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+        <TextView android:id="@+id/text_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="2"/>
+    </LinearLayout>
+</LinearLayout>

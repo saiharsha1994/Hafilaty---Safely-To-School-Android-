@@ -156,7 +156,7 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Student_Route_Creation_Navigation.this);
-        TextViewNewFont.setText("Routes");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_routes));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Student_Route_Creation_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Student_Route_Creation_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -169,7 +169,7 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
         action.setTitle(Html.fromHtml("<font color='#000000'><big>&nbsp;&nbsp;Routes</big></font>"));*/
 
         dropdown = (Spinner)findViewById(R.id.selecttriptypespinner);
-        String[] items = new String[]{"Select Route","Pick Up","Drop"};
+        String[] items = new String[]{getResources().getString(R.string.sj_select_route),getResources().getString(R.string.sj_pick_up),getResources().getString(R.string.sj_drop)};
        /* ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);*/
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items) {
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -232,7 +232,7 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
 
     public void fontchangestudentroute(){
         TextView createnewroute=(TextView)findViewById(R.id.selectcriteriaroute);
-        createnewroute.setText("CREATE NEW ROUTE");
+        createnewroute.setText(getResources().getString(R.string.sj_create_new_route));
         TextView routename=(TextView)findViewById(R.id.routenameroute);
         TextView triptype=(TextView)findViewById(R.id.triptyperoute);
         TextView starttime=(TextView)findViewById(R.id.starttimeroute);
@@ -528,7 +528,7 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
                 strRoute_name=Route_Name.substring(0,Route_Name.length()-1);
                 //strRoute_Type=Route_Type.substring(0,Route_Type.length()-1);
                 Log.e("#####","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"+Route_Type);
-                if(routetypenavigation.equalsIgnoreCase("Pick Up"))
+                if(routetypenavigation.equalsIgnoreCase(getResources().getString(R.string.sj_pick_up)))
                     strRoute_Type=1+"";
                 else
                     strRoute_Type=2+"";
@@ -608,19 +608,19 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
         EditText routename=(EditText)findViewById(R.id.routenamebox);
         routenamenavigation=routename.getText().toString();
         if(routenamenavigation.isEmpty()){
-            Toast.makeText(Student_Route_Creation_Navigation.this, "Please Enter The Route Name",
+            Toast.makeText(Student_Route_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_route_name),
                     Toast.LENGTH_LONG).show();
         }
         else if(routestarttymnavgation.equals("empty")){
-            Toast.makeText(Student_Route_Creation_Navigation.this, "Please Enter The Start Time",
+            Toast.makeText(Student_Route_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_start_time),
                     Toast.LENGTH_LONG).show();
         }
         else if(routeendtymnavigation.equals("empty")){
-            Toast.makeText(Student_Route_Creation_Navigation.this, "Please Enter The End Time",
+            Toast.makeText(Student_Route_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_end_time),
                     Toast.LENGTH_LONG).show();
         }
-        else if(routetypenavigation.equals("Select Route")){
-            Toast.makeText(Student_Route_Creation_Navigation.this, "Please Select Trip Type" ,
+        else if(routetypenavigation.equals(getResources().getString(R.string.sj_select_route))){
+            Toast.makeText(Student_Route_Creation_Navigation.this, getResources().getString(R.string.sj_please_select_trip_type) ,
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -658,8 +658,8 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
     class getDriverListrouteFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog1 = ProgressDialog.show(Student_Route_Creation_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog1 = ProgressDialog.show(Student_Route_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -737,8 +737,8 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
     class getBusListRouteFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Student_Route_Creation_Navigation.this, "Please wait.",
-                    "Fetching Drivers Informatin!", true);
+            progressDialog2 = ProgressDialog.show(Student_Route_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 

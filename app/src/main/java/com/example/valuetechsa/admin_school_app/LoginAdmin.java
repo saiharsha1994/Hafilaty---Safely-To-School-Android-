@@ -252,14 +252,14 @@ public class LoginAdmin extends AppCompatActivity {
 
                 //new sendDataToServer().execute();
                 if(USERID.isEmpty() ){
-                    Toast.makeText(LoginAdmin.this,"Username should not be empty",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginAdmin.this,getResources().getString(R.string.sj_username_should_not_be_empty),Toast.LENGTH_LONG).show();
 
                 }
                 else if(PASSWORD.isEmpty()){
-                    Toast.makeText(LoginAdmin.this,"Password should not be empty",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginAdmin.this,getResources().getString(R.string.sj_password_should_not_be_empty),Toast.LENGTH_LONG).show();
                 }
                 else if(connected==false){
-                    Toast.makeText(LoginAdmin.this,"Check Your Internet Connection",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginAdmin.this,getResources().getString(R.string.sj_check_internet_connection),Toast.LENGTH_LONG).show();
                 }
                 else{
 
@@ -278,7 +278,7 @@ public class LoginAdmin extends AppCompatActivity {
         @Override
         protected void onPreExecute()
         {
-            authProgressDialog = ProgressDialog.show(LoginAdmin.this, "","Please Wait...", true, false);
+            authProgressDialog = ProgressDialog.show(LoginAdmin.this, "",getResources().getString(R.string.sj_please_wait), true, false);
         }
         @Override
         protected Void doInBackground(Void... arg0)
@@ -322,7 +322,7 @@ public class LoginAdmin extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(LoginAdmin.this,"InValid username or password"+" "+PASSWORD+" "+USERID, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginAdmin.this,getResources().getString(R.string.sj_invalid_username_or_password)+" "+PASSWORD+" "+USERID, Toast.LENGTH_LONG).show();
                 }
             }
             catch(Exception e)

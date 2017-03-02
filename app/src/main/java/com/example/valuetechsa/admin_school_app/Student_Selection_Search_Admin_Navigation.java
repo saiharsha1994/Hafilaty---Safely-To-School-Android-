@@ -223,7 +223,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Student_Selection_Search_Admin_Navigation.this);
-        TextViewNewFont.setText("Student Selection");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_student_selection));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Student_Selection_Search_Admin_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Student_Selection_Search_Admin_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -298,7 +298,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             routetypenavigation = intent.getExtras().getString("TripType");
             routestarttymnavgation = intent.getExtras().getString("StartTime");
             routeendtymnavigation = intent.getExtras().getString("EndTime");
-            if(routetypenavigation.equalsIgnoreCase("drop")){
+            if(routetypenavigation.equalsIgnoreCase(getResources().getString(R.string.sj_drop))){
                 routetypenavigation="2";
             }
             else
@@ -838,8 +838,8 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     class getBusListFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -962,14 +962,14 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         int sum=drivernamefromserver.size();
         sum=sum+1;
         String[] driveritems= new String[sum];
-        driveritems[0]="Select Driver";
+        driveritems[0]=getResources().getString(R.string.sj_select_driver);
         for(int i=1;i<=drivernamefromserver.size();i++){
             driveritems[i]=drivernamefromserver.get(i-1);
         }
         int sum1=busnamefromserver.size();
         sum1=sum1+1;
         String[] busitems=new String[sum1];
-        busitems[0]="Select Bus";
+        busitems[0]=getResources().getString(R.string.sj_select_bus);
         for(int j=1;j<=busnamefromserver.size();j++){
             busitems[j]=busnamefromserver.get(j-1);
         }
@@ -1060,12 +1060,12 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     }
 
    public void adddetailstoserversavebutton(View view){
-       if(routedrivernamenavigation.equals("Select Driver")){
-           Toast.makeText(Student_Selection_Search_Admin_Navigation.this, "Please Select Driver",
+       if(routedrivernamenavigation.equals(getResources().getString(R.string.sj_select_driver))){
+           Toast.makeText(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_select_driver),
                    Toast.LENGTH_SHORT).show();
        }
-       else if(routebusnonavigation.equals("Select Bus")){
-           Toast.makeText(Student_Selection_Search_Admin_Navigation.this, "Please Select Bus",
+       else if(routebusnonavigation.equals(getResources().getString(R.string.sj_select_bus))){
+           Toast.makeText(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_select_bus),
                    Toast.LENGTH_SHORT).show();
        }
        else{
@@ -1195,8 +1195,8 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, "Please wait.",
-                    "Adding Details", true);
+            progressDialog2 = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_adding_details), true);
 
         }
 
@@ -1332,7 +1332,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         @Override
         protected void onPostExecute(Void result){
             progressDialog2.dismiss();
-            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, "Route Created" ,
+            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_route_created) ,
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Student_Selection_Search_Admin_Navigation.this, Student_Route_Creation_Navigation.class);
             startActivity(intent);
@@ -1343,8 +1343,8 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
     private void sendRequest() {
         mMap.clear();
-        progressDialog = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, "Please wait.",
-                "Finding direction..!", true);
+        progressDialog = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                getResources().getString(R.string.sj_finding_direction), true);
         /*for(int j=selectedstudents.size()-1;j>=0;j--){
             selectedstudentsreverse.add(selectedstudents.get(j));
         }*/
@@ -1496,7 +1496,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                 removestudent=selectedstudentsname.get(pos);
                 removeposition=pos;
                 if(pos<countinitialstudents){
-                    Toast.makeText(Student_Selection_Search_Admin_Navigation.this, "Student/Teacher Already Exist, Can't Remove, Make Transfer ",
+                    Toast.makeText(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_student_teacher_already_exist),
                             Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -1537,7 +1537,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         String latlong=slat+","+slon;
         int checkstudentreturnvalue=studentcheckfromlist();
         if(checkstudentreturnvalue==1){
-            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, globalstop+" Already Exist In The Route",
+            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, globalstop+getResources().getString(R.string.sj_already_exist_in_the_route),
                     Toast.LENGTH_SHORT).show();
         }
         else {
@@ -1586,8 +1586,8 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         new searchprogessbox().execute();
     }
     private void sendRequestsearch() {
-        progressDialog = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, "Please wait.",
-                "Finding Location..!", true);
+        progressDialog = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                getResources().getString(R.string.sj_finding_location), true);
         String typedlocation = searchBox.getText().toString();
         try {
             new DirectionFinder(this, typedlocation, typedlocation).execute();

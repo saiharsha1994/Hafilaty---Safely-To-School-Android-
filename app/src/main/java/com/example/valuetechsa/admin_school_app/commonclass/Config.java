@@ -8,6 +8,7 @@ public class Config
 	public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
 	public static final String PUSH_NOTIFICATION = "pushNotification";
 	public static String ip="http://al-amaanah.com/Schoooly/index.php?web_services/";
+	public static String image="http://al-amaanah.com/Schoooly/";
 			//"http://valuetech.info/UIISR/index.php?web_services/";
 	//"http://al-amaanah.com//index.php/web_services/";
 

@@ -183,7 +183,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Contract_Creation_Navigation.this);
-        TextViewNewFont.setText("Manage Contract");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_manage_contract));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Contract_Creation_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Contract_Creation_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -230,7 +230,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
                 toastmessage="";
                 Log.e("position-------", "-------------"+pos);
                 if(vendorexpiredatechecknumber.get(pos).equalsIgnoreCase("1")){
-                    toastmessage=toastmessage+"License Has Expired  ";
+                    toastmessage=toastmessage+getResources().getString(R.string.sj_license_has_expired);
                 }
                 if(toastmessage.isEmpty()){
 
@@ -529,31 +529,31 @@ public class Contract_Creation_Navigation extends AppCompatActivity
 
 
         if(contractdateintosserver.isEmpty()){
-            Toast.makeText(Contract_Creation_Navigation.this, "Please Enter The Contract Date",
+            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_the_contract_date),
                     Toast.LENGTH_LONG).show();
         }
         else if(vendornametxtintoserver.isEmpty()){
-            Toast.makeText(Contract_Creation_Navigation.this, "Please Enter The Vendor Name",
+            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_the_vendor_name),
                     Toast.LENGTH_LONG).show();
         }
         else if(vendoremailtxtintoserver.isEmpty()){
-            Toast.makeText(Contract_Creation_Navigation.this, "Please Enter The Vendor Email",
+            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_vendor_email),
                     Toast.LENGTH_LONG).show();
         }
         else if(vendormobilenotxtintoserver.isEmpty()){
-            Toast.makeText(Contract_Creation_Navigation.this, "Please Enter The Vendor Mobile Number",
+            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_vendor_mobile_number),
                     Toast.LENGTH_LONG).show();
         }
         else if(busprovidedtxtintoserver.isEmpty()){
-            Toast.makeText(Contract_Creation_Navigation.this, "Please Enter The Bus Provided",
+            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_the_bus_provided),
                     Toast.LENGTH_LONG).show();
         }
         else if(driverprovidedtxtintoserver.isEmpty()){
-            Toast.makeText(Contract_Creation_Navigation.this, "Please Enter The Driver Provided",
+            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_the_driver_provided),
                     Toast.LENGTH_LONG).show();
         }
         else if(expiredateintoserver.isEmpty()){
-            Toast.makeText(Contract_Creation_Navigation.this, "Please Enter The Expiry Date",
+            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_the_expiry_date),
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -588,8 +588,8 @@ public class Contract_Creation_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -619,7 +619,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Contract_Creation_Navigation.this, "Contract Added Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Contract_Creation_Navigation.this, "Contract Added Successfully", Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -664,8 +664,8 @@ public class Contract_Creation_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -695,7 +695,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Contract_Creation_Navigation.this, "Contract Added Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Contract_Creation_Navigation.this, "Contract Added Successfully", Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -738,7 +738,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
     class getContractDeleteServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, "Please wait.",
+            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
                     "", true);
 
         }
@@ -828,7 +828,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
 
     void uploadIqamaTheard(final String srcPath)
     {
-        dialog = ProgressDialog.show(Contract_Creation_Navigation.this, "", "Uploading file...", true);
+        dialog = ProgressDialog.show(Contract_Creation_Navigation.this, "", getResources().getString(R.string.sj_uploading_file), true);
 
         new Thread(new Runnable() {
             public void run() {
@@ -951,7 +951,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
                     runOnUiThread(new Runnable() {
                         public void run() {
 
-                            Toast.makeText(Contract_Creation_Navigation.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_upload_complete), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -989,8 +989,8 @@ public class Contract_Creation_Navigation extends AppCompatActivity
     class getContractListFromServer extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Contract_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 

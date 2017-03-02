@@ -188,7 +188,7 @@ public class Accident_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Accident_Navigation.this);
-        TextViewNewFont.setText("Accident");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_accident));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Accident_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Accident_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -271,8 +271,8 @@ public class Accident_Navigation extends AppCompatActivity
     class getAccidentListFromServer extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -545,12 +545,6 @@ public class Accident_Navigation extends AppCompatActivity
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            /*EditText date = (EditText)getActivity().findViewById(R.id.iqamaexpireedit);
-
-            date.setText(day + "/" + (month + 1) + "/" + year);*/
-
-
-            //dateprintgiven=day + "/" + (month + 1) + "/" + year;
             if(month<9){
                 month=month+1;
                 sss=""+ (month);
@@ -563,19 +557,6 @@ public class Accident_Navigation extends AppCompatActivity
             dateprintgiven=year + "-" + (sss) + "-" + day;
             dateusergiven = year+"-"+(month+1)+"-"+day;
             txtincidentdate.setText(dateprintgiven);
-            //dateselected[iii]=dateusergiven;
-            /*if(staticday==0 && staticmonth==0 && staticyear==0){
-                staticyear=year;
-                staticmonth=month+1;
-                staticday=day;
-                applybutton=0;
-            }
-            else if(staticday!=day || staticmonth!=(month+1) || staticyear!=year){
-                staticyear=year;
-                staticmonth=month+1;
-                staticday=day;
-                applybutton=0;
-            }*/
 
         }
     }
@@ -631,7 +612,7 @@ public class Accident_Navigation extends AppCompatActivity
 
             buslistspinner=(Spinner) layout.findViewById(R.id.selectbuslistspinner);
             String[] busitems=new String[busnamelistfromserver.size()+1];
-            busitems[0]="Select Bus";
+            busitems[0]=getResources().getString(R.string.sj_select_bus);
             for(int i=1;i<=busnamelistfromserver.size();i++){
                 busitems[i]=busnamelistfromserver.get(i-1);
             }
@@ -675,7 +656,7 @@ public class Accident_Navigation extends AppCompatActivity
 
             driverlistspinner=(Spinner) layout.findViewById(R.id.selectdriverlistspinner);
             String[] driveritems=new String[drivernamelistfromserver.size()+1];
-            driveritems[0]="Select Driver";
+            driveritems[0]=getResources().getString(R.string.sj_select_driver);
             for(int i=1;i<=drivernamelistfromserver.size();i++){
                 driveritems[i]=drivernamelistfromserver.get(i-1);
             }
@@ -837,7 +818,7 @@ public class Accident_Navigation extends AppCompatActivity
 
             buslistspinner=(Spinner) layout.findViewById(R.id.selectbuslistspinner);
             String[] busitems=new String[busnamelistfromserver.size()+1];
-            busitems[0]="Select Bus";
+            busitems[0]=getResources().getString(R.string.sj_select_bus);
             for(int i=1;i<=busnamelistfromserver.size();i++){
                 busitems[i]=busnamelistfromserver.get(i-1);
             }
@@ -897,7 +878,7 @@ public class Accident_Navigation extends AppCompatActivity
 
             driverlistspinner=(Spinner) layout.findViewById(R.id.selectdriverlistspinner);
             String[] driveritems=new String[drivernamelistfromserver.size()+1];
-            driveritems[0]="Select Driver";
+            driveritems[0]=getResources().getString(R.string.sj_select_driver);
             for(int i=1;i<=drivernamelistfromserver.size();i++){
                 driveritems[i]=drivernamelistfromserver.get(i-1);
             }
@@ -1004,11 +985,11 @@ public class Accident_Navigation extends AppCompatActivity
         fineamountintoserver=txtincidentfineamount.getText().toString();
         statusintoserver=txtincidentstatus.getText().toString();
         if(dateintoserver.isEmpty()){
-            Toast.makeText(Accident_Navigation.this, "Please Enter The Date",
+            Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_please_enter_date),
                     Toast.LENGTH_SHORT).show();
         }
         else if(detailsintoserver.isEmpty()){
-            Toast.makeText(Accident_Navigation.this, "Please Enter The Details",
+            Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_please_enter_the_details),
                     Toast.LENGTH_SHORT).show();
         }
         /*else if(uploadreportsintoserver.equalsIgnoreCase("null")){
@@ -1019,20 +1000,20 @@ public class Accident_Navigation extends AppCompatActivity
             Toast.makeText(Accident_Navigation.this, "Please Upload Document",
                     Toast.LENGTH_SHORT).show();
         }*/
-        else if(selectbusintoserver.equalsIgnoreCase("select bus")){
-            Toast.makeText(Accident_Navigation.this, "Please Select Bus",
+        else if(selectbusintoserver.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
+            Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_please_select_bus),
                     Toast.LENGTH_SHORT).show();
         }
-        else if(selectdriverintoserver.equalsIgnoreCase("select driver")){
-            Toast.makeText(Accident_Navigation.this, "Please Select Driver",
+        else if(selectdriverintoserver.equalsIgnoreCase(getResources().getString(R.string.sj_select_driver))){
+            Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_please_select_driver),
                     Toast.LENGTH_SHORT).show();
         }
         else if(fineamountintoserver.isEmpty()){
-            Toast.makeText(Accident_Navigation.this, "Please Enter The Fine Amount",
+            Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_please_enter_the_fine_amount),
                     Toast.LENGTH_SHORT).show();
         }
         else if(statusintoserver.isEmpty()){
-            Toast.makeText(Accident_Navigation.this, "Please Enter The Status",
+            Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_please_enter_the_status),
                     Toast.LENGTH_SHORT).show();
         }
         else {
@@ -1074,7 +1055,7 @@ public class Accident_Navigation extends AppCompatActivity
     class getIncidentDeleteServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, "Please wait.",
+            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, getResources().getString(R.string.sj_please_wait),
                     "", true);
 
         }
@@ -1140,8 +1121,8 @@ public class Accident_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1177,7 +1158,7 @@ public class Accident_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Accident_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_accident_added_succesfully), Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -1221,8 +1202,8 @@ public class Accident_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Accident_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1258,7 +1239,7 @@ public class Accident_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Accident_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_updated_succesfully), Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -1341,7 +1322,7 @@ public class Accident_Navigation extends AppCompatActivity
 
     void uploadIqamaTheard(final String srcPath)
     {
-        dialog = ProgressDialog.show(Accident_Navigation.this, "", "Uploading file...", true);
+        dialog = ProgressDialog.show(Accident_Navigation.this, "", getResources().getString(R.string.sj_uploading_file), true);
 
         new Thread(new Runnable() {
             public void run() {
@@ -1471,7 +1452,7 @@ public class Accident_Navigation extends AppCompatActivity
                     runOnUiThread(new Runnable() {
                         public void run() {
 
-                            Toast.makeText(Accident_Navigation.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Accident_Navigation.this, getResources().getString(R.string.sj_upload_complete), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

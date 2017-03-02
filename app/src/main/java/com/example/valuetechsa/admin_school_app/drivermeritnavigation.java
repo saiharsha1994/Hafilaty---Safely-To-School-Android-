@@ -92,7 +92,7 @@ public class drivermeritnavigation extends AppCompatActivity
     ArrayList<String> timemaintaincedriver=new ArrayList<String>();
     String []dodriver=new String[1000];
     String []dodriverimage=new String[1000];
-    public static String DriverUploads="http://al-amaanah.com/Schoooly/uploads/driver_image/";
+    public static String DriverUploads=Config.image+"uploads/driver_image/";
     ImageView imageView,imageViewtester;
     TextView drivername,driverphoneno;
     GridView grid;
@@ -172,7 +172,7 @@ public class drivermeritnavigation extends AppCompatActivity
         myToast = Toast.makeText(getApplicationContext(), null, Toast.LENGTH_SHORT);
 
         TextView TextViewNewFont = new TextView(drivermeritnavigation.this);
-        TextViewNewFont.setText("Driver Rating");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_driver_rating));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(drivermeritnavigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(drivermeritnavigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -256,7 +256,7 @@ public class drivermeritnavigation extends AppCompatActivity
         String checkdatestring=checkdate.getText().toString();
         if (checkdatestring.isEmpty()){
          Log.e("+++++++++++","empty++++++++++++++++++++++++++++++++");
-            myToast.setText("Please Select A Date");
+            myToast.setText(getResources().getString(R.string.sj_please_select_date));
             myToast.show();
             /*Toast.makeText(drivermeritnavigation.this, "Please Select A Date",
                     Toast.LENGTH_SHORT).show();*/
@@ -356,7 +356,7 @@ public class drivermeritnavigation extends AppCompatActivity
             grid = (GridView)findViewById(R.id.grid);
         }
         else{
-            myToast.setText("Please Select A Date");
+            myToast.setText(getResources().getString(R.string.sj_please_select_date));
             myToast.show();
             /*Toast.makeText(drivermeritnavigation.this, "Please Select A Date",
                     Toast.LENGTH_SHORT).show();*/
@@ -414,7 +414,7 @@ public class drivermeritnavigation extends AppCompatActivity
         }
 
         else{
-            myToast.setText("Please Select A Date");
+            myToast.setText(getResources().getString(R.string.sj_please_select_date));
             myToast.show();
             /*Toast.makeText(drivermeritnavigation.this, "Please Select A Date",
                     Toast.LENGTH_SHORT).show();*/
@@ -428,8 +428,8 @@ public class drivermeritnavigation extends AppCompatActivity
         @Override
         protected void onPreExecute()
         {
-            progressDialog = ProgressDialog.show(drivermeritnavigation.this, "Please wait.",
-                    "Fetching Drivers Information!", true);
+            progressDialog = ProgressDialog.show(drivermeritnavigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
         }
         @Override
         protected Void doInBackground(Void... arg0)
@@ -771,7 +771,7 @@ public class drivermeritnavigation extends AppCompatActivity
             View view = convertView;
             if (view == null) {
                 view = inflater.inflate(R.layout.emptylayoutfordrivermerit, null, true);
-                Toast.makeText(parent.getContext(),"No Rating Exist For This Month",Toast.LENGTH_SHORT).show();
+                Toast.makeText(parent.getContext(),parent.getResources().getString(R.string.sj_no_rating_for_this_month),Toast.LENGTH_SHORT).show();
                 /*myToast.setText("Please Select A Date 11111");
                 myToast.show();*/
                 holder = new ViewHolder();

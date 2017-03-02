@@ -88,8 +88,8 @@ public class LeavePageOne extends Fragment {
     class getBusListFromServer extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(getActivity(), "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(getActivity(), getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -177,8 +177,8 @@ public class LeavePageOne extends Fragment {
             numberofdaysfromserver.clear();
             appliedonfromserver.clear();
             globalcount=0;
-            progressDialog2 = ProgressDialog.show(getActivity(), "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(getActivity(), getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -273,7 +273,7 @@ public class LeavePageOne extends Fragment {
                 globalnumberinlist=0;
                 if(globalcount==0){
                     setLayoutInvisible();
-                    Toast.makeText(getActivity(), "No Student Leave Requests",
+                    Toast.makeText(getActivity(), getResources().getString(R.string.sj_no_student_leave_requests),
                             Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -284,7 +284,7 @@ public class LeavePageOne extends Fragment {
             }
             else {
                 setLayoutInvisible();
-                Toast.makeText(getActivity(), "No Student Leave Requests",
+                Toast.makeText(getActivity(), getResources().getString(R.string.sj_no_student_leave_requests),
                         Toast.LENGTH_LONG).show();
             }
         }
@@ -294,8 +294,8 @@ public class LeavePageOne extends Fragment {
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(getActivity(), "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(getActivity(), getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -318,7 +318,7 @@ public class LeavePageOne extends Fragment {
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(getActivity(), "Driver Added Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getActivity(), "Driver Added Successfully", Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -363,7 +363,7 @@ public class LeavePageOne extends Fragment {
 
         buslistspinner=(Spinner) getActivity().findViewById(R.id.leaveonespinneroption);
         String[] busitems=new String[busnamelistfromserver.size()+1];
-        busitems[0]="Select Bus";
+        busitems[0]=getResources().getString(R.string.sj_select_bus);
         for(int i=1;i<=busnamelistfromserver.size();i++){
             busitems[i]=busnamelistfromserver.get(i-1);
         }
@@ -391,7 +391,7 @@ public class LeavePageOne extends Fragment {
         buslistspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                if(item.equalsIgnoreCase("Select bus")){
+                if(item.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
                     setLayoutInvisible();
                 }
                 else {

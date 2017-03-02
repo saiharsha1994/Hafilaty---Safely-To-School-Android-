@@ -204,7 +204,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Bus_Creation_Navigation.this);
-        TextViewNewFont.setText("Manage Bus");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_manage_bus));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Bus_Creation_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Bus_Creation_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -315,13 +315,13 @@ public class Bus_Creation_Navigation extends AppCompatActivity
                 toastmessage="";
                 Log.e("position-------", "-------------"+pos);
                 if(licenseexpirechecknumber.get(pos)==1){
-                    toastmessage=toastmessage+"--License Has Expired  ";
+                    toastmessage=toastmessage+getResources().getString(R.string.sj_license_has_expired);
                 }
                 if(licenserenewalchecknumber.get(pos)==1){
-                    toastmessage= toastmessage+"--License Renewal Has Expired   ";
+                    toastmessage= toastmessage+getResources().getString(R.string.sj_license_renewal_has_expired);
                 }
                 if(mvpiexpirechecknumber.get(pos)==1){
-                    toastmessage=toastmessage+"--MVPI Has Expired   ";
+                    toastmessage=toastmessage+getResources().getString(R.string.sj_mvpi_has_expired);
                 }
                 if(toastmessage.isEmpty()){
 
@@ -484,7 +484,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
 
             bustypelistspinner=(Spinner) layout.findViewById(R.id.selectbustypespinnerdriver);
             String[] busitems=new String[4];
-            busitems[0]="Select Bus Type";
+            busitems[0]=getResources().getString(R.string.sj_select_bus_type);
             busitems[1]="10 Seater";
             busitems[2]="20 Seater";
             busitems[3]="30 Seater";
@@ -640,7 +640,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
 
             bustypelistspinner=(Spinner) layout.findViewById(R.id.selectbustypespinnerdriver);
             String[] busitems=new String[4];
-            busitems[0]="Select Bus Type";
+            busitems[0]=getResources().getString(R.string.sj_select_bus_type);
             busitems[1]="10 Seater";
             busitems[2]="20 Seater";
             busitems[3]="30 Seater";
@@ -760,15 +760,15 @@ public class Bus_Creation_Navigation extends AppCompatActivity
         licenserenewaldateintoserver=txtLicenseRenewal.getText().toString();
         mvpiexpiredateintoserver=txtMvpiExpire.getText().toString();
         if(busnameintoserver.isEmpty()){
-            Toast.makeText(Bus_Creation_Navigation.this, "Please Enter The Bus Name",
+            Toast.makeText(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_bus_name),
                     Toast.LENGTH_LONG).show();
         }
-        else if(selectedspinneritemintoserver.equalsIgnoreCase("Select Bus Type")){
-            Toast.makeText(Bus_Creation_Navigation.this, "Please Select The Bus Type",
+        else if(selectedspinneritemintoserver.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus_type))){
+            Toast.makeText(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_please_select_the_bus_type),
                     Toast.LENGTH_LONG).show();
         }
         else if(platenumberintoserver.isEmpty()){
-            Toast.makeText(Bus_Creation_Navigation.this, "Please Enter The Plate Number",
+            Toast.makeText(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_please_enter_the_plate_number),
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -818,8 +818,8 @@ public class Bus_Creation_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -849,7 +849,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Bus_Creation_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Bus_Creation_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -894,8 +894,8 @@ public class Bus_Creation_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -925,7 +925,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Bus_Creation_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Bus_Creation_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -968,7 +968,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
     class getBusDeleteServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, "Please wait.",
+            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
                     "", true);
 
         }
@@ -1072,7 +1072,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
 
     void uploadIqamaTheard(final String srcPath)
     {
-        dialog = ProgressDialog.show(Bus_Creation_Navigation.this, "", "Uploading file...", true);
+        dialog = ProgressDialog.show(Bus_Creation_Navigation.this, "", getResources().getString(R.string.sj_uploading_file), true);
 
         new Thread(new Runnable() {
             public void run() {
@@ -1200,7 +1200,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
                     runOnUiThread(new Runnable() {
                         public void run() {
 
-                            Toast.makeText(Bus_Creation_Navigation.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_upload_complete), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -1230,8 +1230,8 @@ public class Bus_Creation_Navigation extends AppCompatActivity
     class getBusListFromServer extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Bus_Creation_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
