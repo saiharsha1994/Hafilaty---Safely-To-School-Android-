@@ -35,8 +35,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import com.astuetz.PagerSlidingTabStrip;
 import com.example.valuetechsa.admin_school_app.DB.DatabaseAdapter;
 import com.example.valuetechsa.admin_school_app.libs.SlidingTabLayout;
 

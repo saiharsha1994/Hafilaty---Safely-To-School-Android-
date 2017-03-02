@@ -1380,6 +1380,12 @@ public class Hawkeye_navigation extends AppCompatActivity
             startActivity(intent);
 
         }
+        else if (id == R.id.studentlistnew) {
+            threadloop=false;
+            Intent intent = new Intent(this, Student_List_Navigation.class);
+            startActivity(intent);
+
+        }
         else if (id == R.id.logout) {
             threadloop=false;
             db.delete("OneTimeLogin", null, null);
@@ -1454,7 +1460,6 @@ public class Hawkeye_navigation extends AppCompatActivity
         super.onNewIntent( intent );
         alertShown=0;
         setIntent( intent );
-
     }
 
     public void showAlert()

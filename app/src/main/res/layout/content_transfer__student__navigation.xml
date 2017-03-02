@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.valuetechsa.admin_school_app.Student_attendence">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="290dp"
+        android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="70dp">
@@ -143,14 +142,13 @@
                     android:id="@+id/managetransfer" />
             </LinearLayout>
         </TableLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/transferstudentmainview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100sp"
         android:layout_marginTop="245dp"
-        android:layout_marginBottom="183dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
         <TableLayout
@@ -187,20 +185,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <RelativeLayout
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:gravity="center_vertical|center_horizontal">
                     <CheckBox
                         android:id="@+id/radiobuttunmaintransfer"
-                        android:layout_width="34.5dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20dp"
                         android:minHeight="50dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
                         android:focusable="true"
                         android:onClick="checkallmainmethod"
                         android:gravity="center_vertical|center_horizontal"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
                         />
+                    </RelativeLayout>
                     <LinearLayout
                         android:layout_width="1.5dp"
                         android:layout_height="match_parent" >
@@ -208,10 +208,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="150dp"
+                        android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
                         android:text="@string/stv_type"
+                        android:layout_weight="1.2"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:layout_gravity="center"
@@ -224,10 +225,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="215dp"
+                        android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
                         android:text="@string/stv_name"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textColor="@android:color/white"
@@ -240,10 +242,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
                         android:text="@string/stv_id"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textColor="@android:color/white"
@@ -256,10 +259,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="210dp"
+                        android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
                         android:text="@string/stv_location"
+                        android:layout_weight="1.6"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textColor="@android:color/white"
@@ -272,10 +276,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="210dp"
+                        android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
                         android:text="@string/stv_contact_details"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textColor="@android:color/white"
@@ -289,7 +294,7 @@
     <RelativeLayout
         android:id="@+id/listofstudents"
         android:layout_width="match_parent"
-        android:layout_height="111dp"
+        android:layout_height="100dp"
         android:layout_marginTop="345dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -319,7 +324,7 @@
         android:paddingLeft="0dp"
         android:paddingRight="0dp">
         <Button
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_marginLeft="700dp"
             android:layout_marginTop="40dp"

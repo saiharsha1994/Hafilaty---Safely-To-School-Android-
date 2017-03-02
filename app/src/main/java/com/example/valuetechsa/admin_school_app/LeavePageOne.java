@@ -56,11 +56,25 @@ public class LeavePageOne extends Fragment {
     Spinner buslistspinner;
     ListView lv1;
     Boolean isScrolling;
+    Typeface tfRobo;
     MyCustomBasedLeaveoneAdaper myCustomBasedLeaveoneAdaper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_leave_page_one,container,false);
+        tfRobo = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+        TextView studentlist=(TextView)v.findViewById(R.id.leaveonelisttextbox);
+        TextView studentlistname=(TextView)v.findViewById(R.id.leaveonestudentnametextbox);
+        TextView studentlistfromdate=(TextView)v.findViewById(R.id.leaveonefromdatetextbox);
+        TextView studentlisttodate=(TextView)v.findViewById(R.id.leaveonetodatetextbox);
+        TextView studentlistreason=(TextView)v.findViewById(R.id.leaveonereasontextbox);
+        TextView studentlisstatus=(TextView)v.findViewById(R.id.leaveonestatustextbox);
+        studentlist.setTypeface(tfRobo);
+        studentlistname.setTypeface(tfRobo);
+        studentlistfromdate.setTypeface(tfRobo);
+        studentlisttodate.setTypeface(tfRobo);
+        studentlistreason.setTypeface(tfRobo);
+        studentlisstatus.setTypeface(tfRobo);
         new getBusListFromServer().execute();
         manage=(RelativeLayout) v.findViewById(R.id.relativelayoutleaveonecreeation);
         listmanage=(RelativeLayout) v.findViewById(R.id.leaveonelist);
@@ -84,6 +98,7 @@ public class LeavePageOne extends Fragment {
             listmanage.setVisibility(View.VISIBLE);
         }
     }
+
 
     class getBusListFromServer extends AsyncTask<Void,Void,Void> {
         @Override
@@ -207,10 +222,10 @@ public class LeavePageOne extends Fragment {
                                 for (int j = 0; j < jsonArray.length(); j++){
 
                                     JSONObject obj = jsonArray.getJSONObject(j);
-                                    /*if(obj.getString("status").equalsIgnoreCase("2")||obj.getString("status").equalsIgnoreCase("3")){
+                                    if(obj.getString("status").equalsIgnoreCase("2")||obj.getString("status").equalsIgnoreCase("3")){
 
-                                    }*/
-                                    //else{
+                                    }
+                                    else{
                                         Log.e("student_name",obj.getString("student_name"));
                                         String student_name=obj.getString("student_name");
                                         studentnametfromserver.add(student_name);
@@ -236,7 +251,7 @@ public class LeavePageOne extends Fragment {
                                         String id=obj.getString("id");
                                         leaveidfromserver.add(id);
                                         globalcount++;
-                                    //}
+                                    }
                                 }
 
 

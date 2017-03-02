@@ -54,10 +54,26 @@ public class LeavePageTwo extends Fragment {
     Spinner buslistspinner;
     ListView lv1;
     Boolean isScrolling;
+    Typeface tfRobo;
     MyCustomBasedLeaveTwoAdaper myCustomBasedLeaveTwoAdaper;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_leave_page_two,container,false);
+        tfRobo = Typeface.createFromAsset(getActivity().getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+        TextView studentlist=(TextView)v.findViewById(R.id.leavetwolisttextbox);
+        TextView studentlistname=(TextView)v.findViewById(R.id.leavetwostudentnametextbox);
+        TextView studentlistfromdate=(TextView)v.findViewById(R.id.leavetwofromdatetextbox);
+        TextView studentlisttodate=(TextView)v.findViewById(R.id.leavetwotodatetextbox);
+        TextView studentlistreason=(TextView)v.findViewById(R.id.leavetworeasontextbox);
+        TextView studentlisstatus=(TextView)v.findViewById(R.id.leavetwostatustextbox);
+
+        studentlist.setTypeface(tfRobo);
+        studentlistname.setTypeface(tfRobo);
+        studentlistfromdate.setTypeface(tfRobo);
+        studentlisttodate.setTypeface(tfRobo);
+        studentlistreason.setTypeface(tfRobo);
+        studentlisstatus.setTypeface(tfRobo);
+
         new getBusListFromServer().execute();
         manage=(RelativeLayout) v.findViewById(R.id.relativelayoutleavetwocreeation);
         listmanage=(RelativeLayout) v.findViewById(R.id.leavetwolist);
@@ -81,6 +97,7 @@ public class LeavePageTwo extends Fragment {
             listmanage.setVisibility(View.VISIBLE);
         }
     }
+
 
     class getBusListFromServer extends AsyncTask<Void,Void,Void> {
         @Override

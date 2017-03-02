@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"  >
     <LinearLayout
+        android:id="@+id/toplinearlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="300sp"
+        android:layout_height="wrap_content"
         android:paddingLeft="10sp"
         android:paddingRight="10sp"
         android:paddingTop="70sp">
@@ -182,9 +182,8 @@
     <RelativeLayout
         android:id="@+id/relativelayoutroutecreeation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="230sp"
-        android:layout_marginBottom="200sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="235sp"
         android:paddingLeft="10sp"
         android:paddingRight="10sp">
         <TableLayout
@@ -210,28 +209,29 @@
                     android:text="@string/stv_route_list"
                     android:id="@+id/routelisttextbox" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50sp">
             <TableLayout
                 android:id="@+id/attendencetable"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:stretchColumns="8">
+                android:layout_height="match_parent">
                 <TableRow
                     android:id="@+id/attedencerowid"
                     android:background="@drawable/borderwithlightblue"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="6">
+                    android:layout_height="wrap_content">
                     <TextView
-                        android:layout_width="230sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_route_name_trip_type"
                         android:textColor="@android:color/white"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20sp"
                         android:id="@+id/routenametextbox"
-                        android:layout_weight="1"
                         />
                     <LinearLayout
                         android:layout_width="1.5sp"
@@ -240,15 +240,15 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="160sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
                         android:text="@string/stv_start_end_time"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:layout_marginTop="10sp"
+                        android:layout_weight="1.4"
+                        android:gravity="center_vertical|center_horizontal"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:layout_weight="1"
                         android:id="@+id/Startendtimetextbox" />
                     <LinearLayout
                         android:layout_width="1.5sp"
@@ -257,15 +257,15 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="120sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_no_of_stops"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:layout_weight="1"
                         android:id="@+id/noofstopstextbox" />
                     <LinearLayout
                         android:layout_width="1.5sp"
@@ -274,15 +274,15 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="220sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_driver_name"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
+                        android:layout_weight="1.8"
+                        android:gravity="center_vertical|center_horizontal"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:layout_weight="1"
                         android:id="@+id/drivernametextbox" />
                     <LinearLayout
                         android:layout_width="1.5sp"
@@ -291,15 +291,15 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="70sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_bus_no"
                         android:textColor="@android:color/white"
+                        android:layout_weight="0.6"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:layout_weight="1"
                         android:id="@+id/busnotextbox" />
                     <LinearLayout
                         android:layout_width="1.5sp"
@@ -308,24 +308,25 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="100sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_edit_route"
+                        android:layout_weight="0.8"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:layout_weight="1"
                         android:id="@+id/editroutetextbox" />
                 </TableRow>
             </TableLayout>
+            </LinearLayout>
         </TableLayout>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="328sp"
+        android:layout_marginTop="335sp"
         android:layout_marginBottom="1sp"
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10sp"

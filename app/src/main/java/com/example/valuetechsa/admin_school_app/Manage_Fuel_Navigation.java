@@ -199,8 +199,28 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         action.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         action.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         action.setCustomView(TextViewNewFont);
-
+        changeFont();
         new getFuelListFromServer().execute();
+    }
+
+    public void changeFont(){
+        TextView paymentlist=(TextView)findViewById(R.id.paymentlisttextbox);
+        TextView date=(TextView)findViewById(R.id.fueldatetextbox);
+        TextView drivername=(TextView)findViewById(R.id.drivernametextbox2);
+        TextView amount=(TextView)findViewById(R.id.amounttextbox);
+        TextView spent=(TextView)findViewById(R.id.amountspenttextbox);
+        TextView ballance=(TextView)findViewById(R.id.balancetextbox);
+        TextView options=(TextView)findViewById(R.id.editpaymenttextbox);
+        Button addpayment=(Button)findViewById(R.id.addpayment);
+
+        paymentlist.setTypeface(tfRobo);
+        date.setTypeface(tfRobo);
+        drivername.setTypeface(tfRobo);
+        amount.setTypeface(tfRobo);
+        spent.setTypeface(tfRobo);
+        ballance.setTypeface(tfRobo);
+        options.setTypeface(tfRobo);
+        addpayment.setTypeface(tfAdam);
     }
 
     class getFuelListFromServer extends AsyncTask<Void,Void,Void> {
