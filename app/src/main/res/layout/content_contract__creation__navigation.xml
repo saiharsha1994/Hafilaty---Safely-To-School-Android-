@@ -50,14 +50,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="120sp"
-        android:layout_marginBottom="307sp"
         android:paddingLeft="10sp"
         android:paddingRight="10sp">
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:stretchColumns="2"
-            android:background="@drawable/tableborder">
+            android:stretchColumns="2">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
@@ -88,12 +86,13 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="180sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
                         android:text="@string/stv_vendor_name"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:layout_marginTop="10sp"
                         android:layout_gravity="center"
                         android:textSize="20sp"
                         android:id="@+id/vendornametextbox" />
@@ -104,10 +103,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="280sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_vendor_email"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:layout_gravity="center"
@@ -120,10 +120,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="190sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_bus_driver_provided"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:layout_gravity="center"
@@ -136,10 +137,11 @@
                         <View style="@style/Divider" />
                     </LinearLayout>
                     <TextView
-                        android:layout_width="150sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
                         android:text="@string/stv_expiry_date"
+                        android:layout_weight="1.1"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:layout_gravity="center"
@@ -154,10 +156,11 @@
                     </LinearLayout>
 
                     <TextView
-                        android:layout_width="143.5sp"
+                        android:layout_width="0sp"
                         android:layout_height="50sp"
-                        android:layout_marginTop="10sp"
-                        android:text="@string/stv_edit_route"
+                        android:text="@string/stv_options"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:layout_gravity="center"

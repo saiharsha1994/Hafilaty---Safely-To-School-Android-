@@ -33,8 +33,9 @@
     <string name="title_activity_driver__create__navigation">Driver_Create_Navigation</string>
     <string name="title_activity_contract__creation__navigation">Contract_Creation_Navigation
     </string>
-     <string name="title_activity_accident__navigation">Accident_Navigation</string>
+    <string name="title_activity_accident__navigation">Accident_Navigation</string>
     <string name="title_activity_leave__navigation">Leave_Navigation</string>
+    <string name="title_activity_student__list__navigation">Student_List_Navigation</string>
 
 
     <!--String values for translation-->
@@ -202,7 +203,6 @@
     <string name="stv_Student_List_parents_no">Mobile Number</string>
 
 
-
     <!--Button-->
     <string name="sb_apply">Apply</string>
     <string name="sb_submit">SUBMIT</string>
@@ -255,6 +255,7 @@
     <string name="st_add_new_driver">ADD NEW DRIVER</string>
     <string name="st_logout">LOGOUT</string>
     <string name="st_leave">MANAGE LEAVES</string>
+    <string name="st_student_list">STUDENT LIST</string>
     <string name="st_change_language">CHANGE LANGUAGE</string>
     <string name="st_accident">ACCIDENT</string>
     <string name="st_manage_contract">MANAGE CONTRACT</string>
@@ -374,6 +375,5 @@
     <string name="sj_please_select_to_route">Please Select TO Route</string>
     <string name="sj_two_routes_cannot_be_same">Two Routes Cannot be Same</string>
     <string name="sj_transfer_completed">Transfer Completed</string>
-
 
 </resources>

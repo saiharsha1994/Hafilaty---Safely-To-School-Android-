@@ -195,7 +195,26 @@ public class Contract_Creation_Navigation extends AppCompatActivity
         action.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         action.setCustomView(TextViewNewFont);
         new getContractListFromServer().execute();
+        changeFont();
         //listgenerate();
+    }
+
+    public void changeFont(){
+        TextView contractlist=(TextView)findViewById(R.id.buslisttextbox);
+        TextView contractname=(TextView)findViewById(R.id.vendornametextbox);
+        TextView contractemail=(TextView)findViewById(R.id.vendoremailtextbox);
+        TextView busdriverprovided=(TextView)findViewById(R.id.busdrivertextbox);
+        TextView expirydate=(TextView)findViewById(R.id.expiredatetextbox);
+        TextView editroute=(TextView)findViewById(R.id.editroutetextbox);
+        Button addcontract=(Button)findViewById(R.id.addcontract);
+
+        contractlist.setTypeface(tfRobo);
+        contractname.setTypeface(tfRobo);
+        contractemail.setTypeface(tfRobo);
+        busdriverprovided.setTypeface(tfRobo);
+        expirydate.setTypeface(tfRobo);
+        editroute.setTypeface(tfRobo);
+        addcontract.setTypeface(tfAdam);
     }
 
     public void listgenerate(){

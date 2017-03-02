@@ -246,6 +246,25 @@ public class Driver_Create_Navigation extends AppCompatActivity
         a[1]=0;
         a[2]=0;
         new getDriverListFromServer().execute();
+        changeFont();
+    }
+
+    public void changeFont(){
+        TextView driverlist=(TextView)findViewById(R.id.driverlisttextbox);
+        TextView drivername=(TextView)findViewById(R.id.drivernametextbox);
+        TextView nationality=(TextView)findViewById(R.id.nationalitytextbox);
+        TextView mobileno=(TextView)findViewById(R.id.mobilenumbertextbox);
+        TextView assignbus=(TextView)findViewById(R.id.assignedbustextbox);
+        TextView options=(TextView)findViewById(R.id.optionstextbox);
+        Button addbus=(Button)findViewById(R.id.adddrivers);
+
+        driverlist.setTypeface(tfRobo);
+        drivername.setTypeface(tfRobo);
+        nationality.setTypeface(tfRobo);
+        mobileno.setTypeface(tfRobo);
+        assignbus.setTypeface(tfRobo);
+        options.setTypeface(tfRobo);
+        addbus.setTypeface(tfAdam);
     }
 
     public void listgenerate(){

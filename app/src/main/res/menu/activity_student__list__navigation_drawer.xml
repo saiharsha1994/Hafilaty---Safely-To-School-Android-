@@ -10,7 +10,7 @@
             android:id="@+id/dashboard"
             android:icon="@drawable/dashboardimage"
             android:title="@string/st_dashboard"
-             />
+            />
     </group>
 
     <group android:checkableBehavior="single"
@@ -103,13 +103,6 @@
             android:id="@+id/managefuel"
             android:icon="@drawable/manage_fuel_image"
             android:title="@string/st_manage_fuel" />
-    </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/studentlistgroup">
-        <item
-            android:id="@+id/studentlistnew"
-            android:icon="@drawable/logout1"
-            android:title="@string/st_student_list" />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/changelanguagegroup">

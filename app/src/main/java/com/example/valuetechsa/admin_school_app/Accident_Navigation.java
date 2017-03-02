@@ -198,7 +198,7 @@ public class Accident_Navigation extends AppCompatActivity
         action.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         action.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         action.setCustomView(TextViewNewFont);
-
+        changeFont();
         new getAccidentListFromServer().execute();
     }
 
@@ -207,6 +207,25 @@ public class Accident_Navigation extends AppCompatActivity
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
+    }
+
+    public void changeFont(){
+        TextView accidentlist=(TextView)findViewById(R.id.accidentlisttextbox);
+        TextView accidentdate=(TextView)findViewById(R.id.accidentdatetextbox);
+        TextView accidentdrivername=(TextView)findViewById(R.id.accidentdrivernametextbox);
+        TextView accidentdetails=(TextView)findViewById(R.id.accidentdetailstextbox);
+        TextView accidentamountandstatus=(TextView)findViewById(R.id.accidentfinetextbox);
+        TextView accidentoptions=(TextView)findViewById(R.id.accidentoptionstextbox);
+        Button addaccident=(Button)findViewById(R.id.addaccident);
+
+        accidentlist.setTypeface(tfRobo);
+        accidentdate.setTypeface(tfRobo);
+        accidentdrivername.setTypeface(tfRobo);
+        accidentdetails.setTypeface(tfRobo);
+        accidentamountandstatus.setTypeface(tfRobo);
+        accidentoptions.setTypeface(tfRobo);
+        addaccident.setTypeface(tfAdam);
+
     }
 
     public void listgenerate(){
@@ -1030,7 +1049,7 @@ public class Accident_Navigation extends AppCompatActivity
             Log.e("fine paid",""+fineamountintoserver);
             /*fineamountintintoserver=Integer.parseInt(fineamountintoserver);*/
             Log.e("status",""+statusintoserver);
-            if(statusintoserver.equalsIgnoreCase("paid")||statusintoserver.equalsIgnoreCase("Unpaid")){
+            if(!(statusintoserver.equalsIgnoreCase("paid")||statusintoserver.equalsIgnoreCase("Unpaid"))){
                 Toast.makeText(Accident_Navigation.this, "The Status Must Be Either Paid Or Unpaid!",
                         Toast.LENGTH_SHORT).show();
             }

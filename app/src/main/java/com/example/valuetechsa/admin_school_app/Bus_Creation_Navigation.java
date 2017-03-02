@@ -216,6 +216,7 @@ public class Bus_Creation_Navigation extends AppCompatActivity
         action.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         action.setCustomView(TextViewNewFont);
 
+        changeFont();
         new getBusListFromServer().execute();
     }
 
@@ -225,6 +226,26 @@ public class Bus_Creation_Navigation extends AppCompatActivity
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
+    }
+
+    public void changeFont(){
+        TextView buslist=(TextView)findViewById(R.id.buslisttextbox);
+        TextView busid=(TextView)findViewById(R.id.busidtextbox);
+        TextView busname=(TextView)findViewById(R.id.busroutenametextbox);
+        TextView buschassisnumber=(TextView)findViewById(R.id.chassisnumbertextbox);
+        TextView busplatenumber=(TextView)findViewById(R.id.platenumbertextbox);
+        TextView busFahas=(TextView)findViewById(R.id.fahastextbox);
+        TextView editroute=(TextView)findViewById(R.id.editroutetextbox);
+        Button addbus=(Button)findViewById(R.id.addbus);
+
+        buslist.setTypeface(tfRobo);
+        busid.setTypeface(tfRobo);
+        busname.setTypeface(tfRobo);
+        buschassisnumber.setTypeface(tfRobo);
+        busplatenumber.setTypeface(tfRobo);
+        busFahas.setTypeface(tfRobo);
+        editroute.setTypeface(tfRobo);
+        addbus.setTypeface(tfAdam);
     }
 
     public void showAlertForLanguage()
