@@ -188,7 +188,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Manage_Fuel_Navigation.this);
-        TextViewNewFont.setText("Manage Fuel");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_manage_fuel));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Manage_Fuel_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Manage_Fuel_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -206,8 +206,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
     class getFuelListFromServer extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -505,7 +505,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                 new getDriversFromServer().execute();
 
             final String[] drivernamefrom=new String[drivernamefromserverfordropdown.size()+1];
-            drivernamefrom[0]="Select Driver";
+            drivernamefrom[0]=getResources().getString(R.string.sj_select_driver);
             for(int i=1;i<=drivernamefromserverfordropdown.size();i++){
                 drivernamefrom[i]=drivernamefromserverfordropdown.get(i-1);
             }
@@ -690,7 +690,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
 
             final String[] drivernamefrom=new String[drivernamefromserverfordropdown.size()+1];
-            drivernamefrom[0]="Select Driver";
+            drivernamefrom[0]=getResources().getString(R.string.sj_select_driver);
             for(int i=1;i<=drivernamefromserverfordropdown.size();i++){
                 drivernamefrom[i]=drivernamefromserverfordropdown.get(i-1);
             }
@@ -799,19 +799,19 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         balanceintoserver= (Integer.parseInt(amountgivenintoserver)-(Integer.parseInt(amountspentintoserver)))+"";
 
         if(dateintoserver.isEmpty()){
-            Toast.makeText(Manage_Fuel_Navigation.this, "Please Select Date",
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_date),
                     Toast.LENGTH_LONG).show();
         }
-        else if(drivernameforadd.equalsIgnoreCase("Select Driver")){
-            Toast.makeText(Manage_Fuel_Navigation.this, "Please Select Driver",
+        else if(drivernameforadd.equalsIgnoreCase(getResources().getString(R.string.sj_select_driver))){
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_driver),
                     Toast.LENGTH_LONG).show();
         }
         else if(amountgivenintoserver.isEmpty()){
-            Toast.makeText(Manage_Fuel_Navigation.this, "Please Enter Given Amount",
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_enter_given_amount),
                     Toast.LENGTH_LONG).show();
         }
         else if(amountspentintoserver.isEmpty()){
-            Toast.makeText(Manage_Fuel_Navigation.this, "Please Enter Spent Amount",
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_enter_spent_amount),
                     Toast.LENGTH_LONG).show();
         }
         else
@@ -844,7 +844,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
     void uploadInvoiceTheard(final String srcPath)
     {
-        dialog = ProgressDialog.show(Manage_Fuel_Navigation.this, "", "Uploading file...", true);
+        dialog = ProgressDialog.show(Manage_Fuel_Navigation.this, "", getResources().getString(R.string.sj_uploading_file), true);
 
         new Thread(new Runnable() {
             public void run() {
@@ -966,7 +966,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                     runOnUiThread(new Runnable() {
                         public void run() {
 
-                            Toast.makeText(Manage_Fuel_Navigation.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_upload_complete), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -999,15 +999,15 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         amountgivenintoserver=amountedit.getText().toString();
 
         if(dateintoserver.isEmpty()){
-            Toast.makeText(Manage_Fuel_Navigation.this, "Please Select Date",
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_date),
                     Toast.LENGTH_LONG).show();
         }
-        else if(drivernameforadd.equalsIgnoreCase("Select Driver")){
-            Toast.makeText(Manage_Fuel_Navigation.this, "Please Select Driver",
+        else if(drivernameforadd.equalsIgnoreCase(getResources().getString(R.string.sj_select_driver))){
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_driver),
                     Toast.LENGTH_LONG).show();
         }
         else if(amountgivenintoserver.isEmpty()){
-            Toast.makeText(Manage_Fuel_Navigation.this, "Please Enter Amount",
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_enter_amount),
                     Toast.LENGTH_LONG).show();
         }
         else
@@ -1021,8 +1021,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1060,7 +1060,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                                         public void run(){
                                             //update ui here
                                             // display toast here
-                                            Toast.makeText(Manage_Fuel_Navigation.this, "Added Successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_added_successfully), Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
@@ -1110,8 +1110,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1146,7 +1146,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                                         public void run(){
                                             //update ui here
                                             // display toast here
-                                            Toast.makeText(Manage_Fuel_Navigation.this, "Record Updated Successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_updated_succesfully), Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
@@ -1194,7 +1194,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
     class getFuelDeleteServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, "Please wait.",
+            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_wait),
                     "", true);
 
         }
@@ -1226,7 +1226,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                                     public void run(){
                                         //update ui here
                                         // display toast here
-                                        Toast.makeText(Manage_Fuel_Navigation.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_deleted_succesfully), Toast.LENGTH_SHORT).show();
                                     }
                                 });
 

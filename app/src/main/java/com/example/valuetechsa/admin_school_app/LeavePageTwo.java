@@ -85,8 +85,8 @@ public class LeavePageTwo extends Fragment {
     class getBusListFromServer extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(getActivity(), "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(getActivity(), getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -174,8 +174,8 @@ public class LeavePageTwo extends Fragment {
             numberofdaysfromserver.clear();
             appliedonfromserver.clear();
             globalcount=0;
-            progressDialog2 = ProgressDialog.show(getActivity(), "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(getActivity(), getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -270,7 +270,7 @@ public class LeavePageTwo extends Fragment {
                 globalnumberinlist=0;
                 if(globalcount==0){
                     setLayoutInvisible();
-                    Toast.makeText(getActivity(), "No Student Leave Requests",
+                    Toast.makeText(getActivity(), getResources().getString(R.string.sj_no_student_leave_requests),
                             Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -280,7 +280,7 @@ public class LeavePageTwo extends Fragment {
             }
             else {
                 setLayoutInvisible();
-                    Toast.makeText(getActivity(), "No Student Leave Requests",
+                    Toast.makeText(getActivity(), getResources().getString(R.string.sj_no_student_leave_requests),
                             Toast.LENGTH_LONG).show();
             }
 
@@ -291,7 +291,7 @@ public class LeavePageTwo extends Fragment {
 
         buslistspinner=(Spinner) getActivity().findViewById(R.id.leavetwospinneroption);
         String[] busitems=new String[busnamelistfromserver.size()+1];
-        busitems[0]="Select Bus";
+        busitems[0]=getResources().getString(R.string.sj_select_bus);
         for(int i=1;i<=busnamelistfromserver.size();i++){
             busitems[i]=busnamelistfromserver.get(i-1);
         }
@@ -327,7 +327,7 @@ public class LeavePageTwo extends Fragment {
                         selectbusidintoserver=busidlistfromserver.get(i);
                     }
                 }*/
-                if(item.equalsIgnoreCase("Select bus")){
+                if(item.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
                     setLayoutInvisible();
                 }
                 else {

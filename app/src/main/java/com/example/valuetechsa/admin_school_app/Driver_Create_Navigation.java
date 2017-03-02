@@ -227,7 +227,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Driver_Create_Navigation.this);
-        TextViewNewFont.setText("Manage Driver");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_manage_driver));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Driver_Create_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Driver_Create_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -279,13 +279,13 @@ public class Driver_Create_Navigation extends AppCompatActivity
                     toastmessage="";
                     Log.e("position-------", "-------------"+pos);
                     if(driveriqamachecknumber.get(pos)==1){
-                        toastmessage=toastmessage+"--Iqama Has Expired  ";
+                        toastmessage=toastmessage+getResources().getString(R.string.sj_iqama_has_expired);
                     }
                     if(driverpassportchecknumber.get(pos)==1){
-                        toastmessage= toastmessage+"--Passport Has Expired   ";
+                        toastmessage= toastmessage+getResources().getString(R.string.sj_passport_has_expired);
                     }
                     if(driverlicensechecknumber.get(pos)==1){
-                        toastmessage=toastmessage+"--License Has Expired   ";
+                        toastmessage=toastmessage+getResources().getString(R.string.sj_license_has_expired);
                     }
                 if(toastmessage.isEmpty()){
 
@@ -534,7 +534,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
             int sum1=busnamefromserver.size();
             sum1=sum1+1;
             String[] busitems=new String[sum1];
-            busitems[0]="Select Bus";
+            busitems[0]=getResources().getString(R.string.sj_select_bus);
             for(int j=1;j<=busnamefromserver.size();j++){
                 busitems[j]=busnamefromserver.get(j-1);
             }
@@ -776,7 +776,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
             int sum1=busnamefromserver.size();
             sum1=sum1+1;
             String[] busitems=new String[sum1];
-            busitems[0]="Select Bus";
+            busitems[0]=getResources().getString(R.string.sj_select_bus);
             for(int j=1;j<=busnamefromserver.size();j++){
                 busitems[j]=busnamefromserver.get(j-1);
             }
@@ -985,9 +985,9 @@ public class Driver_Create_Navigation extends AppCompatActivity
             }
             else{
                 Picasso.with(this)
-                        .load("http://al-amaanah.com/Schoooly/uploads/driver_image/"+driverphotofromserver.get(rownumber))
+                        .load(Config.image+"uploads/driver_image/"+driverphotofromserver.get(rownumber))
                         .into(imageView);
-                Log.e("+++","http://al-amaanah.com/Schoooly/uploads/driver_image/"+driverphotofromserver.get(rownumber));
+                Log.e("+++",Config.image+"uploads/driver_image/"+driverphotofromserver.get(rownumber));
             }
 
 
@@ -1029,15 +1029,15 @@ public class Driver_Create_Navigation extends AppCompatActivity
         passwordserver=passwordedit.getText().toString();
         mobilenoserver=phonenoedit.getText().toString();
         if(nameserver.isEmpty()){
-            Toast.makeText(Driver_Create_Navigation.this, "Please Enter The Driver Name",
+            Toast.makeText(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_enter_the_driver_name),
                     Toast.LENGTH_LONG).show();
         }
         else if(mobilenoserver.isEmpty()){
-            Toast.makeText(Driver_Create_Navigation.this, "Please Enter The Mobile Number",
+            Toast.makeText(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_enter_the_mobile_number),
                     Toast.LENGTH_LONG).show();
         }
         else if(passwordserver.isEmpty()){
-            Toast.makeText(Driver_Create_Navigation.this, "Please Enter The Password",
+            Toast.makeText(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_enter_the_password),
                     Toast.LENGTH_LONG).show();
         }
         /*else if(nationalityserver.isEmpty()){
@@ -1091,7 +1091,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
                 licenseexpiredateserver="null";
             }
             Log.e("Image name","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111111111111111");
-            if(selectedspinneritem.equalsIgnoreCase("Select Bus")){
+            if(selectedspinneritem.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
                 selectedbusid="0";
             }
             else{
@@ -1135,8 +1135,8 @@ public class Driver_Create_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1168,7 +1168,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Driver_Create_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Driver_Create_Navigation.this, "Driver Added Successfully", Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -1213,8 +1213,8 @@ public class Driver_Create_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, "Please wait.",
-                    "Editing Details", true);
+            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    "", true);
 
         }
 
@@ -1246,7 +1246,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
                             try {
                                 JSONObject Jobj = new JSONObject(jsonStr);
                                 response=Jobj.getString("responsecode");
-                                Toast.makeText(Driver_Create_Navigation.this, "Driver Edited Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Driver_Create_Navigation.this, "Driver Edited Successfully", Toast.LENGTH_SHORT).show();
                             }
                             catch (JSONException e)
                             {
@@ -1289,8 +1289,8 @@ public class Driver_Create_Navigation extends AppCompatActivity
     class getDriverListFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1549,8 +1549,8 @@ public class Driver_Create_Navigation extends AppCompatActivity
     class getBusListFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1628,7 +1628,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
     class getDeleteServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, "Please wait.",
+            progressDialog2 = ProgressDialog.show(Driver_Create_Navigation.this, getResources().getString(R.string.sj_please_wait),
                     "", true);
 
         }
@@ -1902,7 +1902,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
 
     void uploadImageTheard(final String srcPath)
     {
-        dialog = ProgressDialog.show(Driver_Create_Navigation.this, "", "Uploading file...", true);
+        dialog = ProgressDialog.show(Driver_Create_Navigation.this, "", getResources().getString(R.string.sj_uploading_file), true);
 
         new Thread(new Runnable() {
             public void run() {
@@ -2023,7 +2023,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
                     runOnUiThread(new Runnable() {
                         public void run() {
 
-                            Toast.makeText(Driver_Create_Navigation.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Driver_Create_Navigation.this, getResources().getString(R.string.sj_upload_complete), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -2053,7 +2053,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
 
     void uploadIqamaTheard(final String srcPath)
     {
-        dialog = ProgressDialog.show(Driver_Create_Navigation.this, "", "Uploading file...", true);
+        dialog = ProgressDialog.show(Driver_Create_Navigation.this, "", getResources().getString(R.string.sj_uploading_file), true);
 
         new Thread(new Runnable() {
             public void run() {
@@ -2182,7 +2182,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
                     runOnUiThread(new Runnable() {
                         public void run() {
 
-                            Toast.makeText(Driver_Create_Navigation.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Driver_Create_Navigation.this, getResources().getString(R.string.sj_upload_complete), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

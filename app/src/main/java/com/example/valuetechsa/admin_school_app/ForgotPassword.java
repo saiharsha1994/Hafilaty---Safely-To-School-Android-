@@ -75,7 +75,7 @@ public class ForgotPassword extends Activity {
                     String emailPattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
                     if(!Email.matches(emailPattern))
                     {
-                        Toast.makeText(ForgotPassword.this, "Email is invalid",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ForgotPassword.this, getResources().getString(R.string.sj_email_is_invalid),Toast.LENGTH_LONG).show();
                     }
                     else
                     {
@@ -106,7 +106,7 @@ public class ForgotPassword extends Activity {
                     String emailPattern="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
                     if(!Email.matches(emailPattern))
                     {
-                        Toast.makeText(ForgotPassword.this, "Email is invalid",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ForgotPassword.this, getResources().getString(R.string.sj_email_is_invalid),Toast.LENGTH_LONG).show();
                     }
                     else
                     {
@@ -138,7 +138,7 @@ public class ForgotPassword extends Activity {
             edtCode.setVisibility(View.VISIBLE);
             edtPswd.setVisibility(View.VISIBLE);
             btnPswdSubmit.setVisibility(View.VISIBLE);
-            cc.showAlertWithTitle("Instruction","Paste the code here which we sent to your e-mail");
+            cc.showAlertWithTitle(getResources().getString(R.string.sj_instruction),getResources().getString(R.string.sj_paste_code_sent_to_email));
         }
         else
         {
@@ -155,7 +155,7 @@ public class ForgotPassword extends Activity {
         @Override
         protected void onPreExecute()
         {
-            authProgressDialog = ProgressDialog.show(ForgotPassword.this, "","Please Wait...", true, false);
+            authProgressDialog = ProgressDialog.show(ForgotPassword.this, "",getResources().getString(R.string.sj_please_wait), true, false);
         }
         @Override
         protected Void doInBackground(Void... arg0)
@@ -178,12 +178,12 @@ public class ForgotPassword extends Activity {
             {
                 if(respons.equals("1"))
                 {
-                    cc.showAlertWithTitle("Thank You!", "We have sent you the password reset code to your e-mail. Kindly paste that code here to change your password");
+                    cc.showAlertWithTitle(getResources().getString(R.string.sj_thank_you), getResources().getString(R.string.sj_password_reset_code_sent));
                     check();
                 }
                 else
                 {
-                    Toast.makeText(ForgotPassword.this,"InValid Email or not registered yet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPassword.this,getResources().getString(R.string.sj_invalid_or_not_registered), Toast.LENGTH_LONG).show();
                 }
             }
             catch(Exception e)
@@ -241,7 +241,7 @@ public class ForgotPassword extends Activity {
         @Override
         protected void onPreExecute()
         {
-            authProgressDialog = ProgressDialog.show(ForgotPassword.this, "","Please Wait...", true, false);
+            authProgressDialog = ProgressDialog.show(ForgotPassword.this, "",getResources().getString(R.string.sj_please_wait), true, false);
         }
         @Override
         protected Void doInBackground(Void... arg0)
@@ -264,7 +264,7 @@ public class ForgotPassword extends Activity {
             {
                 if(respons.equals("1"))
                 {
-                    Toast.makeText(ForgotPassword.this,"Password has been changed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPassword.this,getResources().getString(R.string.sj_password_has_been_changed), Toast.LENGTH_LONG).show();
 
                     Intent i=new Intent(ForgotPassword.this,Home_Admin.class);
                     i.putExtra("FROM", "ForgotPassword");
@@ -274,7 +274,7 @@ public class ForgotPassword extends Activity {
                 }
                 else
                 {
-                    Toast.makeText(ForgotPassword.this,"InValid Email or not registered yet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPassword.this,getResources().getString(R.string.sj_invalid_or_not_registered), Toast.LENGTH_LONG).show();
                 }
             }
             catch(Exception e)

@@ -152,7 +152,7 @@ public class Student_Attendence_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Student_Attendence_Navigation.this);
-        TextViewNewFont.setText("Attendence");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_attendance));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Student_Attendence_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Student_Attendence_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -292,16 +292,16 @@ public class Student_Attendence_Navigation extends AppCompatActivity
 
     public void applyAttendence(View view){
         if(applybutton==0){
-            if(routeattendenceselected.equals("Select Route")){
-                Toast.makeText(Student_Attendence_Navigation.this, "Please Select Route",
+            if(routeattendenceselected.equals(getResources().getString(R.string.sj_select_route))){
+                Toast.makeText(Student_Attendence_Navigation.this, getResources().getString(R.string.sj_please_select_route),
                         Toast.LENGTH_LONG).show();
             }
-            else if(triptypeselected.equals("Select Trip")){
-                Toast.makeText(Student_Attendence_Navigation.this, "Please Select Trip",
+            else if(triptypeselected.equals(getResources().getString(R.string.sj_select_trip))){
+                Toast.makeText(Student_Attendence_Navigation.this, getResources().getString(R.string.sj_please_select_trip),
                         Toast.LENGTH_LONG).show();
             }
             else if(dateusergiven.equals("empty")){
-                Toast.makeText(Student_Attendence_Navigation.this, "Please Select Date",
+                Toast.makeText(Student_Attendence_Navigation.this, getResources().getString(R.string.sj_please_select_date),
                         Toast.LENGTH_LONG).show();
             }
             else{
@@ -311,10 +311,10 @@ public class Student_Attendence_Navigation extends AppCompatActivity
                     }
                 }
                 for(int i=0;i<3;i++){
-                    if(triptypeselected.equals("Pick Up")){
+                    if(triptypeselected.equals(getResources().getString(R.string.sj_pick_up))){
                         triptypeIdselected="1";
                     }
-                    else if(triptypeselected.equals("Drop")){
+                    else if(triptypeselected.equals(getResources().getString(R.string.sj_drop))){
                         triptypeIdselected="2";
                     }
                 }
@@ -328,8 +328,8 @@ public class Student_Attendence_Navigation extends AppCompatActivity
     class getAttendenceFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog = ProgressDialog.show(Student_Attendence_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog = ProgressDialog.show(Student_Attendence_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
             countstudents=0;
 
         }
@@ -420,7 +420,7 @@ public class Student_Attendence_Navigation extends AppCompatActivity
                 setLayoutVisible();
             }
             else{
-                Toast.makeText(Student_Attendence_Navigation.this, "No Attendence Exists On This Day",
+                Toast.makeText(Student_Attendence_Navigation.this, getResources().getString(R.string.sj_no_attendance_records_for_this_day),
                         Toast.LENGTH_LONG).show();
                 setLayoutInvisible();
             }
@@ -540,14 +540,14 @@ public class Student_Attendence_Navigation extends AppCompatActivity
         attendenceTripType=(Spinner)findViewById(R.id.selecttriptypespinnerattendence);
 
         final String[] routeattendencefrom=new String[routenamefromserverattendence.size()+1];
-        routeattendencefrom[0]="Select Route";
+        routeattendencefrom[0]=getResources().getString(R.string.sj_select_route);
         for(int i=1;i<=routenamefromserverattendence.size();i++){
             routeattendencefrom[i]=routenamefromserverattendence.get(i-1);
         }
         final String[] triptypeattendence=new String[3];
-        triptypeattendence[0]="Select Trip";
-        triptypeattendence[1]="Pick Up";
-        triptypeattendence[2]="Drop";
+        triptypeattendence[0]=getResources().getString(R.string.sj_select_trip);
+        triptypeattendence[1]=getResources().getString(R.string.sj_pick_up);
+        triptypeattendence[2]=getResources().getString(R.string.sj_drop);
 
         ArrayAdapter<String> adapterrouteattendencefrom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, routeattendencefrom) {
             public View getView(int position, View convertView, ViewGroup parent) {

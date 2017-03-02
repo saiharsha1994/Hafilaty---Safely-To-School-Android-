@@ -179,7 +179,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Student_Misbehaviour_Navigation.this);
-        TextViewNewFont.setText("Student Misbehaviour");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_student_misbehaviour));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Student_Misbehaviour_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Student_Misbehaviour_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -205,7 +205,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
         else
             connected = false;
         if(connected==false){
-            Toast.makeText(Student_Misbehaviour_Navigation.this, "Please Check Your Net Connection" ,
+            Toast.makeText(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_check_internet_connection) ,
                     Toast.LENGTH_LONG).show();
         }
 
@@ -343,7 +343,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
         busListSpinner=(Spinner)findViewById(R.id.busselectionspinner);
 
         final String[] busmessagefrom=new String[busnamefromserver.size()+1];
-        busmessagefrom[0]="Select Bus";
+        busmessagefrom[0]=getResources().getString(R.string.sj_select_bus);
         for(int i=1;i<=busnamefromserver.size();i++){
             busmessagefrom[i]=busnamefromserver.get(i-1);
         }
@@ -389,8 +389,8 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
     class getStudentsFromServer extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Student_Misbehaviour_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
             //Toast.makeText(Student_Misbehaviour_Navigation.this, busIdselectedforadd, Toast.LENGTH_SHORT).show();
 
         }
@@ -470,8 +470,8 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
 
     public void viewRecord(View view){
 
-        if(busNameselected.equals("Select Bus")){
-            Toast.makeText(Student_Misbehaviour_Navigation.this, "Please Select Bus",
+        if(busNameselected.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
+            Toast.makeText(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_select_bus),
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -494,8 +494,8 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
     class getMisbehaviourRecordsFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog = ProgressDialog.show(Student_Misbehaviour_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog = ProgressDialog.show(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
         }
 
         @Override
@@ -567,7 +567,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
                 setLayoutVisible();
             }
             else{
-                Toast.makeText(Student_Misbehaviour_Navigation.this, "No Records",
+                Toast.makeText(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_no_records),
                         Toast.LENGTH_LONG).show();
                 setLayoutInvisible();
             }
@@ -724,7 +724,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
 
 
             final String[] busmessagefrom=new String[busnamefromserver.size()+1];
-            busmessagefrom[0]="Select Bus";
+            busmessagefrom[0]=getResources().getString(R.string.sj_select_bus);
             for(int i=1;i<=busnamefromserver.size();i++){
                 busmessagefrom[i]=busnamefromserver.get(i-1);
             }
@@ -805,7 +805,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
 
     public void getStudentDropList(){
         final String[] studentmessagefrom=new String[studentnamefromserver.size()+1];
-        studentmessagefrom[0]="Select Student";
+        studentmessagefrom[0]=getResources().getString(R.string.sj_select_student);
         for(int i=1;i<=studentnamefromserver.size();i++){
             studentmessagefrom[i]=studentnamefromserver.get(i-1);
         }
@@ -860,19 +860,19 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
         detailsintoserver=detailsedit.getText().toString();
 
         if(dateintoserver.isEmpty()){
-            Toast.makeText(Student_Misbehaviour_Navigation.this, "Please Select The Date",
+            Toast.makeText(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_select_date),
                     Toast.LENGTH_SHORT).show();
         }
-        else if(nameintoserver.equalsIgnoreCase("Select Student")){
-            Toast.makeText(Student_Misbehaviour_Navigation.this, "Please Select The Student",
+        else if(nameintoserver.equalsIgnoreCase(getResources().getString(R.string.sj_select_student))){
+            Toast.makeText(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_select_student),
                     Toast.LENGTH_SHORT).show();
         }
-        else if(busNameselectedforadd.equalsIgnoreCase("Select Bus")){
-            Toast.makeText(Student_Misbehaviour_Navigation.this, "Please Select Bus",
+        else if(busNameselectedforadd.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
+            Toast.makeText(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_select_bus),
                     Toast.LENGTH_SHORT).show();
         }
         else if(detailsintoserver.isEmpty()){
-            Toast.makeText(Student_Misbehaviour_Navigation.this, "Please Enter The Details",
+            Toast.makeText(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_enter_the_details),
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -889,8 +889,8 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialog2 = ProgressDialog.show(Student_Misbehaviour_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog2 = ProgressDialog.show(Student_Misbehaviour_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1082,6 +1082,11 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
             DrawerLayout mDrawerLayout;
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             mDrawerLayout.closeDrawers();
+
+        }
+        else if (id == R.id.breakdowns) {
+            Intent intent = new Intent(this, Breakdowns_Navigation.class);
+            startActivity(intent);
 
         }
         else if (id == R.id.managefuel) {

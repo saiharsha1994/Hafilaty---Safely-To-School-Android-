@@ -125,6 +125,12 @@
             android:windowSoftInputMode="adjustPan"
             />
         <activity
+            android:name=".Breakdowns_Navigation"
+            android:label="@string/title_activity_breakdowns_navigation"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity
             android:name=".Manage_Fuel_Navigation"
             android:label="@string/title_activity_manage_fuel_navigation"
             android:screenOrientation="landscape"

@@ -50,6 +50,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -61,6 +62,7 @@ import com.example.valuetechsa.admin_school_app.commonclass.Config;
 import com.example.valuetechsa.admin_school_app.libs.Jsonfunctions;
 import com.example.valuetechsa.admin_school_app.model.ServiceModel;
 import com.google.android.gms.location.Geofence;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -69,6 +71,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -161,6 +164,9 @@ public class Hawkeye_navigation extends AppCompatActivity
     Handler mHandler;
     Runnable mHandlerTask;
     int alertShown=0;
+    int oldsize=0;
+    FrameLayout layout_MainMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -235,8 +241,11 @@ public class Hawkeye_navigation extends AppCompatActivity
             applyFontToMenuItem(mi);
         }
 
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
+
         TextView TextViewNewFont = new TextView(Hawkeye_navigation.this);
-        TextViewNewFont.setText("Dashboard");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_dashboard));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Hawkeye_navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         TextViewNewFont.setTypeface(tfRobo);
@@ -311,6 +320,7 @@ public class Hawkeye_navigation extends AppCompatActivity
             alert_timestamp=extras.getString("timestamp");
 
         }
+
         new getDriverListFromServer().execute();
         new getdelay().execute();
         /*fivemins=new Thread(new Runnable() {
@@ -522,8 +532,8 @@ public class Hawkeye_navigation extends AppCompatActivity
         @Override
         protected void onPreExecute()
         {
-            progressDialog1 = ProgressDialog.show(Hawkeye_navigation.this, "Please wait.",
-                    "Fetching Route Information!", true);
+            progressDialog1 = ProgressDialog.show(Hawkeye_navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
         }
         @Override
         protected Void doInBackground(Void... arg0)
@@ -821,6 +831,8 @@ public class Hawkeye_navigation extends AppCompatActivity
 
     public void cordinates(){
         //mMap.clear();
+        LatLng latLng = new LatLng(schoollat, schoollong);
+        Marker m= null;
         removeMarkers();
         for(int i=0;i<buslatlist.size();i++) {
             xl = Double.parseDouble(buslat.get(i));
@@ -830,7 +842,7 @@ public class Hawkeye_navigation extends AppCompatActivity
             Log.e(yl + "Longitudes in loop", buslong.get(i));
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(hcmus));
             if (colorchangebusarray[i] == 0) {
-                Marker m=(mMap.addMarker(new MarkerOptions()
+                m=(mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_bus))
                         .title("test stop")
                         .position(hcmus)));
@@ -838,7 +850,7 @@ public class Hawkeye_navigation extends AppCompatActivity
                 busallMarkers.add(m);
             }
             else{
-                Marker m=(mMap.addMarker(new MarkerOptions()
+                m=(mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_bus))
                         .title("test stop")
                         .position(hcmus)));
@@ -853,23 +865,40 @@ public class Hawkeye_navigation extends AppCompatActivity
                     .position(hcmus)));*/
         }
         zoom=1;
-        LatLng latLng = new LatLng(schoollat, schoollong);
-        //drawMarkerWithCircle(latLng);
-        mMap.setOnMarkerClickListener(this);
+        //LatLng latLng = new LatLng(schoollat, schoollong);
+        if(buslatlist.size()!=oldsize&&buslatlist.size()>=1) {
+            oldsize=buslatlist.size();
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (Marker marker : busallMarkers) {
+                builder.include(marker.getPosition());
+            }
+            LatLngBounds bounds = builder.build();
+            int padding = 100; // offset from edges of the map in pixels
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+            if(buslatlist.size()==1) {
+                CameraUpdate cu2 = CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15F);
+                mMap.animateCamera(cu2);
+            }
+            else
+                mMap.animateCamera(cu);
+        }
     }
 
     public void cordinateszoom(){
         mMap.clear();
         busallMarkers.clear();
+        LatLng latLng = new LatLng(schoollat, schoollong);
+        Marker m=null;
         for(int i=0;i<buslatlist.size();i++) {
             xl = Double.parseDouble(buslat.get(i));
             yl = Double.parseDouble(buslong.get(i));
             LatLng hcmus = new LatLng(xl, yl);
             Log.e(xl + "Latitudes in loop", buslat.get(i));
             Log.e(yl + "Longitudes in loop", buslong.get(i));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hcmus,8));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hcmus,8));
             if (colorchangebusarray[i] == 0) {
-                Marker m=(mMap.addMarker(new MarkerOptions()
+                m=(mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_bus))
                         .title("test stop")
                         .position(hcmus)));
@@ -877,7 +906,7 @@ public class Hawkeye_navigation extends AppCompatActivity
                 busallMarkers.add(m);
             }
             else{
-                Marker m=(mMap.addMarker(new MarkerOptions()
+                m=(mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_bus))
                         .title("test stop")
                         .position(hcmus)));
@@ -893,8 +922,8 @@ public class Hawkeye_navigation extends AppCompatActivity
                     .position(hcmus)));*/
         }
         zoom=1;
-        LatLng latLng = new LatLng(schoollat, schoollong);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
         /*Marker m=(mMap.addMarker(new MarkerOptions()
                 .title("International Indian School Dammam")
                 .position(latLng)));
@@ -902,6 +931,25 @@ public class Hawkeye_navigation extends AppCompatActivity
         m.showInfoWindow();
         clickschool=true;
         drawMarkerWithCircle(latLng);*/
+        oldsize=buslatlist.size();
+        if(buslatlist.size()==0)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15F));
+        if(buslatlist.size()>=1) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (Marker marker : busallMarkers) {
+                builder.include(marker.getPosition());
+            }
+            LatLngBounds bounds = builder.build();
+            int padding = 100; // offset from edges of the map in pixels
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+            if(oldsize==1) {
+                CameraUpdate cu2 = CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15F);
+                mMap.animateCamera(cu2);
+            }
+            else
+                mMap.animateCamera(cu);
+        }
         mMap.setOnMarkerClickListener(this);
     }
 
@@ -1065,13 +1113,13 @@ public class Hawkeye_navigation extends AppCompatActivity
 
             topRow.setText(sheadertop);
             if(bordercrossed[checkinttag]==1 && speedcrossed[checkinttag]==1){
-                alertredtextbox.setText("BUS CROSSING BOUNDARY AND SPEEDING");
+                alertredtextbox.setText(getResources().getString(R.string.sj_bus_crossing_boundary_and_speeding));
             }
             else if(bordercrossed[checkinttag]==1){
-                alertredtextbox.setText("BUS CROSSING BOUNDARY");
+                alertredtextbox.setText(getResources().getString(R.string.sj_bus_crossing_boundary));
             }
             else if(speedcrossed[checkinttag]==1){
-                alertredtextbox.setText("SPEEDING ALERT");
+                alertredtextbox.setText(getResources().getString(R.string.sj_speeding_alert));
             }
             btnClosePopup=(Button)layout.findViewById(R.id.btn_close_popup_hawkeye);
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
@@ -1096,14 +1144,16 @@ public class Hawkeye_navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final View layout1 = inflater1.inflate(R.layout.fadepopup,
                     (ViewGroup) findViewById(R.id.fadePopup));
-            final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
-            fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
+            /*final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
+            fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);*/
+
             LayoutInflater inflater = (LayoutInflater) Hawkeye_navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.screen_popup_alert,
+            final View layout = inflater.inflate(R.layout.screen_popup_alert,
                     (ViewGroup) findViewById(R.id.popup_element));
             pwindo = new PopupWindow(layout, 500,380, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha(200);
             //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
             topRow=(TextView)layout.findViewById(R.id.blueStudentnametexthawkeye);
             drivernamehawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivername);
@@ -1121,8 +1171,9 @@ public class Hawkeye_navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha(0);
                     pwindo.dismiss();
-                    fadePopup.dismiss();
+                    //fadePopup.dismiss();
 
                 }
             });

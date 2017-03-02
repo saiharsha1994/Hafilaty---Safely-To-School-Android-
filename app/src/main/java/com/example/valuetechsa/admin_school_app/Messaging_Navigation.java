@@ -165,7 +165,7 @@ public class Messaging_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Messaging_Navigation.this);
-        TextViewNewFont.setText("Messaging");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_messaging));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Messaging_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Messaging_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -191,7 +191,7 @@ public class Messaging_Navigation extends AppCompatActivity
         else
             connected = false;
         if(connected==false){
-            Toast.makeText(Messaging_Navigation.this, "Please Check Your Net Connection" ,
+            Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_check_internet_connection) ,
                     Toast.LENGTH_LONG).show();
         }
 
@@ -353,15 +353,15 @@ public class Messaging_Navigation extends AppCompatActivity
         studentteacherlist=(Spinner)findViewById(R.id.studentteachermessagespinner);
 
         final String[] routemessagefrom=new String[routenamefromservermessage.size()+1];
-        routemessagefrom[0]="Select Route";
+        routemessagefrom[0]=getResources().getString(R.string.sj_select_route);
         for(int i=1;i<=routenamefromservermessage.size();i++){
             routemessagefrom[i]=routenamefromservermessage.get(i-1);
         }
 
         final String[] studentteachermessagein=new String[3];
-        studentteachermessagein[0]="Select";
-        studentteachermessagein[1]="Student";
-        studentteachermessagein[2]="Teacher";
+        studentteachermessagein[0]=getResources().getString(R.string.sj_select);
+        studentteachermessagein[1]=getResources().getString(R.string.sj_student);
+        studentteachermessagein[2]=getResources().getString(R.string.sj_teacher);
 
         ArrayAdapter<String> adapterroutemessagefrom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, routemessagefrom) {
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -432,12 +432,12 @@ public class Messaging_Navigation extends AppCompatActivity
 
     public void selectedMessageRoute(View view){
 
-        if(routeMessageselected.equals("Select Route")){
-            Toast.makeText(Messaging_Navigation.this, "Please Select Route",
+        if(routeMessageselected.equals(getResources().getString(R.string.sj_select_route))){
+            Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_please_select_route),
                     Toast.LENGTH_LONG).show();
         }
-        else  if(studentteacherselected.equals("Select")){
-            Toast.makeText(Messaging_Navigation.this, "Please Select Student Or Teacher",
+        else  if(studentteacherselected.equals(getResources().getString(R.string.sj_select))){
+            Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_please_select_student_or_teacher),
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -446,10 +446,10 @@ public class Messaging_Navigation extends AppCompatActivity
                     routeMessageIdselected=routeidfromservermessage.get(i);
                 }
             }
-                if(studentteacherselected.equals("Student")){
+                if(studentteacherselected.equals(getResources().getString(R.string.sj_student))){
                     studentteacherIdselected="1";
                 }
-                if(studentteacherselected.equals("Teacher")){
+                if(studentteacherselected.equals(getResources().getString(R.string.sj_teacher))){
                     studentteacherIdselected="2";
                 }
 
@@ -474,8 +474,8 @@ public class Messaging_Navigation extends AppCompatActivity
     class getStudentsFromMessageServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog = ProgressDialog.show(Messaging_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialog = ProgressDialog.show(Messaging_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
         }
 
         @Override
@@ -566,7 +566,7 @@ public class Messaging_Navigation extends AppCompatActivity
                 setLayoutVisible();
             }
             else{
-                Toast.makeText(Messaging_Navigation.this, "No Students or Teachers Exists",
+                Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_no_students_or_teachers_exist),
                         Toast.LENGTH_LONG).show();
                 setLayoutInvisible();
             }
@@ -739,7 +739,7 @@ public class Messaging_Navigation extends AppCompatActivity
     public void selectedmessagelist(View view){
         emptymessage=enterthetextedit.getText().toString();
         if(emptymessage.equalsIgnoreCase("empty")||emptymessage.isEmpty()){
-            Toast.makeText(Messaging_Navigation.this, "Please Enter A Message" ,
+            Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_please_enter_a_message) ,
                     Toast.LENGTH_SHORT).show();
         }
         else{
@@ -752,10 +752,10 @@ public class Messaging_Navigation extends AppCompatActivity
                     checkall=checkall+1;
                 }
             }
-            if(studentteacherselected.equalsIgnoreCase("Student")){
+            if(studentteacherselected.equalsIgnoreCase(getResources().getString(R.string.sj_student))){
                 Log.e("%%%%%%%%%%%5",checkall+"");
                 if(checkall==0){
-                    Toast.makeText(Messaging_Navigation.this, "Please Select Students" ,
+                    Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_please_select_students) ,
                             Toast.LENGTH_SHORT).show();
                 }
                 else if(checkall==Messageglobalcount){
@@ -787,10 +787,10 @@ public class Messaging_Navigation extends AppCompatActivity
                     new sendmessagesome().execute();
                 }
             }
-            else if(studentteacherselected.equalsIgnoreCase("Teacher")){
+            else if(studentteacherselected.equalsIgnoreCase(getResources().getString(R.string.sj_teacher))){
                 Log.e("%%%%%%%%%%%5",checkall+"");
                 if(checkall==0){
-                    Toast.makeText(Messaging_Navigation.this, "Please Select Students" ,
+                    Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_please_select_teachers) ,
                             Toast.LENGTH_SHORT).show();
                 }
                 else if(checkall==Messageglobalcount){
@@ -830,8 +830,8 @@ public class Messaging_Navigation extends AppCompatActivity
         @Override
         protected void onPreExecute()
         {
-            progressDialogmessage = ProgressDialog.show(Messaging_Navigation.this, "Please Wait",
-                    "Sending Message.....", true);
+            progressDialogmessage = ProgressDialog.show(Messaging_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_sending_message), true);
 
         }
         @Override
@@ -889,7 +889,7 @@ public class Messaging_Navigation extends AppCompatActivity
             idappend="empty";
             progressDialogmessage.dismiss();
             if(message.equalsIgnoreCase("Sent Successfully")){
-                Toast.makeText(Messaging_Navigation.this, "Message Sent Successfully" ,
+                Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_message_sent_successfully) ,
                         Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(getIntent());
@@ -902,8 +902,8 @@ public class Messaging_Navigation extends AppCompatActivity
         @Override
         protected void onPreExecute()
         {
-            progressDialogmessage = ProgressDialog.show(Messaging_Navigation.this, "Please Wait",
-                    "Sending Message.....", true);
+            progressDialogmessage = ProgressDialog.show(Messaging_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_sending_message), true);
 
         }
         @Override
@@ -958,7 +958,7 @@ public class Messaging_Navigation extends AppCompatActivity
         {
             progressDialogmessage.dismiss();
             if(message.equalsIgnoreCase("Sent Successfully")){
-                Toast.makeText(Messaging_Navigation.this, "Message Sent Successfully" ,
+                Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_message_sent_successfully) ,
                         Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(getIntent());
@@ -971,8 +971,8 @@ public class Messaging_Navigation extends AppCompatActivity
         @Override
         protected void onPreExecute()
         {
-            progressDialogmessage = ProgressDialog.show(Messaging_Navigation.this, "Please Wait",
-                    "Sending Message.....", true);
+            progressDialogmessage = ProgressDialog.show(Messaging_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_sending_message), true);
 
         }
         @Override
@@ -1027,7 +1027,7 @@ public class Messaging_Navigation extends AppCompatActivity
         {
             progressDialogmessage.dismiss();
             if(message.equalsIgnoreCase("Sent Successfully")){
-                Toast.makeText(Messaging_Navigation.this, "Message Sent Successfully" ,
+                Toast.makeText(Messaging_Navigation.this, getResources().getString(R.string.sj_message_sent_successfully) ,
                         Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(getIntent());

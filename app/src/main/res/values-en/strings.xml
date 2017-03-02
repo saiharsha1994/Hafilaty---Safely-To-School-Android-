@@ -32,6 +32,7 @@
     <string name="title_activity_driver__create__navigation">Driver_Create_Navigation</string>
     <string name="title_activity_contract__creation__navigation">Contract_Creation_Navigation
     </string>
+    <string name="title_activity_breakdowns_navigation">Breakdowns_Navigation</string>
 
 
     <!--String values for translation-->
@@ -171,6 +172,22 @@
     <string name="stv_parent_list">PARENT LIST</string>
     <string name="stv_email2">Email</string>
     <string name="stv_children">Children</string>
+    <string name="stv_date_from">Date From:</string>
+    <string name="stv_date_to">Date To:</string>
+    <string name="stv_breakdown_list">BREAKDOWN LIST</string>
+    <string name="stv_status">Status</string>
+    <string name="stv_Leave_Two_list">STUDENTS LIST</string>
+    <string name="stv_Leave_Two_student_name">Name</string>
+    <string name="stv_Leave_Two_from_date">From Date</string>
+    <string name="stv_Leave_Two_to_date">To Date</string>
+    <string name="stv_Leave_Two_reason">Reason</string>
+    <string name="stv_Leave_Two_status">Status</string>
+    <string name="stv_Student_List">STUDENTS LIST</string>
+    <string name="stv_Student_List_name">Name</string>
+    <string name="stv_Student_List_class">Class</string>
+    <string name="stv_Student_List_section">Section</string>
+    <string name="stv_Student_List_parents_no">Mobile Number</string>
+
 
     <!--Button-->
     <string name="sb_apply">Apply</string>
@@ -232,5 +249,115 @@
     <string name="st_accidents">ACCIDENTS</string>
     <string name="st_manage_fuel">MANAGE FUEL</string>
     <string name="st_parents">PARENTS</string>
+    <string name="st_breakdowns">BREAKDOWNS</string>
+
+    <!--Java files-->
+    <string name="sj_accident">Accident</string>
+    <string name="sj_please_wait">Please wait.</string>
+    <string name="sj_fetching_information">Fetching Information!</string>
+    <string name="sj_select_bus">Select Bus</string>
+    <string name="sj_select_driver">Select Driver</string>
+    <string name="sj_please_enter_date">Please Enter The Date</string>
+    <string name="sj_please_enter_the_details">Please Enter The Details</string>
+    <string name="sj_please_select_bus">Please Select Bus</string>
+    <string name="sj_please_select_driver">Please Select Driver</string>
+    <string name="sj_please_enter_the_fine_amount">Please Enter The Fine Amount</string>
+    <string name="sj_please_enter_the_status">Please Enter The Status</string>
+    <string name="sj_accident_added_succesfully">Accident Added Successfully</string>
+    <string name="sj_updated_succesfully">Updated Successfully</string>
+    <string name="sj_uploading_file">Uploading File...</string>
+    <string name="sj_upload_complete">Upload Complete</string>
+    <string name="sj_breakdowns">Breakdowns</string>
+    <string name="sj_please_select_from_date">Please Select From Date</string>
+    <string name="sj_please_select_to_date">Please Select To Date</string>
+    <string name="sj_no_records">No Records</string>
+    <string name="sj_manage_bus">Manage Bus</string>
+    <string name="sj_license_has_expired">--License Has Expired--</string>
+    <string name="sj_license_renewal_has_expired">--License Renewal Has Expired--</string>
+    <string name="sj_mvpi_has_expired">--MVPI Has Expired--</string>
+    <string name="sj_select_bus_type">Select Bus Type</string>
+    <string name="sj_please_enter_bus_name">Please Enter The Bus Name</string>
+    <string name="sj_please_select_the_bus_type">Please Select The Bus Type</string>
+    <string name="sj_please_enter_the_plate_number">Please Enter The Plate Number</string>
+    <string name="sj_manage_contract">Manage Contract</string>
+    <string name="sj_please_enter_the_contract_date">Please Enter The Contract Date</string>
+    <string name="sj_please_enter_the_vendor_name">Please Enter The Vendor Name</string>
+    <string name="sj_please_enter_vendor_email">Please Enter Vendor Email</string>
+    <string name="sj_please_enter_vendor_mobile_number">Please Enter Vendor Mobile Number</string>
+    <string name="sj_please_enter_the_bus_provided">Please Enter The Bus Provided</string>
+    <string name="sj_please_enter_the_driver_provided">Please Enter The Driver Provided</string>
+    <string name="sj_please_enter_the_expiry_date">Please Enter The Expiry Date</string>
+    <string name="sj_manage_driver">Manage Driver</string>
+    <string name="sj_iqama_has_expired">--Iqama Has Expired--</string>
+    <string name="sj_passport_has_expired">--Passport Has Expired--</string>
+    <string name="sj_please_enter_the_driver_name">Please Enter The Driver Name</string>
+    <string name="sj_please_enter_the_mobile_number">Please Enter The Mobile Number</string>
+    <string name="sj_please_enter_the_password">Please Enter The Password</string>
+    <string name="sj_driver_rating">Driver Rating</string>
+    <string name="sj_please_select_date">Please Select Date</string>
+    <string name="sj_no_rating_for_this_month">No Rating For This Month</string>
+    <string name="sj_leaves">Leaves</string>
+    <string name="sj_no_student_leave_requests">No Student Leave Requests</string>
+    <string name="sj_username_should_not_be_empty">Username Should Not Be Empty</string>
+    <string name="sj_password_should_not_be_empty">Password Should Not Be Empty</string>
+    <string name="sj_check_internet_connection">Check Your Internet Connection</string>
+    <string name="sj_invalid_username_or_password">Invalid Username or Password</string>
+    <string name="sj_manage_fuel">Manage Fuel</string>
+    <string name="sj_please_enter_given_amount">Please Enter Given Amount</string>
+    <string name="sj_please_enter_spent_amount">Please Enter Spent Amount</string>
+    <string name="sj_please_enter_amount">Please Enter Amount</string>
+    <string name="sj_added_successfully">Added Successfully</string>
+    <string name="sj_deleted_succesfully">Deleted Successfully</string>
+    <string name="sj_messaging">Messaging</string>
+    <string name="sj_select_route">Select Route</string>
+    <string name="sj_select">Select</string>
+    <string name="sj_student">Student</string>
+    <string name="sj_teacher">Teacher</string>
+    <string name="sj_please_select_route">Please Select Route</string>
+    <string name="sj_please_select_student_or_teacher">Please Select Student or Teacher</string>
+    <string name="sj_no_students_or_teachers_exist">No Students or Teachers Exist</string>
+    <string name="sj_please_enter_a_message">Please Enter A Message</string>
+    <string name="sj_please_select_students">Please Select Students</string>
+    <string name="sj_please_select_teachers">Please Select Teachers</string>
+    <string name="sj_sending_message">Sending Message...</string>
+    <string name="sj_message_sent_successfully">Message Sent Successfully</string>
+    <string name="sj_attendance">Attendance</string>
+    <string name="sj_please_select_trip">Please Select Trip</string>
+    <string name="sj_select_trip">Select Trip</string>
+    <string name="sj_pick_up">Pick Up</string>
+    <string name="sj_drop">Drop</string>
+    <string name="sj_no_attendance_records_for_this_day">No Attendance Records for This Day</string>
+    <string name="sj_student_misbehaviour">Student Misbehaviour</string>
+    <string name="sj_select_student">Select Student</string>
+    <string name="sj_please_select_student">Please Select Student</string>
+    <string name="sj_email_is_invalid">Email is Invalid</string>
+    <string name="sj_instruction">Instructions</string>
+    <string name="sj_paste_code_sent_to_email">Paste the code sent to your Email</string>
+    <string name="sj_thank_you">Thank You!</string>
+    <string name="sj_password_reset_code_sent">Password reset code has been sent to your Email. Kindly paste the code here to change your password</string>
+    <string name="sj_invalid_or_not_registered">Invalid Email or Not Registered Yet</string>
+    <string name="sj_password_has_been_changed">Password Has Been Changed</string>
+    <string name="sj_dashboard">Dashboard</string>
+    <string name="sj_bus_crossing_boundary_and_speeding">BUS CROSSING BOUNDARY AND SPEEDING</string>
+    <string name="sj_bus_crossing_boundary">BUS CROSSING BOUNDARY</string>
+    <string name="sj_speeding_alert">SPEEDING ALERT</string>
+    <string name="sj_routes">Routes</string>
+    <string name="sj_create_new_route">CREATE NEW ROUTE</string>
+    <string name="sj_please_enter_route_name">Please Enter Route Name</string>
+    <string name="sj_please_enter_start_time">Please Enter Start Time</string>
+    <string name="sj_please_enter_end_time">Please Enter End Time</string>
+    <string name="sj_please_select_trip_type">Please Select Trip Type</string>
+    <string name="sj_student_selection">Student Selection</string>
+    <string name="sj_adding_details">Adding Details</string>
+    <string name="sj_route_created">Route Created</string>
+    <string name="sj_finding_direction">Finding Direction...</string>
+    <string name="sj_student_teacher_already_exist">Student/Teacher Already Exist. Can\'t Remove. Make Transfer</string>
+    <string name="sj_already_exist_in_the_route">Already Exist in The Route</string>
+    <string name="sj_finding_location">Finding Location...</string>
+    <string name="sj_transfer">Transfer</string>
+    <string name="sj_please_select_from_route">Please Select FROM Route</string>
+    <string name="sj_please_select_to_route">Please Select TO Route</string>
+    <string name="sj_two_routes_cannot_be_same">Two Routes Cannot be Same</string>
+    <string name="sj_transfer_completed">Transfer Completed</string>
 
 </resources>

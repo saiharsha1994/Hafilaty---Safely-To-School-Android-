@@ -172,7 +172,7 @@ public class Transfer_Student_Navigation extends AppCompatActivity
         }
 
         TextView TextViewNewFont = new TextView(Transfer_Student_Navigation.this);
-        TextViewNewFont.setText("Transfer");
+        TextViewNewFont.setText(getResources().getString(R.string.sj_transfer));
         TextViewNewFont.setTextSize(32);
         tfRobo = Typeface.createFromAsset(Transfer_Student_Navigation.this.getAssets(), "fonts/ROBOTO-LIGHT.TTF");
         tfAdam = Typeface.createFromAsset(Transfer_Student_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
@@ -340,20 +340,20 @@ public class Transfer_Student_Navigation extends AppCompatActivity
         routeToSpinner=(Spinner)findViewById(R.id.routetospinner);
         studentTeacherTransferSpinner=(Spinner)findViewById(R.id.teacherstudenttransferspinner);
         final String[] routefrom=new String[routenamefromserver.size()+1];
-        routefrom[0]="Select Route";
+        routefrom[0]=getResources().getString(R.string.sj_select_route);
         for(int i=1;i<=routenamefromserver.size();i++){
             routefrom[i]=routenamefromserver.get(i-1);
         }
         String[] routeto=new String[routenamefromserver.size()+1];
-        routeto[0]="Select Route";
+        routeto[0]=getResources().getString(R.string.sj_select_route);
         for(int i=1;i<=routenamefromserver.size();i++){
             routeto[i]=routenamefromserver.get(i-1);
         }
 
         String[] studenttechertransfer=new String[3];
-        studenttechertransfer[0]="Select";
-        studenttechertransfer[1]="Student";
-        studenttechertransfer[2]="Teacher";
+        studenttechertransfer[0]=getResources().getString(R.string.sj_select);
+        studenttechertransfer[1]=getResources().getString(R.string.sj_student);
+        studenttechertransfer[2]=getResources().getString(R.string.sj_teacher);
 
         ArrayAdapter<String> adapterroutefrom = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, routefrom) {
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -458,16 +458,16 @@ public class Transfer_Student_Navigation extends AppCompatActivity
 
     public void selectedRoute(View view){
 
-        if(routeFromselected.equals("Select Route")){
-            Toast.makeText(Transfer_Student_Navigation.this, "Please Select FROM Route",
+        if(routeFromselected.equalsIgnoreCase(getResources().getString(R.string.sj_select_route))){
+            Toast.makeText(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_please_select_from_route),
                     Toast.LENGTH_LONG).show();
         }
-        else if(routeToselected.equals("Select Route")){
-            Toast.makeText(Transfer_Student_Navigation.this, "Please Select TO Route",
+        else if(routeToselected.equalsIgnoreCase(getResources().getString(R.string.sj_select_route))){
+            Toast.makeText(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_please_select_to_route),
                     Toast.LENGTH_LONG).show();
         }
-        else if(studentTeacherTransferSelected.equals("Select")){
-            Toast.makeText(Transfer_Student_Navigation.this, "Please Select Student Or Teacher",
+        else if(studentTeacherTransferSelected.equalsIgnoreCase(getResources().getString(R.string.sj_select))){
+            Toast.makeText(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_please_select_student_or_teacher),
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -481,17 +481,17 @@ public class Transfer_Student_Navigation extends AppCompatActivity
                     routeToIdselected=routeidfromserver.get(j);
                 }
             }
-            if(studentTeacherTransferSelected.equals("Student")){
+            if(studentTeacherTransferSelected.equals(getResources().getString(R.string.sj_student))){
                 studentTeacherTransferIdSelected="1";
             }
-            if(studentTeacherTransferIdSelected.equals("Teacher")){
+            if(studentTeacherTransferIdSelected.equals(getResources().getString(R.string.sj_teacher))){
                 studentTeacherTransferIdSelected="2";
             }
             Log.e("&&&&&&&&&&&&&&&&",routeFromIdselected);
             Log.e("&&&&&&&&&&&&&&&&",routeToIdselected);
             Log.e("&&&&&&&&&&&&&&&&",studentTeacherTransferIdSelected);
             if(routeFromIdselected.equals(routeToIdselected)){
-                Toast.makeText(Transfer_Student_Navigation.this, "Two Routes Cannot Be Same",
+                Toast.makeText(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_two_routes_cannot_be_same),
                         Toast.LENGTH_LONG).show();
             }
             else{
@@ -515,8 +515,8 @@ public class Transfer_Student_Navigation extends AppCompatActivity
     class getStudentsFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-            progressDialog = ProgressDialog.show(Transfer_Student_Navigation.this, "Please wait.",
-                    "Finding!", true);
+            progressDialog = ProgressDialog.show(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
         }
 
         @Override
@@ -607,7 +607,7 @@ public class Transfer_Student_Navigation extends AppCompatActivity
                 setLayoutVisible();
             }
             else{
-                Toast.makeText(Transfer_Student_Navigation.this, "No Students or Teachers Exists",
+                Toast.makeText(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_no_students_or_teachers_exist),
                         Toast.LENGTH_LONG).show();
                 setLayoutInvisible();
             }
@@ -899,8 +899,8 @@ public class Transfer_Student_Navigation extends AppCompatActivity
 
         @Override
         protected void onPreExecute(){
-            progressDialogtransfer = ProgressDialog.show(Transfer_Student_Navigation.this, "Please wait.",
-                    "Fetching Information!", true);
+            progressDialogtransfer = ProgressDialog.show(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
 
         }
 
@@ -1017,7 +1017,7 @@ public class Transfer_Student_Navigation extends AppCompatActivity
         @Override
         protected void onPostExecute(Void result){
             progressDialogtransfer.dismiss();
-            Toast.makeText(Transfer_Student_Navigation.this, "Transfer Completed",
+            Toast.makeText(Transfer_Student_Navigation.this, getResources().getString(R.string.sj_transfer_completed),
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Transfer_Student_Navigation.this, Student_Route_Creation_Navigation.class);
             startActivity(intent);
