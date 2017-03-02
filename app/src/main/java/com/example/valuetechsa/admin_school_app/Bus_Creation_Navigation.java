@@ -1551,16 +1551,23 @@ public class Bus_Creation_Navigation extends AppCompatActivity
             Intent intent = new Intent(this, Manage_Fuel_Navigation.class);
             startActivity(intent);
         }
-        else if (id == R.id.studentmisbehaviour) {
-            Intent intent = new Intent(this, Student_Misbehaviour_Navigation.class);
-            startActivity(intent);
-
-        }
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
         }
         else if (id == R.id.leave) {
             Intent intent = new Intent(this, Leave_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.accident) {
+            Intent intent = new Intent(this, Accident_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.breakdowns) {
+            Intent intent = new Intent(this, Breakdowns_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.studentlistnew) {
+            Intent intent = new Intent(this, Student_List_Navigation.class);
             startActivity(intent);
         }
         else if (id == R.id.logout) {
