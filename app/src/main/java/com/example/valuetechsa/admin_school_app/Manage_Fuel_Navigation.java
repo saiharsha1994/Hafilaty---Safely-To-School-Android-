@@ -44,6 +44,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,6 +52,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -125,6 +127,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
     static Button btnAddRecord,btnUpdateRecord,btnUploadInvoice;
     int editfuelid=0,deletefuelid=0;
     static TextView txtUploadInvoice;
+    FrameLayout layout_MainMenu;
 
     MyCustomBasedFuelAdaper myCustomBasedFuelAdaper;
     @Override
@@ -186,6 +189,9 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             }
             applyFontToMenuItem(mi);
         }
+
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
 
         TextView TextViewNewFont = new TextView(Manage_Fuel_Navigation.this);
         TextViewNewFont.setText(getResources().getString(R.string.sj_manage_fuel));
@@ -506,8 +512,10 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_fuel,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, Resources.getSystem().getDisplayMetrics().heightPixels-50, true);
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
 
             dateedit=(EditText)layout.findViewById(R.id.fueldateedit);
             drivernamespinner=(Spinner)layout.findViewById(R.id.selectdrivernamespinner);
@@ -582,6 +590,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     pwindo.dismiss();
                 }
             });
@@ -684,8 +693,10 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_fuel_edit,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, Resources.getSystem().getDisplayMetrics().heightPixels-50, true);
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
 
             dateedit=(EditText)layout.findViewById(R.id.fueldateedit);
             drivernamespinner=(Spinner)layout.findViewById(R.id.selectdrivernamespinner);
@@ -782,6 +793,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     Intent intent = getIntent();
                     finish();
                     startActivity(intent);

@@ -55,6 +55,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -67,6 +68,7 @@ import com.example.valuetechsa.admin_school_app.DB.DatabaseAdapter;
 import com.example.valuetechsa.admin_school_app.commonclass.Config;
 import com.example.valuetechsa.admin_school_app.libs.Jsonfunctions;
 import com.example.valuetechsa.admin_school_app.model.ServiceModel;
+import com.google.android.gms.vision.Frame;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -112,6 +114,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
     RelativeLayout manage,listmanage;
     ListView lv1;
     MyCustomBasedMisbehaviourAdapter myCustomBasedMisbehaviourAdapter;
+    FrameLayout layout_MainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +192,9 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
         action.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         action.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         action.setCustomView(TextViewNewFont);
+
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
 
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -700,8 +706,10 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_misbehaviour,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, Resources.getSystem().getDisplayMetrics().heightPixels-50, true);
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha(200);
 
             dateedit=(EditText)layout.findViewById(R.id.selectdateforadd);
             detailsedit=(EditText)layout.findViewById(R.id.detailsforadd);
@@ -793,6 +801,7 @@ public class Student_Misbehaviour_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha(0);
                     pwindo.dismiss();
                 }
             });

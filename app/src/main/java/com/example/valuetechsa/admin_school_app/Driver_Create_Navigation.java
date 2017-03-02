@@ -56,6 +56,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -164,6 +165,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
     int[] checkwhichchoose=new int[3];
     static String sss;
     MyCustomBasedDriverAdaper myCustomBasedDriverAdaper;
+    FrameLayout layout_MainMenu;
 
 
     @Override
@@ -225,6 +227,9 @@ public class Driver_Create_Navigation extends AppCompatActivity
             }
             applyFontToMenuItem(mi);
         }
+
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
 
         TextView TextViewNewFont = new TextView(Driver_Create_Navigation.this);
         TextViewNewFont.setText(getResources().getString(R.string.sj_manage_driver));
@@ -487,27 +492,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
     private void initiatePopupWindowdriver() {
         try {
 // We need to get the instance of the LayoutInflater
-            /*LayoutInflater inflater1 = (LayoutInflater) Driver_Create_Navigation.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View layout1 = inflater1.inflate(R.layout.fadepopup,
-                    (ViewGroup) findViewById(R.id.fadePopup));
-            final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, true);
-            fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);*/
-            /*imagenameserver=null;
-            iqamafileserver=null;
-            licenseserver=null;
-            passportserver=null;
-            nameserver=null;
-            nationalityserver=null;
-            iqamanumberserver=null;
-            iqamaexpireserver=null;
-            passportnumberserver=null;
-            passportexpireserver=null;
-            licensenumberserver=null;
-            licenseexpiredateserver=null;
-            passwordserver=null;
-            mobilenoserver=null;
-            selectedbusid="0";*/
+
 
             imagenameserver="null";
             iqamafileserver="null";
@@ -531,15 +516,10 @@ public class Driver_Create_Navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_drivers,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, Resources.getSystem().getDisplayMetrics().heightPixels-50, true);
-            try{
-                pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-                /*pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-                pwindo.setFocusable(true);*/
-            }
-            catch (Exception e){
-
-            }
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
 
 
             nameedit=(EditText)layout.findViewById(R.id.nameedit);
@@ -625,6 +605,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                         Intent intent = getIntent();
                         finish();
                         startActivity(intent);
@@ -758,15 +739,10 @@ public class Driver_Create_Navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_drivers,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, Resources.getSystem().getDisplayMetrics().heightPixels-50, true);
-            try{
-                pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-                /*pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-                pwindo.setFocusable(true);*/
-            }
-            catch (Exception e){
-
-            }
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
 
 
             nameedit=(EditText)layout.findViewById(R.id.nameedit);
@@ -925,6 +901,7 @@ public class Driver_Create_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     Intent intent = getIntent();
                     finish();
                     startActivity(intent);

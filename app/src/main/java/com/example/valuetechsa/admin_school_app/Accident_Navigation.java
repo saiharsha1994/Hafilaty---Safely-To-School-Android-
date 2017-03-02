@@ -47,6 +47,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -126,6 +127,8 @@ public class Accident_Navigation extends AppCompatActivity
     ArrayList<String> busnamelistfromserver=new ArrayList<String>();
     ArrayList<String> busidlistfromserver=new ArrayList<String>();
     ArrayList<String> driveridlistfromserver=new ArrayList<String>();
+    FrameLayout layout_MainMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,6 +189,9 @@ public class Accident_Navigation extends AppCompatActivity
             }
             applyFontToMenuItem(mi);
         }
+
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
 
         TextView TextViewNewFont = new TextView(Accident_Navigation.this);
         TextViewNewFont.setText(getResources().getString(R.string.sj_accident));
@@ -614,6 +620,7 @@ public class Accident_Navigation extends AppCompatActivity
             pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
             pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
             txtincidentdetails=(EditText)layout.findViewById(R.id.incidentdetailsedit);
             txtuploadrecordtxt=(TextView)layout.findViewById(R.id.uploadnamereporttext);
             txtuploaddocumenttxt=(TextView)layout.findViewById(R.id.uploadnamedocumenttext);
@@ -748,6 +755,7 @@ public class Accident_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     pwindo.dismiss();
                     Intent intent = getIntent();
                     finish();
@@ -789,6 +797,7 @@ public class Accident_Navigation extends AppCompatActivity
             pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
             pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
             globalincidentid=incidentididfromserver.get(rownumber);
             editviewornot="1";
 
@@ -983,6 +992,7 @@ public class Accident_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     pwindo.dismiss();
                     Intent intent = getIntent();
                     finish();

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Misbehaviour_Navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.valuetechsa.admin_school_app.Student_Misbehaviour_Navigation">
+    android:id="@+id/outerlayout"
+    android:foreground="@drawable/dimmer">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/toppart"
         android:layout_marginTop="70dp"
-        android:paddingBottom="350dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
         <TableLayout
@@ -101,7 +107,8 @@
         android:id="@+id/managelayoutmisbehaviour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="185dp"
+        android:layout_below="@id/toppart"
+        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
         <TableLayout
@@ -180,7 +187,7 @@
         android:layout_marginBottom="1sp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
-        android:background="@drawable/tableborderwhite">
+        android:background="@drawable/tableborderblue">
 
         <ListView
             android:id="@+id/misbehaviourlist"
@@ -191,6 +198,7 @@
         </ListView>
 
     </RelativeLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</FrameLayout>
 

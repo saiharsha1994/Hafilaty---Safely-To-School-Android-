@@ -1,193 +1,198 @@
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Student_Selection_Route_Admin"
+    tools:context=".Student_Misbehaviour_Navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"  >
-    <Button
-        android:layout_width="160sp"
-        android:layout_height="45sp"
-        android:layout_marginLeft="60sp"
-        android:layout_marginTop="70sp"
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:layout_alignParentRight="true"
-        android:background="#2196f3"
-        android:padding="8sp"
-        android:textSize="20sp"
-        android:onClick="getpopupdriver"
-        android:textColor="@android:color/white"
-        android:text="@string/sb_add_drivers"
-        android:id="@+id/adddrivers" />
-    <!--
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3sp"
-        android:background="@android:color/darker_gray"/>-->
-
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300sp"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/routelist"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-        </ListView>
-
-    </LinearLayout>-->
-    <!--<View
-        android:layout_width="match_parent"
-        android:layout_height="3sp"
-        android:background="@android:color/darker_gray"/>-->
-
+    android:id="@+id/outerlayout"
+    android:foreground="@drawable/dimmer">
     <RelativeLayout
-        android:id="@+id/relativelayoutdrivercreeation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="120sp"
-        android:paddingLeft="10sp"
-        android:paddingRight="10sp">
-        <TableLayout
+        android:layout_height="match_parent">
+        <Button
+            android:layout_width="160sp"
+            android:layout_height="45sp"
+            android:layout_marginLeft="60sp"
+            android:layout_marginTop="70sp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:background="#2196f3"
+            android:padding="8sp"
+            android:textSize="20sp"
+            android:onClick="getpopupdriver"
+            android:textColor="@android:color/white"
+            android:text="@string/sb_add_drivers"
+            android:id="@+id/adddrivers" />
+        <!--
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3sp"
+            android:background="@android:color/darker_gray"/>-->
+
+        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300sp"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/routelist"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            </ListView>
+
+        </LinearLayout>-->
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="3sp"
+            android:background="@android:color/darker_gray"/>-->
+
+        <RelativeLayout
+            android:id="@+id/relativelayoutdrivercreeation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:stretchColumns="2">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0sp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="10sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_driver_list"
-                    android:id="@+id/driverlisttextbox" />
-            </LinearLayout>
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/adddrivers"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp">
             <TableLayout
-                android:id="@+id/drivertable"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:stretchColumns="8">
-                <TableRow
-                    android:id="@+id/driverrowid"
-                    android:background="@drawable/borderwithlightblue"
+                android:layout_height="match_parent"
+                android:stretchColumns="2">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="50sp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
                     <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/stv_driver_name"
-                        android:textColor="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="10sp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:id="@+id/drivernametextbox"
-                        />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_driver_list"
+                        android:id="@+id/driverlisttextbox" />
+                </LinearLayout>
+                <TableLayout
+                    android:id="@+id/drivertable"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:stretchColumns="8">
+                    <TableRow
+                        android:id="@+id/driverrowid"
+                        android:background="@drawable/borderwithlightblue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="@string/stv_driver_name"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/drivernametextbox"
+                            />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_nationality"
-                        android:layout_weight="1.3"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/nationalitytextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_nationality"
+                            android:layout_weight="1.3"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/nationalitytextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_mobile_number"
-                        android:layout_weight="1.3"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/mobilenumbertextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_mobile_number"
+                            android:layout_weight="1.3"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/mobilenumbertextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_assigned_bus"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/assignedbustextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_assigned_bus"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/assignedbustextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_options"
-                        android:layout_weight="1.1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/optionstextbox" />
-                </TableRow>
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_options"
+                            android:layout_weight="1.1"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/optionstextbox" />
+                    </TableRow>
+                </TableLayout>
             </TableLayout>
-        </TableLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="220sp"
-        android:layout_marginBottom="1sp"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
-        android:paddingLeft="0sp"
-        android:paddingRight="0sp">
-
-        <ListView
-            android:id="@+id/driverselectedlist"
-            android:layout_marginTop="0sp"
-            android:layout_height="match_parent"
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:clickable="true"
-            android:longClickable="true"
-            android:divider="#000000">
-        </ListView>
+            android:layout_height="match_parent"
+            android:layout_marginTop="220sp"
+            android:layout_marginBottom="1sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:paddingLeft="0sp"
+            android:paddingRight="0sp">
+
+            <ListView
+                android:id="@+id/driverselectedlist"
+                android:layout_marginTop="0sp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:longClickable="true"
+                android:divider="#000000">
+            </ListView>
+        </RelativeLayout>
+
+
     </RelativeLayout>
-
-
-</RelativeLayout>
+</FrameLayout>
