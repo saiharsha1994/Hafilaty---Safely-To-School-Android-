@@ -1212,6 +1212,8 @@ public class Contract_Creation_Navigation extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            startActivity(new Intent(Contract_Creation_Navigation.this, Hawkeye_navigation.class));
+            finish();
         }
     }
 

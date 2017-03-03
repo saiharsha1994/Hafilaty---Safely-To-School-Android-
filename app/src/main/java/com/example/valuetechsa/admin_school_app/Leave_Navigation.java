@@ -226,6 +226,8 @@ public class Leave_Navigation extends ActionBarActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            startActivity(new Intent(Leave_Navigation.this, Hawkeye_navigation.class));
+            finish();
         }
     }
 

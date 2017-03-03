@@ -1294,6 +1294,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            startActivity(new Intent(Manage_Fuel_Navigation.this, Hawkeye_navigation.class));
+            finish();
         }
     }
 

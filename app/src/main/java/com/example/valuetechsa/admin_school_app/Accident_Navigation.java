@@ -1564,6 +1564,8 @@ public class Accident_Navigation extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            startActivity(new Intent(Accident_Navigation.this, Hawkeye_navigation.class));
+            finish();
         }
     }
 

@@ -2294,6 +2294,8 @@ public class Driver_Create_Navigation extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            startActivity(new Intent(Driver_Create_Navigation.this, Hawkeye_navigation.class));
+            finish();
         }
     }
 
