@@ -766,6 +766,18 @@ public class Student_Attendence_Navigation extends AppCompatActivity
             Intent intent = new Intent(this, Leave_Navigation.class);
             startActivity(intent);
         }
+        else if (id == R.id.accident) {
+            Intent intent = new Intent(this, Accident_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.breakdowns) {
+            Intent intent = new Intent(this, Breakdowns_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.studentlistnew) {
+            Intent intent = new Intent(this, Student_List_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.logout) {
             db.delete("OneTimeLogin", null, null);
             Intent intent = new Intent(this, LoginAdmin.class);
