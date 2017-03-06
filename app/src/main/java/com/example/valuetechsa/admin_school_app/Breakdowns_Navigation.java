@@ -55,6 +55,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -108,6 +109,7 @@ public class Breakdowns_Navigation extends AppCompatActivity
     static int datecheck=0;
     static EditText dateFrom;
     static EditText dateTo;
+    FrameLayout layout_MainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +175,9 @@ public class Breakdowns_Navigation extends AppCompatActivity
             }
             applyFontToMenuItem(mi);
         }
+
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
 
         TextView TextViewNewFont = new TextView(Breakdowns_Navigation.this);
         TextViewNewFont.setText(getResources().getString(R.string.sj_breakdowns));

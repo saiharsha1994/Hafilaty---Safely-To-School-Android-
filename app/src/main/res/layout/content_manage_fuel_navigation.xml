@@ -1,208 +1,213 @@
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Student_Selection_Route_Admin"
+    tools:context=".Student_Misbehaviour_Navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"  >
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="45sp"
-        android:layout_marginLeft="60sp"
-        android:layout_marginTop="70sp"
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:layout_alignParentRight="true"
-        android:background="#2196f3"
-        android:padding="8sp"
-        android:textSize="20sp"
-        android:onClick="getpopup"
-        android:textColor="@android:color/white"
-        android:text="@string/sb_add_payment"
-        android:id="@+id/addpayment" />
-    <!--
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3sp"
-        android:background="@android:color/darker_gray"/>-->
-
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300sp"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/routelist"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-        </ListView>
-
-    </LinearLayout>-->
-    <!--<View
-        android:layout_width="match_parent"
-        android:layout_height="3sp"
-        android:background="@android:color/darker_gray"/>-->
-
+    android:id="@+id/outerlayout"
+    android:foreground="@drawable/dimmer">
     <RelativeLayout
-        android:id="@+id/relativelayoutbuscreeation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="120sp"
-        android:paddingLeft="10sp"
-        android:paddingRight="10sp">
-        <TableLayout
+        android:layout_height="match_parent">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="45sp"
+            android:layout_marginLeft="60sp"
+            android:layout_marginTop="70sp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:background="#2196f3"
+            android:padding="8sp"
+            android:textSize="20sp"
+            android:onClick="getpopup"
+            android:textColor="@android:color/white"
+            android:text="@string/sb_add_payment"
+            android:id="@+id/addpayment" />
+        <!--
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3sp"
+            android:background="@android:color/darker_gray"/>-->
+
+        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300sp"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/routelist"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            </ListView>
+
+        </LinearLayout>-->
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="3sp"
+            android:background="@android:color/darker_gray"/>-->
+
+        <RelativeLayout
+            android:id="@+id/relativelayoutbuscreeation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:stretchColumns="2">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0sp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="10sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_payment_list"
-                    android:id="@+id/paymentlisttextbox" />
-            </LinearLayout>
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/addpayment"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp">
             <TableLayout
-                android:id="@+id/paymenttable"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
-                >
-                <TableRow
-                    android:id="@+id/busrowid"
-                    android:background="@drawable/borderwithlightblue"
+                android:layout_height="match_parent"
+                android:stretchColumns="2">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
+                    android:layout_height="50sp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
                     <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_date"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_weight="0.7"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/fueldatetextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:layout_weight="1.5"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/stv_driver_name"
-                        android:textColor="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="10sp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:id="@+id/drivernametextbox2" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:layout_weight="0.6"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/stv_amount2"
                         android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/amounttextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                        android:text="@string/stv_payment_list"
+                        android:id="@+id/paymentlisttextbox" />
+                </LinearLayout>
+                <TableLayout
+                    android:id="@+id/paymenttable"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    >
+                    <TableRow
+                        android:id="@+id/busrowid"
+                        android:background="@drawable/borderwithlightblue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:layout_weight="0.6"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/stv_amount_spent"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/amountspenttextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_date"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_weight="0.7"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/fueldatetextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:layout_weight="0.6"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/stv_balance"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/balancetextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:layout_weight="1.5"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="@string/stv_driver_name"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/drivernametextbox2" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:layout_weight="0.7"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/stv_options"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/editpaymenttextbox" />
-                </TableRow>
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="@string/stv_amount2"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/amounttextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="@string/stv_amount_spent"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/amountspenttextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="@string/stv_balance"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/balancetextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:layout_weight="0.7"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="@string/stv_options"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/editpaymenttextbox" />
+                    </TableRow>
+                </TableLayout>
             </TableLayout>
-        </TableLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="220sp"
-        android:layout_marginBottom="1sp"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
-        android:paddingLeft="0sp"
-        android:paddingRight="0sp">
-
-        <ListView
-            android:id="@+id/paymentcreatedlist"
-            android:layout_marginTop="0sp"
-            android:layout_height="match_parent"
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:divider="#000000">
-        </ListView>
+            android:layout_height="match_parent"
+            android:layout_marginTop="220sp"
+            android:layout_marginBottom="1sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:paddingLeft="0sp"
+            android:paddingRight="0sp">
+
+            <ListView
+                android:id="@+id/paymentcreatedlist"
+                android:layout_marginTop="0sp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:divider="#000000">
+            </ListView>
+
+        </RelativeLayout>
 
     </RelativeLayout>
-
-</RelativeLayout>
+</FrameLayout>

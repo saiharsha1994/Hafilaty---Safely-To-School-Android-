@@ -116,7 +116,8 @@
             android:name=".Bus_Creation_Navigation"
             android:label="@string/title_activity_bus__creation__navigation"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Parent_Creation_Navigation"
             android:label="@string/title_activity_parent_creation_navigation"
@@ -133,19 +134,20 @@
             android:name=".Manage_Fuel_Navigation"
             android:label="@string/title_activity_manage_fuel_navigation"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Driver_Create_Navigation"
             android:label="@string/title_activity_driver__create__navigation"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Accidents_Navigation"
             android:label="@string/title_activity_accidents_navigation"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".FileChooser"
             android:label="Choose File"
@@ -159,7 +161,8 @@
             android:name=".Contract_Creation_Navigation"
             android:label="@string/title_activity_contract__creation__navigation"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
 
         <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
@@ -176,7 +179,8 @@
             android:name=".Accident_Navigation"
             android:label="@string/title_activity_accident__navigation"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Leave_Navigation"
             android:label="@string/title_activity_leave__navigation"
