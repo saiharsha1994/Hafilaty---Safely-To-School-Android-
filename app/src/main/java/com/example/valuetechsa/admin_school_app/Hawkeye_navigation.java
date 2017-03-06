@@ -1095,14 +1095,15 @@ public class Hawkeye_navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final View layout1 = inflater1.inflate(R.layout.fadepopup,
                     (ViewGroup) findViewById(R.id.fadePopup));
-            final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
-            fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
+            //final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
+            //fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
             LayoutInflater inflater = (LayoutInflater) Hawkeye_navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_hawkeye,
                     (ViewGroup) findViewById(R.id.popup_element));
             pwindo = new PopupWindow(layout, 500,380, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha(200);
             //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
             topRow=(TextView)layout.findViewById(R.id.blueStudentnametexthawkeye);
             drivernamehawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivername);
@@ -1125,8 +1126,9 @@ public class Hawkeye_navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha(0);
                     pwindo.dismiss();
-                    fadePopup.dismiss();
+                    //fadePopup.dismiss();
 
                 }
             });

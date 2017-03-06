@@ -47,6 +47,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -162,6 +163,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     double schoollat,schoollong;
     String[] schoolcordarray=new String[100000];
     int firsttimezero=0;
+    FrameLayout layout_MainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,6 +223,8 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             }
             applyFontToMenuItem(mi);
         }
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
 
         TextView TextViewNewFont = new TextView(Student_Selection_Search_Admin_Navigation.this);
         TextViewNewFont.setText(getResources().getString(R.string.sj_student_selection));
@@ -1657,7 +1661,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             final View layout1 = inflater1.inflate(R.layout.fadepopup,
                     (ViewGroup) findViewById(R.id.fadePopup));
             final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
-            fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
+            //fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
             LayoutInflater inflater = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup,
@@ -1665,6 +1669,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
             pwindo = new PopupWindow(layout, 500,400, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha( 200);
             TextView studentnamedisply=(TextView)layout.findViewById(R.id.blueStudentnametext);
             btnAddPopup = (Button) layout.findViewById(R.id.btn_add_popup);
             btnClosePopup=(Button) layout.findViewById(R.id.btn_close_popup);
@@ -1700,8 +1705,9 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     pwindo.dismiss();
-                    fadePopup.dismiss();
+                    //fadePopup.dismiss();
                 }
             });
 
@@ -1719,7 +1725,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             final View layout1 = inflater1.inflate(R.layout.fadepopup,
                     (ViewGroup) findViewById(R.id.fadePopup));
             final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
-            fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
+            //fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
             LayoutInflater inflater = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_remove,
@@ -1727,6 +1733,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
             pwindo = new PopupWindow(layout, 500,400, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha( 200);
             TextView studentnamedisply=(TextView)layout.findViewById(R.id.blueStudentnameremovetext);
             btnAddRemovePopup = (Button) layout.findViewById(R.id.btn_remove_popup);
             btnCloserRemovePopup=(Button) layout.findViewById(R.id.btn_closeremove_popup);
@@ -1762,8 +1769,9 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             btnCloserRemovePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     pwindo.dismiss();
-                    fadePopup.dismiss();
+                    //fadePopup.dismiss();
                 }
             });
 

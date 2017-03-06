@@ -47,6 +47,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -121,6 +122,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
     private static final int REQUEST_PATH = 1;
     String toastmessage;
     ProgressDialog dialog = null;
+    FrameLayout layout_MainMenu;
 
 
     @Override
@@ -181,6 +183,9 @@ public class Contract_Creation_Navigation extends AppCompatActivity
             }
             applyFontToMenuItem(mi);
         }
+
+        layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
+        layout_MainMenu.getForeground().setAlpha( 0);
 
         TextView TextViewNewFont = new TextView(Contract_Creation_Navigation.this);
         TextViewNewFont.setText(getResources().getString(R.string.sj_manage_contract));
@@ -354,15 +359,10 @@ public class Contract_Creation_Navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_contracts,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, Resources.getSystem().getDisplayMetrics().heightPixels-50, true);
-            try{
-                pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-                /*pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-                pwindo.setFocusable(true);*/
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
 
             vendornameedit=(EditText)layout.findViewById(R.id.vendornameedit);
             vendoremailedit=(EditText)layout.findViewById(R.id.vendoremailedit);
@@ -413,6 +413,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     Intent intent = getIntent();
                     finish();
                     startActivity(intent);
@@ -450,15 +451,10 @@ public class Contract_Creation_Navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_contracts,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, Resources.getSystem().getDisplayMetrics().heightPixels-50, true);
-            try{
-                pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-                /*pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-                pwindo.setFocusable(true);*/
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+            layout_MainMenu.getForeground().setAlpha( 200);
 
             contractid=Integer.parseInt(vendoridfromserver.get(rownumber));
             vendornameedit=(EditText)layout.findViewById(R.id.vendornameedit);
@@ -522,6 +518,7 @@ public class Contract_Creation_Navigation extends AppCompatActivity
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     Intent intent = getIntent();
                     finish();
                     startActivity(intent);
