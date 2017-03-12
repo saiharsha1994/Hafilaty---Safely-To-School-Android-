@@ -35,13 +35,6 @@
             android:title="@string/st_transfer" />
     </group>
     <group android:checkableBehavior="single"
-        android:id="@+id/parentcreationgroup">
-        <item
-            android:id="@+id/parents"
-            android:icon="@drawable/manage_fuel_image"
-            android:title="@string/st_parents" />
-    </group>
-    <group android:checkableBehavior="single"
         android:id="@+id/drivermeritgroup">
         <item
             android:id="@+id/driverrating"
@@ -55,13 +48,6 @@
             android:icon="@drawable/messagingimage"
             android:title="@string/st_messaging" />
     </group>
-    <!--<group android:checkableBehavior="single">
-        <item
-            android:id="@+id/accidents"
-            android:icon="@drawable/logout1"
-            android:title="@string/st_accidents"
-            />
-    </group>-->
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/studentmisbehaviour"
@@ -73,7 +59,7 @@
         android:id="@+id/accidentgroup">
         <item
             android:id="@+id/accident"
-            android:icon="@drawable/logout1"
+            android:icon="@drawable/incident"
             android:title="@string/st_accident" />
     </group>
     <group android:checkableBehavior="single"
@@ -105,25 +91,32 @@
             android:title="@string/st_manage_fuel" />
     </group>
     <group android:checkableBehavior="single"
+        android:id="@+id/leavegroup">
+        <item
+            android:id="@+id/leave"
+            android:icon="@drawable/incident"
+            android:title="@string/st_leave" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/breakdownsgroup">
+        <item
+            android:id="@+id/breakdowns"
+            android:icon="@drawable/towedcar"
+            android:title="@string/st_breakdowns" />
+    </group>
+    <group android:checkableBehavior="single"
         android:id="@+id/studentlistgroup">
         <item
             android:id="@+id/studentlistnew"
-            android:icon="@drawable/logout1"
+            android:icon="@drawable/attendanceimage"
             android:title="@string/st_student_list" />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/changelanguagegroup">
         <item
             android:id="@+id/changelanguage"
-            android:icon="@drawable/logout1"
+            android:icon="@drawable/incident"
             android:title="@string/st_change_language" />
-    </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/leavegroup">
-        <item
-            android:id="@+id/leave"
-            android:icon="@drawable/logout1"
-            android:title="@string/st_leave" />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/logoutgroup">

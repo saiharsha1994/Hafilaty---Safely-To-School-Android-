@@ -570,6 +570,8 @@ public class Student_List_Navigation extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            startActivity(new Intent(Student_List_Navigation.this, Hawkeye_navigation.class));
+            finish();
         }
     }
 
@@ -641,16 +643,25 @@ public class Student_List_Navigation extends AppCompatActivity
             Intent intent = new Intent(this, Student_Misbehaviour_Navigation.class);
             startActivity(intent);
         }
-        else if (id == R.id.accident) {
-            Intent intent = new Intent(this, Accident_Navigation.class);
-            startActivity(intent);
-        }
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
         }
         else if (id == R.id.leave) {
             Intent intent = new Intent(this, Leave_Navigation.class);
             startActivity(intent);
+        }
+        else if (id == R.id.accident) {
+            Intent intent = new Intent(this, Accident_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.breakdowns) {
+            Intent intent = new Intent(this, Breakdowns_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.studentlistnew) {
+            DrawerLayout mDrawerLayout;
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mDrawerLayout.closeDrawers();
         }
         else if (id == R.id.logout) {
             db.delete("OneTimeLogi" +

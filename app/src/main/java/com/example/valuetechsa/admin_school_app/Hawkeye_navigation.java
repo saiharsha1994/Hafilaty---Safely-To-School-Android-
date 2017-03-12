@@ -1358,6 +1358,7 @@ public class Hawkeye_navigation extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.managefuel) {
+            threadloop=false;
             Intent intent = new Intent(this, Manage_Fuel_Navigation.class);
             startActivity(intent);
         }
@@ -1385,6 +1386,12 @@ public class Hawkeye_navigation extends AppCompatActivity
         else if (id == R.id.studentlistnew) {
             threadloop=false;
             Intent intent = new Intent(this, Student_List_Navigation.class);
+            startActivity(intent);
+
+        }
+        else if (id == R.id.breakdowns) {
+            threadloop=false;
+            Intent intent = new Intent(this, Breakdowns_Navigation.class);
             startActivity(intent);
 
         }

@@ -1574,6 +1574,8 @@ public class Accident_Navigation extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            startActivity(new Intent(Accident_Navigation.this, Hawkeye_navigation.class));
+            finish();
         }
     }
 
@@ -1612,9 +1614,8 @@ public class Accident_Navigation extends AppCompatActivity
             Intent intent = new Intent(this, Student_Route_Creation_Navigation.class);
             startActivity(intent);
         } else if (id == R.id.attendence) {
-            DrawerLayout mDrawerLayout;
-            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            mDrawerLayout.closeDrawers();
+            Intent intent = new Intent(this, Student_Attendence_Navigation.class);
+            startActivity(intent);
         } else if (id == R.id.transfer) {
             Intent intent = new Intent(this, Transfer_Student_Navigation.class);
             startActivity(intent);
@@ -1642,7 +1643,27 @@ public class Accident_Navigation extends AppCompatActivity
         else if (id == R.id.studentmisbehaviour) {
             Intent intent = new Intent(this, Student_Misbehaviour_Navigation.class);
             startActivity(intent);
-
+        }
+        else if (id == R.id.managefuel) {
+            Intent intent = new Intent(this, Manage_Fuel_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.accident) {
+            DrawerLayout mDrawerLayout;
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mDrawerLayout.closeDrawers();
+        }
+        else if (id == R.id.leave) {
+            Intent intent = new Intent(this, Leave_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.breakdowns) {
+            Intent intent = new Intent(this, Breakdowns_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.studentlistnew) {
+            Intent intent = new Intent(this, Student_List_Navigation.class);
+            startActivity(intent);
         }
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();

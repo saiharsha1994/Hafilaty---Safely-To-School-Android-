@@ -359,5 +359,16 @@
     <string name="sj_please_select_to_route">Please Select TO Route</string>
     <string name="sj_two_routes_cannot_be_same">Two Routes Cannot be Same</string>
     <string name="sj_transfer_completed">Transfer Completed</string>
+    <string name="st_leave">MANAGE LEAVES</string>
+    <string name="st_student_list">STUDENT LIST</string>
+    <string name="stv_incident_date">Date</string>
+    <string name="stv_incident_details">Detaile</string>
+    <string name="stv_incident_fine_amount">Fine Amount</string>
+    <string name="stv_incident_fine_status">Status</string>
+    <string name="stv_incident_select_bus">Select Bus</string>
+    <string name="stv_incident_select_driver">Select Driver</string>
+    <string name="stv_incident_submit">Submit</string>
+    <string name="stv_incident_upload_documents">Upload Document</string>
+    <string name="stv_incident_upload_report">Upload Reports</string>
 
 </resources>

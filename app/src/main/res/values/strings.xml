@@ -158,7 +158,6 @@
     <string name="stv_date2">Date:</string>
     <string name="stv_driver">Driver:</string>
     <string name="stv_amount">Amount:</string>
-    <string name="stv_payment_list">PAYMENT LIST</string>
     <string name="stv_amount2">Amount</string>
     <string name="stv_amount_spent">Spent</string>
     <string name="stv_balance">Balance</string>
@@ -375,5 +374,6 @@
     <string name="sj_please_select_to_route">Please Select TO Route</string>
     <string name="sj_two_routes_cannot_be_same">Two Routes Cannot be Same</string>
     <string name="sj_transfer_completed">Transfer Completed</string>
+    <string name="stv_payment_list">PAYMENT LIST</string>
 
 </resources>
