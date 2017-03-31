@@ -55,10 +55,10 @@ public class MyCustomBaseAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         int icolor=searchArrayList.get(position).getColorchanege();
-        SpannableStringBuilder sb = new SpannableStringBuilder(" Vehicle:" + searchArrayList.get(position).getPlateno());
+        SpannableStringBuilder sb = new SpannableStringBuilder(" Vehicle: " + searchArrayList.get(position).getPlateno());
         StyleSpan b = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
         sb.setSpan(b, 0, 0 + 9, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        SpannableStringBuilder sb1 = new SpannableStringBuilder(" Driver:" + searchArrayList.get(position).getDrivername());
+        SpannableStringBuilder sb1 = new SpannableStringBuilder(" Driver: " + searchArrayList.get(position).getDrivername());
         StyleSpan b1 = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
         sb1.setSpan(b1, 0, 0 + 8, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         holder.txtrouteid.setText(searchArrayList.get(position).getRoutename());

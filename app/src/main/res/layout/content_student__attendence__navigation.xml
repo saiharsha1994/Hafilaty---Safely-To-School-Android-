@@ -1,301 +1,326 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Attendence_Navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.valuetechsa.admin_school_app.Student_attendence">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="70dp">
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="2"
-            android:background="@drawable/tableborderlightblue">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_select_criteria"
-                    android:id="@+id/selectcriteriaatt" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="@string/stv_select_route"
-                    android:id="@+id/selectroute" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="@string/stv_select_trip_type"
-                    android:id="@+id/selecttriptype" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="@string/stv_select_date"
-                    android:id="@+id/selectdate" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <Spinner
-                        android:id="@+id/selectroutespinnerattendence"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="180dp"
-                        android:layout_height="45dp"
-                        android:textSize="40sp"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="190dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="55dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <Spinner
-                        android:id="@+id/selecttriptypespinnerattendence"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="190dp"
-                        android:layout_height="45dp"
-                        android:textSize="40sp"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="160dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="65dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <EditText
-                        android:id="@+id/selectdatespinner"
-                        android:layout_marginLeft="00dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_width="120dp"
-                        android:layout_height="45dp"
-                        android:textSize="20dp"
-                        android:gravity="center"
-                        android:inputType="none"
-                        android:textIsSelectable="true"
-                        android:background="@android:color/transparent"
-                        />
-                </RelativeLayout>
-                <Button
-                    android:layout_width="160dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:background="#2196f3"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:onClick="applyAttendence"
-                    android:text="@string/sb_apply"
-                    android:id="@+id/applyattendence" />
-            </LinearLayout>
-        </TableLayout>
-    </LinearLayout>
-
+    android:id="@+id/outerlayout"
+    android:foreground="@drawable/dimmer"
+    >
     <RelativeLayout
-        android:id="@+id/attendencereativelayoutnotlist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="245dp"
-        android:layout_marginBottom="183dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TableLayout
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="2"
-            android:background="@drawable/tableborder">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_attendance_report"
-                    android:id="@+id/attendancereport" />
-            </LinearLayout>
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="70dp"
+            android:id="@+id/header">
             <TableLayout
-                android:id="@+id/attendencetable"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="4">
-                <TableRow
-                    android:id="@+id/attedencerowid"
-                    android:background="@drawable/borderwithlightblue"
+                android:stretchColumns="2"
+                android:background="@drawable/tableborderlightblue">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
                     <TextView
-                        android:layout_width="234.5dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/stv_student_name"
-                        android:textColor="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20dp"
-                        android:id="@+id/studentnametextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_select_criteria"
+                        android:id="@+id/selectcriteriaatt" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="10dp">
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
                     <TextView
-                        android:layout_width="135dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/stv_studentid"
-                        android:textColor="@android:color/white"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20dp"
-                        android:id="@+id/studentidtextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
+                        android:text="@string/stv_select_route"
+                        android:id="@+id/selectroute"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:textSize="20dp"
+                        android:text="@string/stv_select_trip_type"
+                        android:id="@+id/selecttriptype"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:text="@string/stv_select_date"
+                        android:id="@+id/selectdate"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/spinnerborder"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+                        <Spinner
+                            android:id="@+id/selectroutespinnerattendence"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textSize="40sp"
+                            android:gravity="center"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/spinnerborder"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+                        <Spinner
+                            android:id="@+id/selecttriptypespinnerattendence"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textSize="40sp"
+                            android:gravity="center"
+                            />
+                    </RelativeLayout>
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="222.5dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/stv_parent_name"
+                        <EditText
+                            android:id="@+id/selectdatespinner"
+                            android:layout_marginTop="0dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="fill_parent"
+                            android:textSize="20dp"
+                            android:paddingLeft="15dp"
+                            android:inputType="none"
+                            android:textIsSelectable="true"
+                            android:background="@drawable/spinnerborder"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:background="#2196f3"
+                        android:padding="8dp"
+                        android:textSize="20sp"
                         android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"
-                        android:id="@+id/parentnametextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="156dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/stv_contact_details"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"
-                        android:id="@+id/contactdetailstextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/stv_check_in"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"
-                        android:id="@+id/checkin" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/stv_check_out"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"
-                        android:id="@+id/checkout" />
-                </TableRow>
+                        android:onClick="applyAttendence"
+                        android:text="@string/sb_apply"
+                        android:id="@+id/applyattendence"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"/>
+                </LinearLayout>
             </TableLayout>
-        </TableLayout>
-    </RelativeLayout>
+        </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="345dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <ListView
-            android:id="@+id/attendencelist"
-            android:layout_marginTop="0dp"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:id="@+id/attendencereativelayoutnotlist"
             android:layout_width="match_parent"
-            android:divider="#000000">
-        </ListView>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2"
+                android:background="@drawable/tableborder">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_attendance_report"
+                        android:id="@+id/attendancereport" />
+                </LinearLayout>
+                <TableLayout
+                    android:id="@+id/attendencetable"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="4">
+                    <TableRow
+                        android:id="@+id/attedencerowid"
+                        android:background="@drawable/borderwithlightblue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_weight="3"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_student_name"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20dp"
+                            android:id="@+id/studentnametextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
 
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_studentid"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20dp"
+                            android:id="@+id/studentidtextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_weight="3"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_parent_name"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20dp"
+                            android:id="@+id/parentnametextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_contact_details"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:id="@+id/contactdetailstextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_check_in"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:id="@+id/checkin" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_height="50dp"
+                            android:text="@string/stv_check_out"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_width="0dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:textSize="20dp"
+                            android:id="@+id/checkout" />
+                    </TableRow>
+                </TableLayout>
+            </TableLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/attendencereativelayoutnotlist"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <ListView
+                android:id="@+id/attendencelist"
+                android:layout_marginTop="0dp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:divider="#000000">
+            </ListView>
+
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</FrameLayout>
 

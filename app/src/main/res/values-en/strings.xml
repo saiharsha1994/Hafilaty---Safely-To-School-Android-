@@ -187,6 +187,10 @@
     <string name="stv_Student_List_class">Class</string>
     <string name="stv_Student_List_section">Section</string>
     <string name="stv_Student_List_parents_no">Mobile Number</string>
+    <string name="stv_total_students">Total Students</string>
+    <string name="stv_present_students">Present Students</string>
+    <string name="stv_absent_students">Absent Students</string>
+    <string name="stv_bus_speed">Bus Speed</string>
 
 
     <!--Button-->
@@ -220,6 +224,7 @@
     <string name="sb_add_payment">ADD PAYMENT</string>
     <string name="sb_update">UPDATE</string>
     <string name="sb_add_parent">ADD PARENT</string>
+    <string name="sb_add_more">ADD MORE</string>
 
     <!--EditText-->
     <string name="set_email_id">Email Id</string>
@@ -359,16 +364,32 @@
     <string name="sj_please_select_to_route">Please Select TO Route</string>
     <string name="sj_two_routes_cannot_be_same">Two Routes Cannot be Same</string>
     <string name="sj_transfer_completed">Transfer Completed</string>
+    <string name="sj_bus_not_started_yet">Bus not started yet</string>
+
+
+
+
     <string name="st_leave">MANAGE LEAVES</string>
     <string name="st_student_list">STUDENT LIST</string>
-    <string name="stv_incident_date">Date</string>
-    <string name="stv_incident_details">Detaile</string>
-    <string name="stv_incident_fine_amount">Fine Amount</string>
-    <string name="stv_incident_fine_status">Status</string>
-    <string name="stv_incident_select_bus">Select Bus</string>
-    <string name="stv_incident_select_driver">Select Driver</string>
+    <string name="stv_incident_date">Date:</string>
+    <string name="stv_incident_details">Details:</string>
+    <string name="stv_incident_fine_amount">Fine Amount:</string>
+    <string name="stv_incident_fine_status">Status:</string>
+    <string name="stv_incident_select_bus">Select Bus:</string>
+    <string name="stv_incident_select_driver">Select Driver:</string>
     <string name="stv_incident_submit">Submit</string>
-    <string name="stv_incident_upload_documents">Upload Document</string>
-    <string name="stv_incident_upload_report">Upload Reports</string>
+    <string name="stv_incident_upload_documents">Upload Document:</string>
+    <string name="stv_incident_upload_report">Upload Reports:</string>
+    <string name="alert">Alert</string>
+    <string name="permission_required">The permission is required for the app to function properly</string>
+    <string name="sb_reassign_bus">REASSIGN BUS</string>
+    <string name="sb_resolve">RESOLVE</string>
+    <string name="sj_reassigned_successfully">Reassigned Successfully</string>
+    <string name="sj_please_upload_first">Please upload previous receipt</string>
+    <string name="stv_brokendown_bus">Broken-down Bus:</string>
+    <string name="stv_reassign_bus">Reassign Bus</string>
+    <string name="stv_select_reassign_bus">Select Bus to Reassign:</string>
+    <string name="stv_select_driver">Select Driver:</string>
+    <string name="stv_create_route">CREATE ROUTE</string>
 
 </resources>

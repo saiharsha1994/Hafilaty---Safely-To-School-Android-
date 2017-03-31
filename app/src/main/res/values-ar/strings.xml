@@ -111,7 +111,6 @@
     <string name="stv_license_renewal_date">تاريخ تجديد الرخصة:</string>
     <string name="stv_upload_mvpi">الرجاء تحميل الفحص الدوري:</string>
     <string name="stv_mvpi_expiry_date">تاريخ انتهاء الفحص الدوري:</string>
-    <string name="stv_manage_contract">"    ادارة العقد"</string>
     <string name="stv_contract_date">تاريخ العقد:</string>
     <string name="stv_vendor_name2">اسم المورد:</string>
     <string name="stv_vendor_email2">عنوان المورد الأليكتروني:</string>
@@ -161,8 +160,8 @@
     <string name="sb_add_bus">اضافة حافلة</string>
     <string name="sb_add_contract">اضافة عقد</string>
     <string name="sb_add_drivers">اضافة سائق</string>
-    <string name="sb_previous_month">&lt;الشهر الفائت</string>
-    <string name="sb_next_month">الشهر القادم&gt;</string>
+    <string name="sb_previous_month">الشهر الفائت&gt;</string>
+    <string name="sb_next_month">&lt;الشهر القادم</string>
     <string name="sb_get_list">احصل على القائمة</string>
     <string name="sb_send_message">ارسل الرسالة</string>
     <string name="sb_select">أختر</string>
@@ -187,11 +186,11 @@
 
 
     <string name="st_dashboard">لوحة المعلومات</string>
-    <string name="st_routes">ROUTES</string>
+    <string name="st_routes">المسارات</string>
     <string name="st_attendance">الحضور</string>
     <string name="st_transfer">الانتقال</string>
     <string name="st_driver_rating">تقييم السائق</string>
-    <string name="st_messaging">MESSAGING</string>
+    <string name="st_messaging">التواصل بالرسائل</string>
     <string name="st_add_new_bus">اضافة باص جديد</string>
     <string name="st_add_new_driver">اضافة سائق جديد</string>
     <string name="st_logout">الخروج</string>

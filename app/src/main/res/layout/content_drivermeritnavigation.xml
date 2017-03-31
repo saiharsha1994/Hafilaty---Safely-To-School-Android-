@@ -1,137 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DriverMerit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.valuetechsa.admin_school_app.DriverMerit">
-    <LinearLayout
+    android:id="@+id/outerlayout"
+    android:foreground="@drawable/dimmer">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TableLayout
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="2"
-            android:background="@drawable/tableborderlightblue">
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/header">
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_select_criteria"
-                    android:id="@+id/selectcriteria" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="@string/stv_select_month"
-                    android:id="@+id/selectroute" />
-                <RelativeLayout
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <EditText
-                        android:id="@+id/selectroutespinner"
-                        android:layout_marginLeft="00dp"
+                android:layout_height="match_parent"
+                android:stretchColumns="2"
+                android:background="@drawable/tableborderlightblue">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_width="120dp"
-                        android:layout_height="45dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
                         android:textSize="20dp"
-                        android:gravity="center"
-                        android:inputType="none"
-                        android:textIsSelectable="true"
-                        android:background="@android:color/transparent"
-                        />
-                </RelativeLayout>
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_select_criteria"
+                        android:id="@+id/selectcriteria" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginRight="0dp"
+                            android:paddingRight="10dp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20dp"
+                            android:text="@string/stv_select_month"
+                            android:id="@+id/selectroute"
+                            android:layout_weight="0.6"/>
+
+                            <EditText
+                                android:id="@+id/selectroutespinner"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="0.7"
+                                android:background="@drawable/spinnerborder"
+                                android:textSize="20dp"
+                                android:gravity="center"
+                                android:inputType="none"
+                                android:textIsSelectable="true"
+                                />
 
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:background="#2196f3"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:onClick="apply"
-                    android:text="@string/sb_apply"
-                    android:id="@+id/applyattenden" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:background="#2196f3"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:onClick="previousmonthmethod"
-                    android:textColor="@android:color/white"
-                    android:text="@string/sb_previous_month"
-                    android:id="@+id/previousmonth" />
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center"
+                            android:background="#2196f3"
+                            android:padding="8dp"
+                            android:textSize="20sp"
+                            android:textColor="@android:color/white"
+                            android:onClick="apply"
+                            android:text="@string/sb_view_records"
+                            android:id="@+id/applyattenden" />
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center"
+                            android:background="#2196f3"
+                            android:padding="8dp"
+                            android:textSize="20sp"
+                            android:onClick="previousmonthmethod"
+                            android:textColor="@android:color/white"
+                            android:text="@string/sb_previous_month"
+                            android:id="@+id/previousmonth" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:background="#2196f3"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:onClick="nextmonthmethod"
-                    android:textColor="@android:color/white"
-                    android:text="@string/sb_next_month"
-                    android:id="@+id/nextmonth" />
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="#2196f3"
+                            android:padding="8dp"
+                            android:textSize="20sp"
+                            android:onClick="nextmonthmethod"
+                            android:textColor="@android:color/white"
+                            android:text="@string/sb_next_month"
+                            android:id="@+id/nextmonth" />
+                    </LinearLayout>
 
-            </LinearLayout>
-        </TableLayout>
-    </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="185dp"
-        tools:context="com.example.valuetechsa.admin_school_app.DriverMerit">
-        <GridView
-            android:id="@+id/grid"
+                </LinearLayout>
+            </TableLayout>
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:layout_below="@id/header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:background="#e5e5e5"
-            android:horizontalSpacing="10dp"
-            android:numColumns="2"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp"
-            android:padding="4dp"
-            />
+            android:layout_marginTop="10dp"
+            tools:context="com.example.valuetechsa.admin_school_app.DriverMerit">
+            <GridView
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="#e5e5e5"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="10dp"
+                android:padding="4dp"
+                />
 
-    </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
+</FrameLayout>

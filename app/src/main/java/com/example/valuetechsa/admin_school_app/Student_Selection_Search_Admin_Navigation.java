@@ -2,10 +2,12 @@ package com.example.valuetechsa.admin_school_app;
 
 import android.*;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -21,12 +23,14 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -164,6 +168,15 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     String[] schoolcordarray=new String[100000];
     int firsttimezero=0;
     FrameLayout layout_MainMenu;
+
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    ArrayList<String> busnameforreassign=new ArrayList<String>();
+    ArrayList<String> busidforreassign=new ArrayList<String>();
+    TextView brokendownBus;
+    Spinner reassignBusSelect;
+    NotificationUtils notificationUtils;
+    TextView topRow,drivernamehawkeyetextbox;
+    String alert_title="",alert_message="",alert_notification_message="",alert_type="",previous_alert_type="normal",frombusidintoserver="",tobusidintoserver="",tobusnameintoserver="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -315,6 +328,52 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             Log.e("intent values", routeendtymnavigation);
 
         }
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+                    String title = intent.getStringExtra("title");
+                    String message = intent.getStringExtra("message");
+                    String notification_message = intent.getStringExtra("notification_message");
+                    String type = intent.getStringExtra("type");
+                    String imageUrl = intent.getStringExtra("image");
+
+
+                    if(!type.equalsIgnoreCase("normal")){
+                        initiatePopupWindowhawkeyeAlert(title,message,notification_message,type);
+                    }
+
+                    //Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+
+
+                    else {
+                        //Display Notification
+                        Intent resultIntent = new Intent(getApplicationContext(), Hawkeye_navigation.class);
+                        resultIntent.putExtra("title", title);
+                        resultIntent.putExtra("message", message);
+                        resultIntent.putExtra("notification_message", notification_message);
+                        resultIntent.putExtra("type", type);
+
+                        // check for image attachment
+                        if (TextUtils.isEmpty(imageUrl)) {
+                            showNotificationMessage(getApplicationContext(), title, notification_message, resultIntent);
+                        } else {
+                            // image is present, show notification with image
+                            showNotificationMessageWithBigImage(getApplicationContext(), title, notification_message, resultIntent, imageUrl);
+                        }
+                    }
+
+                }
+            }
+        };
+
+        new getSpareBusFromServer().execute();
+
 
 
 //        listViewstudents=(ListView) findViewById(R.id.studentlist);
@@ -1787,6 +1846,358 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
        startActivity(intent);
        finish();
    }
+
+    private void initiatePopupWindowhawkeyeAlert(String title,String message, String notification_message,final String type) {
+        try {
+            previous_alert_type=type;
+            String busid="";
+            String busname="";
+
+            if(!type.equalsIgnoreCase("normal")){
+                String[] split= type.split("~");
+                busid=split[1];
+                busname=split[2];
+            }
+            //Toast.makeText(Hawkeye_navigation.this,busid+busname,Toast.LENGTH_SHORT).show();
+            final String id=busid;
+            final String name=busname;
+
+            LayoutInflater inflater = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.screen_popup_alert,(ViewGroup) findViewById(R.id.popup_element));
+            if(!type.equalsIgnoreCase("normal"))
+                layout = inflater.inflate(R.layout.screen_popup_alert_breakdown,(ViewGroup) findViewById(R.id.popup_element));
+            pwindo = new PopupWindow(layout, WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha(200);
+            //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
+            topRow=(TextView)layout.findViewById(R.id.blueStudentnametexthawkeye);
+            drivernamehawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivername);
+
+            if(message.isEmpty())
+                drivernamehawkeyetextbox.setVisibility(View.INVISIBLE);
+            else
+                drivernamehawkeyetextbox.setText(message);
+            topRow.setText(title);
+
+            btnClosePopup=(Button)layout.findViewById(R.id.btn_close_popup_hawkeye);
+            btnClosePopup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(type.equalsIgnoreCase("normal")) {
+                        layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();
+                    }
+                    else {
+                        layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();
+                        initiatePopupWindowhawkeyeReassign(type,id,name);
+                    }
+                    //fadePopup.dismiss();
+
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private void initiatePopupWindowhawkeyeReassign(String type,String busId, String busName) {
+        try {
+            frombusidintoserver="";
+            tobusnameintoserver="";
+            tobusidintoserver="";
+
+            LayoutInflater inflater = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.screen_popup_reassign,(ViewGroup) findViewById(R.id.popup_element));
+
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150,WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha(200);
+            //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
+
+            brokendownBus=(TextView)layout.findViewById(R.id.brokendownbus);
+            reassignBusSelect=(Spinner)layout.findViewById(R.id.selectreassignbusspinner);
+
+            brokendownBus.setText(busName+"");
+            frombusidintoserver=busId;
+
+            if(busidforreassign.isEmpty())
+                new getSpareBusFromServer().execute();
+
+            //Toast.makeText(Hawkeye_navigation.this,busnameforreassign.size()+"",Toast.LENGTH_SHORT).show();
+
+            final String[] busnamefrom=new String[busnameforreassign.size()+1];
+            busnamefrom[0]=getResources().getString(R.string.sj_select_bus);
+            for(int i=1;i<=busnameforreassign.size();i++){
+                busnamefrom[i]=busnameforreassign.get(i-1);
+                //Toast.makeText(Hawkeye_navigation.this,busnamefrom[i],Toast.LENGTH_SHORT).show();
+            }
+
+
+            ArrayAdapter<String> adapterbusname = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, busnamefrom) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+                public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                    View v =super.getDropDownView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+            };
+
+            adapterbusname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            reassignBusSelect.setAdapter(adapterbusname);
+
+
+            reassignBusSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String item = parent.getItemAtPosition(position).toString();
+                    tobusnameintoserver=item;
+
+                    Log.e("spinner selected for ad",item);
+                    for (int i = 0; i < busnameforreassign.size(); i++) {
+                        if (tobusnameintoserver.equals(busnameforreassign.get(i))) {
+                            tobusidintoserver = busidforreassign.get(i);
+
+                        }
+                    }
+
+                }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            btnClosePopup=(Button)layout.findViewById(R.id.btn_reassign_bus);
+            btnClosePopup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        /*layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();*/
+                    reassignBus();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void reassignBus(){
+
+        //Toast.makeText(Hawkeye_navigation.this,frombusidintoserver+tobusidintoserver+tobusnameintoserver+"",Toast.LENGTH_SHORT).show();
+        if(tobusnameintoserver.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
+            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_select_bus),
+                    Toast.LENGTH_LONG).show();
+        }
+
+        else
+            new reassignbustoserver().execute();
+
+
+    }
+
+
+    class reassignbustoserver extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected void onPreExecute(){
+            progressDialog2 = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+
+                Jsonfunctions sh = new Jsonfunctions();
+                ServiceModel reg = new ServiceModel();
+
+                Log.e("add",frombusidintoserver+" "+tobusidintoserver);
+
+                String url= Config.ip+"BusList_api/reassignBus/from_bus_id/"+frombusidintoserver+"/to_bus_id/"+tobusidintoserver;
+                String response;
+
+                try
+                {
+                    try
+                    {
+                        Log.e("url above service call",url);
+                        String jsonStr = sh.makeServiceCall(url,Jsonfunctions.GET);
+                        Log.e("url below service call",url);
+                        if (jsonStr != null) {
+                            try {
+                                JSONObject Jobj = new JSONObject(jsonStr);
+                                response=Jobj.getString("responsecode");
+                                if(Jobj.getString("responsecode").equals("1"))
+                                {
+                                    //JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+                                    runOnUiThread(new Runnable(){
+
+                                        @Override
+                                        public void run(){
+                                            //update ui here
+                                            // display toast here
+                                            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_reassigned_successfully), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+
+                                }
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            Log.e("ServiceHandler", "Couldn't get any data from the url");
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            progressDialog2.dismiss();
+            layout_MainMenu.getForeground().setAlpha(0);
+            if(pwindo!=null&&pwindo.isShowing()) {
+                pwindo.dismiss();
+            }
+        }
+    }
+
+
+
+    class getSpareBusFromServer extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+                try {
+                    Jsonfunctions sh = new Jsonfunctions();
+                    ServiceModel reg = new ServiceModel();
+                    Log.e("url", Config.ip + "BusList_api/listSpareBuses");
+                    String jsonStr1 = sh.makeServiceCall(Config.ip + "BusList_api/listSpareBuses", Jsonfunctions.GET);
+
+                    if (jsonStr1 != null) {
+                        try {
+                            JSONObject Jobj = new JSONObject(jsonStr1);
+
+                            if (Jobj.getString("responsecode").equals("1")) {
+                                JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+
+                                for (int j = 0; j < jsonArray.length(); j++) {
+
+                                    JSONObject obj = jsonArray.getJSONObject(j);
+                                    Log.e("+++", obj.getString("bus_Id"));
+                                    String id = obj.getString("bus_Id");
+                                    busidforreassign.add(id);
+                                    Log.e("+++", obj.getString("name"));
+                                    String name = obj.getString("name");
+                                    busnameforreassign.add(name);
+
+                                }
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.e("ServiceHandler", "Couldn't get any data from the url");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
+
+    /**
+     * Showing notification with text only
+     */
+    private void showNotificationMessage(Context context, String title, String message, Intent intent) {
+        notificationUtils = new NotificationUtils(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notificationUtils.showNotificationMessage(title, message, intent);
+    }
+
+    /**
+     * Showing notification with text and image
+     */
+    private void showNotificationMessageWithBigImage(Context context, String title, String message, Intent intent, String imageUrl) {
+        notificationUtils = new NotificationUtils(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notificationUtils.showNotificationMessage(title, message, intent, imageUrl);
+    }
+
+
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationUtils.clearNotifications(getApplicationContext());
+
+    }
+
+
+    @Override
+    public void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
 
 
     public void showAlertForLanguage()
