@@ -440,7 +440,9 @@
     <string name="sj_80">80 Km/Hr</string>
     <string name="sj_90">90 Km/Hr</string>
     <string name="sj_100">100 Km/Hr</string>
-
+    <string name="alert">Alert</string>
+    <string name="permission_required">The permission is required for the app to function properly</string>
+    <string name="sj_bus_not_started_yet">Bus not started yet</string>
 
 
 </resources>
