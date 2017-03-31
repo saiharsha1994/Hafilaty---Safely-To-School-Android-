@@ -1,0 +1,277 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Selection_Route_Admin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/toplinearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:paddingTop="2sp">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="2"
+                android:background="@drawable/tableborderlightblue">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="10sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:text="@string/stv_SELECT_RECIPIENT_CRITERIA"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/selectcriteriaroutedistance" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8sp">
+                    <TextView
+                        android:layout_width="0sp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10sp"
+                        android:paddingBottom="5sp"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:textSize="20sp"
+                        android:text="@string/stv_select_route"
+                        android:layout_weight="1"
+                        android:id="@+id/selectroutedistancebyroute" />
+                    <RelativeLayout
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1.5"
+                        android:paddingBottom="5sp"
+                        android:background="@drawable/spinnerborder">
+                        <Spinner
+                            android:id="@+id/selectbusdistancebyroutetypespinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="40sp"
+                            android:gravity="center"
+                            android:layout_marginTop="3dp"
+                            />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical|center_horizontal"/>
+                    <Button
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:paddingLeft="5dp"
+                        android:paddingBottom="5sp"
+                        android:background="#2196f3"
+                        android:padding="2sp"
+                        android:textSize="20sp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_weight="1.5"
+                        android:textColor="@android:color/white"
+                        android:text="@string/sb_get_list"
+                        android:id="@+id/getlistdistancebyroute" />
+                </LinearLayout>
+            </TableLayout>
+        </LinearLayout>
+        <!--
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3sp"
+            android:background="@android:color/darker_gray"/>-->
+
+        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300sp"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/routelist"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            </ListView>
+
+        </LinearLayout>-->
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="3sp"
+            android:background="@android:color/darker_gray"/>-->
+
+        <RelativeLayout
+            android:id="@+id/relativelayoutrouteroutecreeation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/toplinearlayout">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2"
+                android:background="@drawable/tableborder">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="10sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_individual_selection"
+                        android:id="@+id/individualselectiontextbox" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp">
+                    <TableLayout
+                        android:id="@+id/attendencetable"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TableRow
+                            android:id="@+id/attedencerowid"
+                            android:background="@drawable/borderwithlightblue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="0sp"
+                                android:layout_height="50sp"
+                                android:text="@string/stv_route_name_distance_by_route"
+                                android:textColor="@android:color/white"
+                                android:layout_weight="1.4"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:textSize="20sp"
+                                android:id="@+id/routenamedistancebyroutetextbox"
+                                />
+                            <LinearLayout
+                                android:layout_width="1.5sp"
+                                android:layout_height="match_parent" >
+
+                                <View style="@style/Divider" />
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="0sp"
+                                android:layout_height="50sp"
+                                android:text="@string/stv_trip_type_distance_by_route"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:layout_weight="0.8"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:layout_gravity="center"
+                                android:textSize="20sp"
+                                android:id="@+id/triptypedistancebyroutetextbox" />
+                            <LinearLayout
+                                android:layout_width="1.5sp"
+                                android:layout_height="match_parent" >
+
+                                <View style="@style/Divider" />
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="0sp"
+                                android:layout_height="50sp"
+                                android:text="@string/stv_bus_name_distance_by_route"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:layout_weight="1.5"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:layout_gravity="center"
+                                android:textSize="20sp"
+                                android:id="@+id/busnamedistancebyroutetextbox" />
+                            <LinearLayout
+                                android:layout_width="1.5sp"
+                                android:layout_height="match_parent" >
+
+                                <View style="@style/Divider" />
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="0sp"
+                                android:layout_height="50sp"
+                                android:text="@string/stv_no_of_stops_distance_by_route"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:layout_weight="0.8"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:layout_gravity="center"
+                                android:textSize="20sp"
+                                android:id="@+id/noofstopsdistancebyroutetextbox" />
+                            <LinearLayout
+                                android:layout_width="1.5sp"
+                                android:layout_height="match_parent" >
+
+                                <View style="@style/Divider" />
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="0sp"
+                                android:layout_height="50sp"
+                                android:text="@string/stv_route_distance_distance_by_route"
+                                android:textColor="@android:color/white"
+                                android:layout_weight="0.9"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:textSize="20sp"
+                                android:id="@+id/routedistancedistancebyroutetextbox" />
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+            </TableLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativelayoutlistrouteroute"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/relativelayoutrouteroutecreeation"
+            android:layout_marginBottom="1sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:paddingLeft="0sp"
+            android:paddingRight="0sp">
+            <ListView
+                android:id="@+id/routecreateddistancebyroutelist"
+                android:layout_marginTop="0sp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:divider="#000000">
+            </ListView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

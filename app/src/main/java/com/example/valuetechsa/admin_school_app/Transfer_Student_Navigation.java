@@ -553,13 +553,15 @@ public class Transfer_Student_Navigation extends AppCompatActivity
                                     Log.e("latitudelongitude",latilongi);
                                     String assignto=obj.getString("assigned_to");
                                     Log.e("assign to",obj.getString("assigned_to"));
-                                    Log.e("id",assignto.substring(0,1));
+                                    int indexofff=assignto.indexOf("-");
+                                    Log.e("id",assignto.substring(0,indexofff));
                                     Log.e("type",assignto.substring(2,assignto.length()));
                                     String contactno=obj.getString("contact_num");
                                     Log.e("contact no",obj.getString("contact_num"));
                                     String stoptiming=obj.getString("stope_time");
                                     Log.e("stop timing",stoptiming);
-                                    if(studentTeacherTransferSelected.equalsIgnoreCase(assignto.substring(2,assignto.length()))){
+                                    int indexof=assignto.indexOf("-");
+                                    if(studentTeacherTransferSelected.equalsIgnoreCase(assignto.substring(indexof+1,assignto.length()))){
                                         Log.e("@@@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                                         StudentStopName.add(Stopnames);
                                         StudentLatitude.add(lati);
@@ -1185,6 +1187,10 @@ public class Transfer_Student_Navigation extends AppCompatActivity
         }
         else if (id == R.id.studentlistnew) {
             Intent intent = new Intent(this, Student_List_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.reportsfour) {
+            Intent intent = new Intent(this, Reports_Navigation.class);
             startActivity(intent);
         }
         else if (id == R.id.logout) {

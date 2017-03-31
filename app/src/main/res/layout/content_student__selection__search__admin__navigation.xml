@@ -50,11 +50,30 @@
                     android:background="@drawable/bordersearch"
                     android:drawableLeft="@drawable/searchbaricon"
                     android:hint="@string/set_search" />
+
+                <EditText
+                    android:paddingLeft="3sp"
+                    android:paddingRight="3sp"
+                    android:layout_marginLeft="20dp"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:layout_gravity="left|bottom"
+                    android:layout_marginBottom="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:singleLine="true"
+                    android:text="Distance: 0 KM, Time: 0 Mins"
+                    android:id="@+id/editdistancetimebosbox"
+                    android:background="@drawable/bordersearch"
+                    android:hint="@string/set_search" />
             </fragment>
         </LinearLayout>
         <View
             android:layout_width="1.5dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="62sp"
             android:background="#2196f3"/>
         <!--    <View
                 android:layout_width="match_parent"

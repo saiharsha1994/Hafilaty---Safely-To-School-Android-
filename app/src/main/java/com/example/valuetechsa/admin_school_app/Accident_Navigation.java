@@ -1665,6 +1665,10 @@ public class Accident_Navigation extends AppCompatActivity
             Intent intent = new Intent(this, Student_List_Navigation.class);
             startActivity(intent);
         }
+        else if (id == R.id.reportsfour) {
+            Intent intent = new Intent(this, Reports_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
         }

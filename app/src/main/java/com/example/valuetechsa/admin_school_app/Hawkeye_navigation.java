@@ -1374,6 +1374,12 @@ public class Hawkeye_navigation extends AppCompatActivity
             startActivity(intent);
 
         }
+        else if (id == R.id.reportsfour) {
+            threadloop=false;
+            Intent intent = new Intent(this, Reports_Navigation.class);
+            startActivity(intent);
+
+        }
         else if (id == R.id.changelanguage) {
             showAlertForLanguage();
         }

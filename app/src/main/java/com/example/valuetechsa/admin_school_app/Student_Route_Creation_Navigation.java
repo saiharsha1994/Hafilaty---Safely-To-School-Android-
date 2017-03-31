@@ -114,7 +114,6 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-
         toggle.setDrawerIndicatorEnabled(false);
         Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.menu, this.getTheme());
         toggle.setHomeAsUpIndicator(drawable);
@@ -1004,6 +1003,10 @@ public class Student_Route_Creation_Navigation extends AppCompatActivity
         }
         else if (id == R.id.studentlistnew) {
             Intent intent = new Intent(this, Student_List_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.reportsfour) {
+            Intent intent = new Intent(this, Reports_Navigation.class);
             startActivity(intent);
         }
         else if (id == R.id.logout) {

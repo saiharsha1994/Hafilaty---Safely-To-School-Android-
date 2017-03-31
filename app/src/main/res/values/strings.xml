@@ -201,6 +201,35 @@
     <string name="stv_Student_List_class">Class</string>
     <string name="stv_Student_List_section">Section</string>
     <string name="stv_Student_List_parents_no">Mobile Number</string>
+    <string name="stv_add_student">ADD STUDENT</string>
+    <string name="stv_remove_student">REMOVE STUDENT</string>
+
+    <string name="stv_SELECT_RECIPIENT_CRITERIA">SELECT RECIPIENT CRITERIA</string>
+    <string name="stv_select_bus_distance_by_vechile">Select Bus:</string>
+    <string name="stv_from_date_distance_by_vechile">Date From:</string>
+    <string name="stv_to_date_distance_by_vechile">Date To:</string>
+    <string name="stv_date_distance_by_vechile">Date</string>
+    <string name="stv_bus_id_distance_by_vechile">Bus Id</string>
+    <string name="stv_bus_name_distance_by_vechile">Bus Name</string>
+    <string name="stv_plate_number_distance_by_vechile">Plate Number</string>
+    <string name="stv_bus_distance_distance_by_vechile">Bus Distance</string>
+
+    <string name="stv_pick_up_start_arrival_depature">Pick-Up Start Time</string>
+    <string name="stv_pick_up_end_arrival_depature">Pick-Up End Time</string>
+    <string name="stv_drop_start_arrival_depature">Drop Start Time</string>
+    <string name="stv_drop_end_arrival_depature">Drop End Time</string>
+
+    <string name="stv_date_over_speeding">Date</string>
+    <string name="stv_bus_name_over_speeding">Bus Name</string>
+    <string name="stv_driver_name_over_speeding">Driver Name</string>
+    <string name="stv_speed_achived_over_speeding">Speed</string>
+    <string name="stv_speed_limit_over_speeding">Speed Limit:</string>
+
+    <string name="stv_route_name_distance_by_route">Route Name</string>
+    <string name="stv_trip_type_distance_by_route">Trip Type</string>
+    <string name="stv_bus_name_distance_by_route">Bus Name</string>
+    <string name="stv_no_of_stops_distance_by_route">No. Of Stops</string>
+    <string name="stv_route_distance_distance_by_route">Route Distance</string>
 
 
     <!--Button-->
@@ -264,6 +293,7 @@
     <string name="st_student_misbehaviour">MISBEHAVIOUR</string>
     <string name="st_accidents">ACCIDENTS</string>
     <string name="st_manage_fuel">MANAGE FUEL</string>
+    <string name="st_reports">REPORTS</string>
     <string name="st_parents">PARENTS</string>
     <string name="st_breakdowns">BREAKDOWNS</string>
 
@@ -272,10 +302,12 @@
     <string name="sj_please_wait">Please wait.</string>
     <string name="sj_fetching_information">Fetching Information!</string>
     <string name="sj_select_bus">Select Bus</string>
+    <string name="sj_select_speed">Select Speed</string>
     <string name="sj_select_driver">Select Driver</string>
     <string name="sj_please_enter_date">Please Enter The Date</string>
     <string name="sj_please_enter_the_details">Please Enter The Details</string>
     <string name="sj_please_select_bus">Please Select Bus</string>
+    <string name="sj_please_select_speed">Please Select Speed</string>
     <string name="sj_please_select_driver">Please Select Driver</string>
     <string name="sj_please_enter_the_fine_amount">Please Enter The Fine Amount</string>
     <string name="sj_please_enter_the_status">Please Enter The Status</string>
@@ -313,6 +345,7 @@
     <string name="sj_please_select_date">Please Select Date</string>
     <string name="sj_no_rating_for_this_month">No Rating For This Month</string>
     <string name="sj_leaves">Leaves</string>
+    <string name="sj_reportsfour">Reports</string>
     <string name="sj_no_student_leave_requests">No Student Leave Requests</string>
     <string name="sj_username_should_not_be_empty">Username Should Not Be Empty</string>
     <string name="sj_password_should_not_be_empty">Password Should Not Be Empty</string>
@@ -369,11 +402,32 @@
     <string name="sj_finding_direction">Finding Direction...</string>
     <string name="sj_student_teacher_already_exist">Student/Teacher Already Exist. Can\'t Remove. Make Transfer</string>
     <string name="sj_already_exist_in_the_route">Already Exist in The Route</string>
+    <string name="sj_stop_number">Stop Number</string>
     <string name="sj_finding_location">Finding Location...</string>
     <string name="sj_transfer">Transfer</string>
     <string name="sj_please_select_from_route">Please Select FROM Route</string>
     <string name="sj_please_select_to_route">Please Select TO Route</string>
     <string name="sj_two_routes_cannot_be_same">Two Routes Cannot be Same</string>
     <string name="sj_transfer_completed">Transfer Completed</string>
+    <string name="title_activity_reports__navigation">Reports_Navigation</string>
+    <string name="sj_no_data_exists">No Data Exists</string>
+
+    <string name="sj_student_selected">Student Selected:</string>
+    <string name="sj_seats_not_avaliable">Seats Not Avaliable</string>
+    <string name="sj_seats_remaining_in_bus">Seats Remaining In Bus:</string>
+
+    <string name="sj_select_all">Select All</string>
+    <string name="sj_10">10 Km/Hr</string>
+    <string name="sj_20">20 Km/Hr</string>
+    <string name="sj_30">30 Km/Hr</string>
+    <string name="sj_40">40 Km/Hr</string>
+    <string name="sj_50">50 Km/Hr</string>
+    <string name="sj_60">60 Km/Hr</string>
+    <string name="sj_70">70 Km/Hr</string>
+    <string name="sj_80">80 Km/Hr</string>
+    <string name="sj_90">90 Km/Hr</string>
+    <string name="sj_100">100 Km/Hr</string>
+
+
 
 </resources>

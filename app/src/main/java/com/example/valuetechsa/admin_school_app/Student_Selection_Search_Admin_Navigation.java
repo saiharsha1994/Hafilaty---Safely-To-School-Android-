@@ -76,9 +76,13 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Modules.DirectionFinder;
 import Modules.DirectionFinderListener;
@@ -95,11 +99,13 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     LatLng globallatlng;
     ListView listViewstudents ;
     String response="",url="";
-    String studentidgot;
+    String studentidgot,studentidgotfull;
     int driverlistno,buslistno,routeidno,lineno;
     int editrouteid;
     Jsonfunctions sh;
     int addornotpopup=0;
+    int searchclick=0;
+    int lastdelete=0;
     Button btnClosePopup,btnAddPopup,btnCloserRemovePopup,btnAddRemovePopup;
 
     ArrayList<String> list=new ArrayList<String>();
@@ -124,6 +130,10 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     ArrayList<String> teachername=new ArrayList<String>();
     ArrayList<String> teacherlat=new ArrayList<String>();
     ArrayList<String> teacherlong=new ArrayList<String>();
+    ArrayList<String> dummydrivername=new ArrayList<String>();
+    ArrayList<String> dummydriverid=new ArrayList<String>();
+    ArrayList<String> dummybusname=new ArrayList<String>();
+    ArrayList<String> dummybusid=new ArrayList<String>();
     ArrayList<String> teacherlatlong=new ArrayList<String>();
     ArrayList<String> EditStopName=new ArrayList<String>();
     ArrayList<String> EditLatitudeLongitude=new ArrayList<String>();
@@ -132,14 +142,41 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     ArrayList<String> EditAssignTo=new ArrayList<String>();
     ArrayList<String> EditDriverIdFromServer=new ArrayList<String>();
     ArrayList<String> EditBusIdFromServer=new ArrayList<String>();
+
+    ArrayList<String> driverpickupidFromServer=new ArrayList<String>();
+    ArrayList<String> driverdropidFromServer=new ArrayList<String>();
+    ArrayList<String> buspickupidFromServer=new ArrayList<String>();
+    ArrayList<String> busdropidFromServer=new ArrayList<String>();
+    ArrayList<String> bustypenumberFromServer=new ArrayList<String>();
+
+    ArrayList<Integer> dummyindex=new ArrayList<Integer>();
+    ArrayList<String> dummyselectedstudent=new ArrayList<String>();
+    ArrayList<String> dummyselectedstudentname=new ArrayList<String>();
+    ArrayList<String> dummycolorchangelat=new ArrayList<String>();
+    ArrayList<String> dummycolorchangelan=new ArrayList<String>();
+    ArrayList<String> dummystudentid=new ArrayList<String>();
+
+    ArrayList<String> schoollocationfromserver=new ArrayList<String>();
+    ArrayList<String> schoolnamefromserver=new ArrayList<String>();
+
+    String globalschoolname,globalschoollat,globalschoollan;
+
     LinearLayout back_dim_layout;
     SQLiteDatabase db;
     DatabaseAdapter dbh;
     String slat="";
     String slon="";
     int countinitialstudents=0;
+    double globaldistance=0,globaltime=0;
     double dlat =0;
     double dlon=0;
+    ArrayList<Double> dlatlist=new ArrayList<Double>();
+    ArrayList<Double> dlonlist=new ArrayList<Double>();
+    ArrayList<String> slatlist=new ArrayList<String>();
+    ArrayList<String> slonlist=new ArrayList<String>();
+    ArrayList<String> globalstoplist=new ArrayList<String>();
+    ArrayList<String> studentidlist=new ArrayList<String>();
+
     private PopupWindow pwindo;
     private EditText searchBox;
     int removeposition;
@@ -159,10 +196,18 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     private ProgressDialog progressDialog1;
     private ProgressDialog progressDialog2;
     private ProgressDialog progressDialog5;
+    private ProgressDialog progressDialog123;
+    ArrayList<String> selectedstudentdistance=new ArrayList<String>();
+    ArrayList<String> selectedstudenttime=new ArrayList<String>();
+    ArrayList<String> schoolstudentdistance=new ArrayList<String>();
+    ArrayList<String> schoolstudenttime=new ArrayList<String>();
+    ArrayList<Double> schoolstudentdistancedummy=new ArrayList<Double>();
     String nameuser,passuser,adminid,adminname,schoolcordinates;
     double schoollat,schoollong;
     String[] schoolcordarray=new String[100000];
     int firsttimezero=0;
+    int [][] finaldistance;
+    int globalcalculate=0;
     FrameLayout layout_MainMenu;
 
     @Override
@@ -334,9 +379,10 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         screenchange();
-        new getMapDataToServer().execute();
-        new getDriverListFromServer().execute();
-        new getRoutesFromServer().execute();
+        new getSettingsListFromServer().execute();
+        //new getMapDataToServer().execute();
+        //new getDriverListFromServer().execute();
+        //new getRoutesFromServer().execute();
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
@@ -359,11 +405,87 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         cancless.setTypeface(tfAdam);
     }
 
+    class getSettingsListFromServer extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected void onPreExecute(){;
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try
+            {
+                try
+                {
+                    Jsonfunctions sh = new Jsonfunctions();
+                    ServiceModel reg=new ServiceModel();
+                    Log.e("url", Config.ip+"Settings_api/listSettings");
+                    String jsonStr1 = sh.makeServiceCall(Config.ip+"Settings_api/listSettings",Jsonfunctions.GET);
+
+                    if (jsonStr1 != null)
+                    {
+                        try
+                        {
+                            JSONObject Jobj = new JSONObject(jsonStr1);
+
+                            if(Jobj.getString("responsecode").equals("1"))
+                            {
+                                JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+
+                                for (int j = 0; j < jsonArray.length(); j++){
+
+                                    JSONObject obj = jsonArray.getJSONObject(j);
+                                    Log.e("school_location",obj.getString("school_location"));
+                                    String school_location=obj.getString("school_location");
+                                    schoollocationfromserver.add(school_location);
+                                    Log.e("school_name",obj.getString("school_name"));
+                                    String school_name=obj.getString("school_name");
+                                    schoolnamefromserver.add(school_name);
+                                }
+
+
+
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        Log.e("ServiceHandler", "Couldn't get any data from the url");
+                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            int ri=schoollocationfromserver.get(0).indexOf(",");
+            globalschoollat=schoollocationfromserver.get(0).substring(0,ri);
+            globalschoollan=schoollocationfromserver.get(0).substring(ri+1);
+            Log.e("~~~~~~~~~","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~schoollat: "+globalschoollat);
+            Log.e("~~~~~~~~~","~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~schoollan: "+globalschoollan);
+            new getMapDataToServer().execute();
+        }
+    }
+
+
     class getRoutesFromServer extends AsyncTask<Void,Void,Void>{
         @Override
         protected void onPreExecute(){
-
-
         }
 
         @Override
@@ -435,6 +557,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
         @Override
         protected void onPostExecute(Void result){
+            new getDriverListFromServer().execute();
             if (lineno!=0) {
                 editrouteid=Integer.parseInt(routeidfromserver.get(lineno-1));
                 routenamenavigation=routenamefromserver.get(lineno-1);
@@ -533,7 +656,9 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                 colorchangelan.add(EditLongitude.get(i));
                 studentidselected.add(EditAssignTo.get(i));
             }
-            new progessdialogbox().execute();
+            //distancefromschool();
+            new distancebox().execute();
+            //new progessdialogbox().execute();
             //listgenerate();
 
         }
@@ -558,8 +683,8 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                 {
                     Jsonfunctions sh = new Jsonfunctions();
                     ServiceModel reg=new ServiceModel();
-                    Log.e("url", Config.ip+"Students_api/allStudents");
-                    String jsonStr1 = sh.makeServiceCall(Config.ip+"Students_api/allStudents",Jsonfunctions.GET);
+                    Log.e("url", Config.ip+"Students_api/allStudents/trip_type/"+routetypenavigation);
+                    String jsonStr1 = sh.makeServiceCall(Config.ip+"Students_api/allStudents/trip_type/"+routetypenavigation,Jsonfunctions.GET);
 
                     if (jsonStr1 != null)
                     {
@@ -726,8 +851,6 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                                     }
 
                                 }
-
-
                             }
                         }
                         catch (JSONException e)
@@ -754,11 +877,11 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         @Override
         protected void onPostExecute(Void result)
         {
-
+            calculateDistanceForSingleCoordinate();
             cordinates();
+            new getRoutesFromServer().execute();
         }
     }
-
 
     class getDriverListFromServer extends AsyncTask<Void,Void,Void>{
         @Override
@@ -799,6 +922,12 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                                     Log.e("+++",obj.getString("driver_id"));
                                     String driverId=obj.getString("driver_id");
                                     driveridfromserver.add(driverId);
+                                    Log.e("pickup_route_id",obj.getString("pickup_route_id"));
+                                    String pickup_route_id=obj.getString("pickup_route_id");
+                                    driverpickupidFromServer.add(pickup_route_id);
+                                    Log.e("drop_route_id",obj.getString("drop_route_id"));
+                                    String drop_route_id=obj.getString("drop_route_id");
+                                    driverdropidFromServer.add(drop_route_id);
 //                                    Log.e("+++",obj.getString("student_id"));
 //                                    Log.e("+++",obj.getString("att_date"));
 //                                    Log.e("+++",obj.getString("att_month"));
@@ -878,6 +1007,15 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                                     Log.e("+++",obj.getString("bus_Id"));
                                     String busId=obj.getString("bus_Id");
                                     busidfromserver.add(busId);
+                                    Log.e("pickup_route_id",obj.getString("pickup_route_id"));
+                                    String pickup_route_id=obj.getString("pickup_route_id");
+                                    buspickupidFromServer.add(pickup_route_id);
+                                    Log.e("drop_route_id",obj.getString("drop_route_id"));
+                                    String drop_route_id=obj.getString("drop_route_id");
+                                    busdropidFromServer.add(drop_route_id);
+                                    Log.e("bus_type",obj.getString("bus_type"));
+                                    String bus_type=obj.getString("bus_type");
+                                    bustypenumberFromServer.add(bus_type);
 //                                    Log.e("+++",obj.getString("student_id"));
 //                                    Log.e("+++",obj.getString("att_date"));
 //                                    Log.e("+++",obj.getString("att_month"));
@@ -915,6 +1053,27 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         protected void onPostExecute(Void result){
             dropdownlist();
             progressDialog2.dismiss();
+        }
+    }
+
+    class distancebox extends AsyncTask<Void,Void,Void>{
+
+        @Override
+        protected void onPreExecute()
+        {
+            distancefromschool();
+        }
+        @Override
+        protected Void doInBackground(Void... arg0)
+        {
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result)
+        {
+
+            progressDialog123.dismiss();
         }
     }
 
@@ -960,84 +1119,219 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         }
     }
 
+    public void calculateDistanceForSingleCoordinate(){
+        Double[ ][ ] distancecoordinate = new Double[list.size()][list.size()];
+        finaldistance=new  int[list.size()][list.size()];
+        Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+latlist.size());
+        Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+longlist.size());
+        Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+list.size());
+        for(int i=0;i<list.size();i++){
+            for(int j=0;j<list.size();j++){
+                if(i==j){
+                    distancecoordinate[i][j]=0.0;
+                    finaldistance[i][j]=0;
+                    Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+(i+1)+" "+(j+1)+" : "+distancecoordinate[i][j].intValue());
+                    Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ final distance: "+finaldistance[i][j]);
+                }
+                else {
+                    distancecoordinate[i][j]=haversine(Double.parseDouble(latlist.get(i)),Double.parseDouble(longlist.get(i)),Double.parseDouble(latlist.get(j)),Double.parseDouble(longlist.get(j)));
+                    if(distancecoordinate[i][j]>=0 && distancecoordinate[i][j]<30){
+                        finaldistance[i][j]=1;
+                    }
+                    else {
+                        finaldistance[i][j]=0;
+                    }
+                    Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+(i+1)+" "+(j+1)+" : "+distancecoordinate[i][j].intValue());
+                    Log.e("@@@","@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ final distance: "+finaldistance[i][j]);
+                }
+            }
+        }
+    }
+
+    public static double haversine(
+            double lat1, double lng1, double lat2, double lng2) {
+        int r = 6371; // average radius of the earth in km
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lng2 - lng1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                        * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double d = r * c;
+        return d*1000;
+    }
+
     public void dropdownlist(){
         driverdropdown = (Spinner)findViewById(R.id.selectdriverspinner);
         busdropdown = (Spinner)findViewById(R.id.selectbusspinner);
+        for(int routeid1=0;routeid1<routenamefromserver.size();routeid1++){
+            if(routenamenavigation.equals(routenamefromserver.get(routeid1))){
+                routeidno=routeid1;
+                Log.e("++++++","+++++++++++++++++++++++++++++++++++++++++++++++++"+routeidfromserver.get(routeidno));
+            }
+        }
         int sum=drivernamefromserver.size();
         sum=sum+1;
-        String[] driveritems= new String[sum];
+        int sumdriver=1;
+        if(routetypenavigation.equalsIgnoreCase("1")){
+            for(int ii=0;ii<drivernamefromserver.size();ii++){
+                if(Integer.parseInt(driverpickupidFromServer.get(ii))==0||Integer.parseInt(driverpickupidFromServer.get(ii))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    sumdriver=sumdriver+1;
+                    Log.e("*****","*********************************************************");
+                }
+            }
+            Log.e("*****","*********************************************************sumdriver"+sumdriver);
+        }
+        else {
+            for(int ii=0;ii<drivernamefromserver.size();ii++){
+                if(Integer.parseInt(driverdropidFromServer.get(ii))==0||Integer.parseInt(driverdropidFromServer.get(ii))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    sumdriver=sumdriver+1;
+                    Log.e("*****","*********************************************************");
+                }
+            }
+            Log.e("*****","*********************************************************sumdriver"+sumdriver);
+        }
+        String[] driveritems= new String[sumdriver];
         driveritems[0]=getResources().getString(R.string.sj_select_driver);
-        for(int i=1;i<=drivernamefromserver.size();i++){
-            driveritems[i]=drivernamefromserver.get(i-1);
+        if(routetypenavigation.equalsIgnoreCase("1")){
+            int hi=1;
+            for(int i=1;i<=drivernamefromserver.size();i++){
+                if(Integer.parseInt(driverpickupidFromServer.get(i-1))==0||Integer.parseInt(driverpickupidFromServer.get(i-1))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    driveritems[hi]=drivernamefromserver.get(i-1);
+                    dummydrivername.add(drivernamefromserver.get(i-1));
+                    dummydriverid.add(driveridfromserver.get(i-1));
+                    Log.e("*****","*********************************************************drivername "+driveritems[hi]);
+                    hi++;
+                }
+            }
+        }
+        else{
+            int hi=1;
+            for(int i=1;i<=drivernamefromserver.size();i++){
+                if(Integer.parseInt(driverdropidFromServer.get(i-1))==0||Integer.parseInt(driverdropidFromServer.get(i-1))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    driveritems[hi]=drivernamefromserver.get(i-1);
+                    dummydrivername.add(drivernamefromserver.get(i-1));
+                    dummydriverid.add(driveridfromserver.get(i-1));
+                    Log.e("*****","*********************************************************drivername "+driveritems[hi]);
+                    hi++;
+                }
+            }
         }
         int sum1=busnamefromserver.size();
         sum1=sum1+1;
-        String[] busitems=new String[sum1];
-        busitems[0]=getResources().getString(R.string.sj_select_bus);
-        for(int j=1;j<=busnamefromserver.size();j++){
-            busitems[j]=busnamefromserver.get(j-1);
+        int sumbus=1;
+        if(routetypenavigation.equalsIgnoreCase("1")){
+            for(int ii=0;ii<busnamefromserver.size();ii++){
+                if(Integer.parseInt(buspickupidFromServer.get(ii))==0||Integer.parseInt(buspickupidFromServer.get(ii))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    sumbus=sumbus+1;
+                    Log.e("*****","*********************************************************");
+                }
+            }
+            Log.e("*****","*********************************************************sumbus"+sumbus);
         }
-        ArrayAdapter<String> adapterdriver = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, driveritems) {
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View v = super.getView(position, convertView, parent);
-                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
-                ((TextView) v).setTypeface(externalFont);
-                ((TextView) v).setTextSize(20);
-                ((TextView) v).setMinHeight(70);
-                return v;
+        else {
+            for(int ii=0;ii<busnamefromserver.size();ii++){
+                if(Integer.parseInt(busdropidFromServer.get(ii))==0||Integer.parseInt(busdropidFromServer.get(ii))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    sumbus=sumbus+1;
+                    Log.e("*****","*********************************************************");
+                }
             }
-            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
-                View v =super.getDropDownView(position, convertView, parent);
-                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
-                ((TextView) v).setTypeface(externalFont);
-                ((TextView) v).setTextSize(20);
-                ((TextView) v).setMinHeight(70);
-                return v;
+            Log.e("*****","*********************************************************sumbus"+sumbus);
+        }
+        String[] busitems=new String[sumbus];
+        busitems[0]=getResources().getString(R.string.sj_select_bus);
+        if(routetypenavigation.equalsIgnoreCase("1")){
+            int hi=1;
+            for(int j=1;j<=busnamefromserver.size();j++){
+                if(Integer.parseInt(buspickupidFromServer.get(j-1))==0||Integer.parseInt(buspickupidFromServer.get(j-1))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    busitems[hi]=busnamefromserver.get(j-1);
+                    dummybusname.add(busnamefromserver.get(j-1));
+                    dummybusid.add(busidfromserver.get(j-1));
+                    Log.e("*****","*********************************************************busname"+busitems[hi]);
+                    hi++;
+                }
             }
-        };
+        }
+        else{
+            int hi=1;
+            for(int j=1;j<=busnamefromserver.size();j++){
+                if(Integer.parseInt(busdropidFromServer.get(j-1))==0||Integer.parseInt(busdropidFromServer.get(j-1))==Integer.parseInt(routeidfromserver.get(routeidno))){
+                    busitems[hi]=busnamefromserver.get(j-1);
+                    dummybusname.add(busnamefromserver.get(j-1));
+                    dummybusid.add(busidfromserver.get(j-1));
+                    Log.e("*****","*********************************************************busname "+busitems[hi]);
+                    hi++;
+                }
+            }
+        }
+        try{
+            ArrayAdapter<String> adapterdriver = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, driveritems) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+                public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                    View v =super.getDropDownView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+            };
         /*ArrayAdapter<String> adapterdriver = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, driveritems);*/
-        adapterdriver.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> adapterbus = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, busitems) {
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View v = super.getView(position, convertView, parent);
-                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
-                ((TextView) v).setTypeface(externalFont);
-                ((TextView) v).setTextSize(20);
-                ((TextView) v).setMinHeight(70);
-                return v;
-            }
-            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
-                View v =super.getDropDownView(position, convertView, parent);
-                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
-                ((TextView) v).setTypeface(externalFont);
-                ((TextView) v).setTextSize(20);
-                ((TextView) v).setMinHeight(70);
-                return v;
-            }
-        };
+            adapterdriver.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> adapterbus = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, busitems) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+                public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                    View v =super.getDropDownView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+            };
         /*ArrayAdapter<String> adapterbus = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, busitems);*/
-        adapterbus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        driverdropdown.setAdapter(adapterdriver);
-        busdropdown.setAdapter(adapterbus);
+            adapterbus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            driverdropdown.setAdapter(adapterdriver);
+            busdropdown.setAdapter(adapterbus);
+        }
+        catch (Exception e){
 
+        }
         if(lineno!=0){
             int rowdriver=0;
             int rowbus=0;
             String driverid=EditDriverIdFromServer.get(lineno-1);
             String busid=EditBusIdFromServer.get(lineno-1);
-            for(int r=0;r<driveridfromserver.size();r++){
-                if(driverid.equals(driveridfromserver.get(r))){
-                    routedrivernamenavigation=drivernamefromserver.get(r);
+            for(int r=0;r<dummydriverid.size();r++){
+                if(driverid.equals(dummydriverid.get(r))){
+                    routedrivernamenavigation=dummydrivername.get(r);
                     rowdriver=r+1;
                 }
-
             }
-            for(int t=0;t<busidfromserver.size();t++){
-                if(busid.equals(busidfromserver.get(t))){
-                    routebusnonavigation=busnamefromserver.get(t);
+            for(int t=0;t<dummybusid.size();t++){
+                if(busid.equals(dummybusid.get(t))){
+                    routebusnonavigation=dummybusname.get(t);
                     rowbus=t+1;
                 }
             }
+            Log.e("!!!!!!!!!","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! driverid "+driverid);
+            Log.e("!!!!!!!!!","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!bus id "+busid);
+            Log.e("!!!!!!!!!","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!rowdriver "+rowdriver);
+            Log.e("!!!!!!!!!","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!rowbus "+rowbus);
             driverdropdown.setSelection(rowdriver);
             busdropdown.setSelection(rowbus);
         }
@@ -1073,7 +1367,94 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                    Toast.LENGTH_SHORT).show();
        }
        else{
-           new addstopstoserver().execute();
+           String seatcapacity;
+           String ssss="";
+           int busassigned=0;
+           int totalstudentsselected=0;
+           int remainingseats=9999999;
+           Log.e("#####","#####################################################routeid: "+routeidfromserver.get(routeidno));
+           if(routetypenavigation.equalsIgnoreCase("1")){
+
+               for(int ee=0;ee<busnamefromserver.size();ee++){
+                   if(routebusnonavigation.equalsIgnoreCase(busnamefromserver.get(ee))){
+                       seatcapacity=bustypenumberFromServer.get(ee);
+
+                       Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(seatcapacity);
+                       while (m.find())
+                       {
+                           double d = Double.parseDouble(m.group(1));
+                           ssss=ssss+String.valueOf(d);
+                           //System.out.println(d);
+                       }
+                       Log.e("########","#########################################seatcapacity: "+seatcapacity);
+                       Log.e("########","#########################################ssss: "+ssss);
+                       break;
+                   }
+               }
+               /*for(int rr=0;rr<bustypenumberFromServer.size();rr++){
+                   if(buspickupidFromServer.get(rr).equalsIgnoreCase(routeidfromserver.get(routeidno))){
+                       busassigned=1;
+                       seatcapacity=bustypenumberFromServer.get(rr);
+
+                       Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(seatcapacity);
+                       while (m.find())
+                       {
+                           double d = Double.parseDouble(m.group(1));
+                           ssss=ssss+String.valueOf(d);
+                           //System.out.println(d);
+                       }
+                       Log.e("########","#########################################seatcapacity: "+seatcapacity);
+                       Log.e("########","#########################################ssss "+ssss);
+                       break;
+                   }
+               }*/
+           }
+           else {
+               for(int ee=0;ee<busnamefromserver.size();ee++){
+                   if(routebusnonavigation.equalsIgnoreCase(busnamefromserver.get(ee))){
+                       seatcapacity=bustypenumberFromServer.get(ee);
+
+                       Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(seatcapacity);
+                       while (m.find())
+                       {
+                           double d = Double.parseDouble(m.group(1));
+                           ssss=ssss+String.valueOf(d);
+                           //System.out.println(d);
+                       }
+                       Log.e("########","#########################################seatcapacity: "+seatcapacity);
+                       Log.e("########","#########################################ssss: "+ssss);
+                       break;
+                   }
+               }
+               /*for(int rr=0;rr<bustypenumberFromServer.size();rr++){
+                   routebusnonavigation
+                   if(busdropidFromServer.get(rr).equalsIgnoreCase(routeidfromserver.get(routeidno))){
+                       busassigned=1;
+                       seatcapacity=bustypenumberFromServer.get(rr);
+
+                       Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(seatcapacity);
+                       while (m.find())
+                       {
+                           double d = Double.parseDouble(m.group(1));
+                           ssss=ssss+String.valueOf(d);
+                           //System.out.println(d);
+                       }
+                       Log.e("########","#########################################seatcapacity: "+seatcapacity);
+                       Log.e("########","#########################################ssss: "+ssss);
+                       break;
+                   }
+               }*/
+           }
+           Log.e("#########","#########################################no of selected students "+selectedstudentsname.size());
+           totalstudentsselected=selectedstudentsname.size();
+           Double dummy=Double.parseDouble(ssss);
+           if(totalstudentsselected>dummy.intValue()){
+               Toast.makeText(Student_Selection_Search_Admin_Navigation.this,getResources().getString(R.string.sj_seats_not_avaliable)+", "+getResources().getString(R.string.sj_student_selected)+" "+totalstudentsselected+" , "+getResources().getString(R.string.sj_seats_remaining_in_bus)+" "+dummy.intValue(),
+                       Toast.LENGTH_SHORT).show();
+           }
+           else {
+               new addstopstoserver().execute();
+           }
        }
 
     }
@@ -1344,18 +1725,21 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         }
     }
 
-
-    private void sendRequest() {
-        mMap.clear();
-        progressDialog = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
+    public void distancefromschool(){
+        progressDialog123 = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
                 getResources().getString(R.string.sj_finding_direction), true);
-        /*for(int j=selectedstudents.size()-1;j>=0;j--){
-            selectedstudentsreverse.add(selectedstudents.get(j));
-        }*/
-        for (int i=0;i<selectedstudents.size()-1;i++) {
+        globalcalculate=1;
+        Log.e("```````````","`````````````````````````````````````````````````distancefromschool outside");
+        Log.e("```````````","`````````````````````````````````````````````````distancefromschool outside: "+globalcalculate);
+        if(selectedstudents.size()==0){
+            new progessdialogbox().execute();
+            globalcalculate=0;
+            return;
+        }
+        for (int i=0;i<selectedstudents.size();i++) {
 
-            String xll=selectedstudents.get(i);
-            String yll=selectedstudents.get(i+1);
+            String xll=schoollocationfromserver.get(0);
+            String yll=selectedstudents.get(i);
             if(yll.isEmpty())
                 break;
             String origin = xll;
@@ -1366,22 +1750,308 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            if(i==selectedstudents.size()-2){
-                String origin1 = yll;
-                String destination1 = yll;
+        }
+        Log.e("```````````","`````````````````````````````````````````````````distancefromschool after for");
+    }
+
+    public void finaldistance(){
+        for(int pp=0;pp<schoolstudentdistance.size();pp++){
+            Log.e("```````````","`````````````````````````````````````````````````"+schoolstudentdistance.get(pp)+":"+selectedstudentsname.get(pp));
+        }
+        if(schoolstudentdistance.size()==selectedstudents.size()){
+            globalcalculate=0;
+            Log.e("```````````","`````````````````````````````````````````````````distancefromschool after all");
+
+            for(int i=0;i<schoolstudentdistance.size();i++){
+                String sss="";
+                if(schoolstudentdistance.get(i).contains("km")){
+                    Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(schoolstudentdistance.get(i));
+                    while (m.find())
+                    {
+                        double d = Double.parseDouble(m.group(1));
+                        sss=sss+String.valueOf(d);
+                        //System.out.println(d);
+                    }
+                }
+                else{
+                    Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(schoolstudentdistance.get(i));
+                    while (m.find())
+                    {
+                        double d = Double.parseDouble(m.group(1));
+                        sss=sss+String.valueOf(d);
+                        //System.out.println(d);
+                    }
+                    Double mt=Double.parseDouble(sss);
+                    mt=mt/1000;
+                    sss=String.valueOf(mt);
+                }
+                Double distance=Double.parseDouble(sss);
+                schoolstudentdistancedummy.add(distance);
+            }
+            for(int pp=0;pp<schoolstudentdistancedummy.size();pp++){
+                Log.e("```````````","`````````````````````````````````````````````````new: "+schoolstudentdistancedummy.get(pp));
+            }
+            /*Collections.sort(schoolstudentdistancedummy);
+            Collections.reverse(schoolstudentdistancedummy);*/
+            ArrayList<StringIntTuple> list123 = new ArrayList<StringIntTuple>();
+            for(int i =0; i<schoolstudentdistancedummy.size(); i++){
+                list123.add(new StringIntTuple(schoolstudentdistancedummy.get(i),Integer.toString(i)));
+            }
+            Collections.sort(list123,new StringIntTupleIntComparator());
+            for(int pp=0;pp<list123.size();pp++){
+                Log.e("```````````","`````````````````````````````````````````````````new sort: "+list123.get(pp));
+                String indexstring=list123.get(pp).toString();
+                int index=indexstring.indexOf(",");
+                int indexback=indexstring.indexOf(")");
+                Log.e("```````````","`````````````````````````````````````````````````new sort split: "+indexstring.substring(index+1,indexback));
+                dummyindex.add(Integer.parseInt(indexstring.substring(index+1,indexback)));
+            }
+            if(routetypenavigation.equalsIgnoreCase("1")){
+                Collections.reverse(dummyindex);
+                for(int rr=0;rr<dummyindex.size();rr++){
+                    dummyselectedstudent.add(selectedstudents.get(dummyindex.get(rr)));
+                    dummyselectedstudentname.add(selectedstudentsname.get(dummyindex.get(rr)));
+                    dummycolorchangelat.add(colorchangelat.get(dummyindex.get(rr)));
+                    dummycolorchangelan.add(colorchangelan.get(dummyindex.get(rr)));
+                    dummystudentid.add(studentidselected.get(dummyindex.get(rr)));
+                    Log.e("Change the list","lllllllllllllllllllllllllllllllllllllllllwwwwwwwwwwpickup");
+                }
+                selectedstudents.clear();
+                selectedstudentsname.clear();
+                colorchangelat.clear();
+                colorchangelan.clear();
+                studentidselected.clear();
+                for(int gg=0;gg<dummystudentid.size();gg++){
+                    selectedstudents.add(dummyselectedstudent.get(gg));
+                    selectedstudentsname.add(dummyselectedstudentname.get(gg));
+                    colorchangelat.add(dummycolorchangelat.get(gg));
+                    colorchangelan.add(dummycolorchangelan.get(gg));
+                    studentidselected.add(dummystudentid.get(gg));
+                    Log.e("Change the list","lllllllllllllllllllllllllllllllllllllllll");
+                }
+                new progessdialogbox().execute();
+            }
+            else {
+                for(int rr=0;rr<dummyindex.size();rr++){
+                    dummyselectedstudent.add(selectedstudents.get(dummyindex.get(rr)));
+                    dummyselectedstudentname.add(selectedstudentsname.get(dummyindex.get(rr)));
+                    dummycolorchangelat.add(colorchangelat.get(dummyindex.get(rr)));
+                    dummycolorchangelan.add(colorchangelan.get(dummyindex.get(rr)));
+                    dummystudentid.add(studentidselected.get(dummyindex.get(rr)));
+                    Log.e("Change the list","lllllllllllllllllllllllllllllllllllllllllwwwwwwwwwwdrop");
+                }
+                selectedstudents.clear();
+                selectedstudentsname.clear();
+                colorchangelat.clear();
+                colorchangelan.clear();
+                studentidselected.clear();
+                for(int gg=0;gg<dummystudentid.size();gg++){
+                    selectedstudents.add(dummyselectedstudent.get(gg));
+                    selectedstudentsname.add(dummyselectedstudentname.get(gg));
+                    colorchangelat.add(dummycolorchangelat.get(gg));
+                    colorchangelan.add(dummycolorchangelan.get(gg));
+                    studentidselected.add(dummystudentid.get(gg));
+                    Log.e("Change the list","lllllllllllllllllllllllllllllllllllllllll");
+                }
+                new progessdialogbox().execute();
+            }
+        }
+    }
+
+    private void sendRequest() {
+        mMap.clear();
+        Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% only twice");
+        selectedstudentdistance.clear();
+        selectedstudenttime.clear();
+        progressDialog = ProgressDialog.show(Student_Selection_Search_Admin_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                getResources().getString(R.string.sj_finding_direction), true);
+        /*for(int j=selectedstudents.size()-1;j>=0;j--){
+            selectedstudentsreverse.add(selectedstudents.get(j));
+        }*/
+
+        if(routetypenavigation.equalsIgnoreCase("1")){
+            for (int i=0;i<selectedstudents.size()-1;i++) {
+
+                String xll=selectedstudents.get(i);
+                String yll=selectedstudents.get(i+1);
+                if(yll.isEmpty())
+                    break;
+                String origin = xll;
+                String destination = yll;
                 try {
                     new DirectionFinder(this, origin, destination).execute();
 
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+                if(i==selectedstudents.size()-2){
+                    String origin1 = yll;
+                    String destination1 = yll;
+                    try {
+                        new DirectionFinder(this, origin, destination).execute();
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+                }
 
             }
+            if(selectedstudents.size()>0){
+                String comb=globalschoollat+","+globalschoollan;
+                String xlll=selectedstudents.get(selectedstudents.size()-1);
+                String ylll=comb;
+                String originl = xlll;
+                String destinationl = ylll;
+                try {
+                    Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% insidedirection");
+                    new DirectionFinder(this, originl, destinationl).execute();
 
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                String xllll=comb;
+                String yllll=comb;
+                String originll = xllll;
+                String destinationll = yllll;
+                try {
+                    Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% insidedirection");
+                    new DirectionFinder(this, originll, destinationll).execute();
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        else {
+            //LatLng schoolcoo = new LatLng(Double.parseDouble(globalschoollat), Double.parseDouble(globalschoollan));
+            Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% drop");
+            if(selectedstudents.size()>0){
+                String comb=globalschoollat+","+globalschoollan;
+                String xlll=comb;
+                String ylll=selectedstudents.get(0);
+                String originl = xlll;
+                String destinationl = ylll;
+                try {
+                    Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% insidedirection");
+                    new DirectionFinder(this, originl, destinationl).execute();
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+            for (int i=0;i<selectedstudents.size()-1;i++) {
+
+                String xll=selectedstudents.get(i);
+                String yll=selectedstudents.get(i+1);
+                if(yll.isEmpty())
+                    break;
+                String origin = xll;
+                String destination = yll;
+                try {
+                    new DirectionFinder(this, origin, destination).execute();
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                if(i==selectedstudents.size()-2){
+                    String origin1 = yll;
+                    String destination1 = yll;
+                    try {
+                        new DirectionFinder(this, origin, destination).execute();
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        }
+        Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% final can call");
+        //calculatedistancetime();
         selectedstudentsreverse.clear();
         cordinates();
 
+    }
+
+    public void calculatedistancetime(){
+        globaldistance=0;
+        globaltime=0;
+        Double distance=0.0;
+        Double time=0.0;
+
+        for(int i=0;i<selectedstudentdistance.size()-1;i++){
+            String sss="";
+                if(selectedstudentdistance.get(i).contains("km")){
+                    Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(selectedstudentdistance.get(i));
+                    while (m.find())
+                    {
+                        double d = Double.parseDouble(m.group(1));
+                        sss=sss+String.valueOf(d);
+                        //System.out.println(d);
+                    }
+                }
+                else{
+                    Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(selectedstudentdistance.get(i));
+                    while (m.find())
+                    {
+                        double d = Double.parseDouble(m.group(1));
+                        sss=sss+String.valueOf(d);
+                        //System.out.println(d);
+                    }
+                    Double mt=Double.parseDouble(sss);
+                    mt=mt/1000;
+                    sss=String.valueOf(mt);
+                }
+            distance=distance+Double.parseDouble(sss);
+            Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% inside distance :"+sss);
+        }
+        for(int i=0;i<selectedstudenttime.size()-1;i++){
+            String sss="";
+            if(selectedstudenttime.get(i).contains("hours")){
+                String withhours=selectedstudenttime.get(i);
+                String hours=withhours.substring(0, withhours.indexOf(" "));
+                Double hoursdouble=Double.parseDouble(hours);
+                hoursdouble=hoursdouble*60;
+                String mins=withhours.replace("hours","");
+                mins=mins.replace("mins","");
+                mins=mins.substring(mins.indexOf(" "));
+                Double minsdouble=Double.parseDouble(mins);
+                Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% hours:"+hoursdouble);
+                Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% mins :"+mins);
+                Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% total:"+(hoursdouble+minsdouble));
+                sss=(hoursdouble+minsdouble)+"";
+            }
+            else{
+                Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(selectedstudenttime.get(i));
+                while (m.find())
+                {
+                    double d = Double.parseDouble(m.group(1));
+                    sss=sss+String.valueOf(d);
+                    //System.out.println(d);
+                }
+            }
+            time=time+Double.parseDouble(sss);
+            Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% inside time :"+sss);
+        }
+        Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Total Distance :"+distance);
+        Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Total Time :"+time);
+        Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Total No of Stops :"+(selectedstudentdistance.size()));
+        Double stoptime=(double)selectedstudentdistance.size()*2;
+        //time=time+stoptime;
+        DecimalFormat numberFormat = new DecimalFormat("#0.0");
+        DecimalFormat numberFormatDistance = new DecimalFormat("#0.00");
+        EditText distim=(EditText)findViewById(R.id.editdistancetimebosbox);
+        if(time>=60){
+            int hours = time.intValue() / 60; //since both are ints, you get an int
+            int minutes = time.intValue() % 60;
+            distim.setText("Distance: "+numberFormatDistance.format(distance)+" KM, Time: "+hours+" Hours "+minutes+" Mins");
+            distim.setTextColor(Color.RED);
+        }
+        else {
+            distim.setText("Distance: "+numberFormatDistance.format(distance)+" KM, Time: "+numberFormat.format(time)+" Mins");
+        }
     }
 
     @Override
@@ -1401,6 +2071,12 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         mMap.setMyLocationEnabled(true);
     }
     public void cordinates(){
+        LatLng schoolcoo = new LatLng(Double.parseDouble(globalschoollat), Double.parseDouble(globalschoollan));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(schoolcoo,9));
+        Marker mmmm=mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue1))
+                .title("School")
+                .position(schoolcoo));
         for(int i=0;i<latlist.size();i++) {
             xl = Double.parseDouble(latlist.get(i));
             yl = Double.parseDouble(longlist.get(i));
@@ -1444,7 +2120,6 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
         if(firsttimezero==0){
             LatLng latLng = new LatLng(schoollat, schoollong);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,9));
             Marker m=(mMap.addMarker(new MarkerOptions()
                     .visible(false)
                     .position(latLng)));
@@ -1481,6 +2156,11 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         }
         if(!selectedstudentsname.isEmpty()){
             Log.e("inside list generator","+++++++++++++++++++++++++++++++++++++++++++++++");
+            listgenerate();
+        }
+        else if(lastdelete==1){
+            Log.e("inside list generator","+++++++++++++++++++++++++++++++++++++++++++++++");
+            lastdelete=0;
             listgenerate();
         }
         mMap.setOnMarkerClickListener(this);
@@ -1525,27 +2205,147 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        String schoollocation=marker.getTitle();
+        if(schoollocation.equalsIgnoreCase("School")){
+            schoollocation="empty";
+            return true;
+        }
+        String seatcapacity;
+        String ssss="";
+        int busassigned=0;
+        int totalstudentsselected=0;
+        int remainingseats=9999999;
+        Log.e("#####","#####################################################routeid: "+routeidfromserver.get(routeidno));
+        if(routetypenavigation.equalsIgnoreCase("1")){
+            for(int rr=0;rr<bustypenumberFromServer.size();rr++){
+                if(buspickupidFromServer.get(rr).equalsIgnoreCase(routeidfromserver.get(routeidno))){
+                    busassigned=1;
+                    seatcapacity=bustypenumberFromServer.get(rr);
+
+                        Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(seatcapacity);
+                        while (m.find())
+                        {
+                            double d = Double.parseDouble(m.group(1));
+                            ssss=ssss+String.valueOf(d);
+                            //System.out.println(d);
+                        }
+                    Log.e("########","#########################################seatcapacity: "+seatcapacity);
+                    Log.e("########","#########################################ssss "+ssss);
+                    break;
+                }
+            }
+        }
+        else {
+            for(int rr=0;rr<bustypenumberFromServer.size();rr++){
+                if(busdropidFromServer.get(rr).equalsIgnoreCase(routeidfromserver.get(routeidno))){
+                    busassigned=1;
+                    seatcapacity=bustypenumberFromServer.get(rr);
+
+                    Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(seatcapacity);
+                    while (m.find())
+                    {
+                        double d = Double.parseDouble(m.group(1));
+                        ssss=ssss+String.valueOf(d);
+                        //System.out.println(d);
+                    }
+                    Log.e("########","#########################################seatcapacity: "+seatcapacity);
+                    Log.e("########","#########################################ssss: "+ssss);
+                    break;
+                }
+            }
+        }
+        Log.e("#########","#########################################no of selected students "+selectedstudentsname.size());
+        if(busassigned==1){
+            Double dummy=Double.parseDouble(ssss);
+            remainingseats= dummy.intValue()-selectedstudentsname.size();
+            Log.e("###########","#########################################remaining seats "+remainingseats);
+        }
+        dlonlist.clear();
+        dlatlist.clear();
+        slatlist.clear();
+        slonlist.clear();
+        globalstoplist.clear();
+        studentidlist.clear();
         int[] location = new int[2];
          dlat =marker.getPosition().latitude;
+         dlatlist.add(marker.getPosition().latitude);
          dlon =marker.getPosition().longitude;
-        globalstop= marker.getTitle();
+         dlonlist.add(marker.getPosition().longitude);
+         globalstop= marker.getTitle();
+         globalstoplist.add(marker.getTitle());
          slat = String.valueOf(dlat);
+         slatlist.add(String.valueOf(dlat));
          slon = String.valueOf(dlon);
-        studentidgot=(String)marker.getTag();
+         slonlist.add(String.valueOf(dlon));
+         studentidgot=(String)marker.getTag();
+         studentidgotfull=(String)marker.getTag();
+         studentidlist.add((String)marker.getTag());
         Log.e("get tag","================================================================"+studentidgot);
+        Log.e("get tag","================================================================"+studentidgotfull);
         if(studentidgot.contains("teacher")||studentidgot.contains("student")){
-            studentidgot=studentidgot.substring(0,1);
+            int num=studentidgot.indexOf("-");
+            studentidgot=studentidgot.substring(0,num);
         }
         Log.e("get tag","================================================================"+studentidgot);
         Log.e("get tag","================================================================"+globalstop);
+        totalstudentsselected=totalstudentsselected+1;
         String latlong=slat+","+slon;
+        for(int ii=0;ii<list.size();ii++){
+            if(stops.get(ii).equalsIgnoreCase(globalstop)){
+                int rownumber=ii;
+                for(int jj=0;jj<list.size();jj++){
+                    if(finaldistance[rownumber][jj]==1){
+                        Log.e("stop beside ","================================================================"+stops.get(jj));
+                        Log.e("stop beside ","================================================================"+jj);
+                        int yesorno=studentcheckbesidefromlist(Integer.parseInt(studentidfromserver.get(jj)));
+                        if(yesorno==1){
+                            Log.e("stop beside ","================================================================EXISTS");
+                        }
+                        else {
+                            Log.e("stop beside ","================================================================DOES NOT EXISTS");
+                            totalstudentsselected=totalstudentsselected+1;
+                            dlatlist.add(Double.parseDouble(latlist.get(jj)));
+                            dlonlist.add(Double.parseDouble(longlist.get(jj)));
+                            slatlist.add(latlist.get(jj));
+                            slonlist.add(longlist.get(jj));
+                            globalstoplist.add(stops.get(jj));
+                            studentidlist.add(studentidfromserver.get(jj));
+                        }
+
+                    }
+                }
+            }
+        }
+        Log.e("+++++++++++++ ","================================================================Total Students"+totalstudentsselected);
         int checkstudentreturnvalue=studentcheckfromlist();
         if(checkstudentreturnvalue==1){
-            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, globalstop+getResources().getString(R.string.sj_already_exist_in_the_route),
+            int studentline=0;
+            for(int dd=0;dd<studentidselected.size();dd++){
+                Log.e("+++++++++++++ ","=======================================================idnew : "+studentidselected.get(dd));
+                int newrow=studentidselected.get(dd).indexOf("-");
+                if(studentidgot.equalsIgnoreCase(studentidselected.get(dd).substring(0,newrow))){
+                    studentline=dd+1;
+                    break;
+                }
+            }
+            Toast.makeText(Student_Selection_Search_Admin_Navigation.this, globalstop+"-"+getResources().getString(R.string.sj_stop_number)+" "+studentline+" : "+getResources().getString(R.string.sj_already_exist_in_the_route),
                     Toast.LENGTH_SHORT).show();
+            Log.e("+++++++++++++ ","==========================================================id: "+studentidgot);
+            dlonlist.clear();
+            dlatlist.clear();
+            slatlist.clear();
+            slonlist.clear();
+            globalstoplist.clear();
+            studentidlist.clear();
         }
         else {
-            initiatePopupWindow();
+            if(totalstudentsselected>remainingseats){
+                Toast.makeText(Student_Selection_Search_Admin_Navigation.this,getResources().getString(R.string.sj_seats_not_avaliable)+", "+getResources().getString(R.string.sj_student_selected)+" "+totalstudentsselected+" , "+getResources().getString(R.string.sj_seats_remaining_in_bus)+" "+remainingseats,
+                        Toast.LENGTH_SHORT).show();
+            }
+            else {
+                initiatePopupWindow();
+            }
 
             /*if(addornotpopup==2){
                 Log.e("Always inside","#################################################");
@@ -1573,7 +2373,10 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     public int studentcheckfromlist(){
         int returnvalue=0;
         for(int iii=0;iii<studentidselected.size();iii++){
+            Log.e("inside","studentlist");
+            Log.e("next1111","  "+(studentidgot+"-student")+"  "+studentidselected.get(iii));
             if((studentidgot+"-student").equals(studentidselected.get(iii))&&!globalstop.contains("TEACHER")){
+                Log.e("inside","studentlist1");
                 returnvalue=1;
                 break;
             }
@@ -1586,7 +2389,26 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         return returnvalue;
     }
 
+    public int studentcheckbesidefromlist(int k){
+        int returnvalue=0;
+        Log.e("inside","studentlist2");
+        for(int iii=0;iii<studentidselected.size();iii++){
+            if((k+"-student").equals(studentidselected.get(iii))&&!globalstop.contains("TEACHER")){
+                Log.e("inside","studentlist");
+                returnvalue=1;
+                break;
+            }
+            else if((k+"-teacher").equals(studentidselected.get(iii))&&globalstop.contains("TEACHER")){
+                returnvalue=1;
+                break;
+            }
+
+        }
+        return returnvalue;
+    }
+
     public void findLocation() {
+        searchclick=1;
         new searchprogessbox().execute();
     }
     private void sendRequestsearch() {
@@ -1629,82 +2451,155 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         polylinePaths = new ArrayList<>();
         originMarkers = new ArrayList<>();
         destinationMarkers = new ArrayList<>();
+        Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%global count: "+globalcalculate);
+        if(globalcalculate==1){
+            for (Route route : routes) {
+                    Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%school student distance"+route.distance.text);
+                    schoolstudentdistance.add(route.distance.text);
+                    Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%school student time"+route.duration.text);
+                    schoolstudenttime.add(route.duration.text);
+                    //calculatedistancetime();
+            }
+            finaldistance();
+        }
+        else{
+            for (Route route : routes) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
+                originMarkers.add(mMap.addMarker(new MarkerOptions()
+                        .visible(false)
+                        .title(route.startAddress)
+                        .position(route.startLocation)));
+                destinationMarkers.add(mMap.addMarker(new MarkerOptions()
+                        .visible(false)
+                        .title(route.endAddress)
+                        .position(route.endLocation)));
 
-        for (Route route : routes) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
+                PolylineOptions polylineOptions = new PolylineOptions().
+                        geodesic(true).
+                        color(Color.BLUE).
+                        width(10);
 
-            originMarkers.add(mMap.addMarker(new MarkerOptions()
-                    .visible(false)
-                    .title(route.startAddress)
-                    .position(route.startLocation)));
-            destinationMarkers.add(mMap.addMarker(new MarkerOptions()
-                    .visible(false)
-                    .title(route.endAddress)
-                    .position(route.endLocation)));
-
-            PolylineOptions polylineOptions = new PolylineOptions().
-                    geodesic(true).
-                    color(Color.BLUE).
-                    width(10);
-
-            for (int i = 0; i < route.points.size(); i++)
-                polylineOptions.add(route.points.get(i));
-
-            polylinePaths.add(mMap.addPolyline(polylineOptions));
+                for (int i = 0; i < route.points.size(); i++)
+                    polylineOptions.add(route.points.get(i));
+                if(searchclick==0){
+                    Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+route.distance.text);
+                    selectedstudentdistance.add(route.distance.text);
+                    Log.e("%%%%%%","%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+route.duration.text);
+                    selectedstudenttime.add(route.duration.text);
+                    calculatedistancetime();
+                }
+                searchclick=0;
+                polylinePaths.add(mMap.addPolyline(polylineOptions));
+        }
         }
     }
     private void initiatePopupWindow() {
         try {
 // We need to get the instance of the LayoutInflater
-            LayoutInflater inflater1 = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
+            /*LayoutInflater inflater1 = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final View layout1 = inflater1.inflate(R.layout.fadepopup,
                     (ViewGroup) findViewById(R.id.fadePopup));
             final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
-            //fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
+            *///fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
             LayoutInflater inflater = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup,
                     (ViewGroup) findViewById(R.id.popup_element));
 
-            pwindo = new PopupWindow(layout, 500,400, true);
+            pwindo = new PopupWindow(layout, 500,300, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
-            layout_MainMenu.getForeground().setAlpha( 200);
+            layout_MainMenu.getForeground().setAlpha(200);
             TextView studentnamedisply=(TextView)layout.findViewById(R.id.blueStudentnametext);
+            final TextView studentlistnamedisply=(TextView)layout.findViewById(R.id.txtstudentlistView);
             btnAddPopup = (Button) layout.findViewById(R.id.btn_add_popup);
             btnClosePopup=(Button) layout.findViewById(R.id.btn_close_popup);
-            studentnamedisply.setText("   "+globalstop);
+            //studentnamedisply.setText("   "+globalstop);
             studentnamedisply.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+            if(globalstoplist.size()>=2){
+                String names="Selected Students: ";
+                for(int iii=0;iii<globalstoplist.size();iii++){
+                    if(iii==0){
+                        names=names+globalstoplist.get(iii);
+                    }
+                    else{
+                        names=names+", "+globalstoplist.get(iii);
+                    }
+                }
+                studentlistnamedisply.setText(" "+names);
+            }
+            else{
+                studentlistnamedisply.setText("Selected Students: "+globalstop);
+            }
             // btnClosePopup.setOnClickListener(cancel_button_click_listener);
             btnAddPopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String latlong=slat+","+slon;
-                    globallatlng = new LatLng(dlat, dlon);
-                    selectedstudentsname.add(globalstop);
-                    selectedstudents.add(latlong);
-                    colorchangelat.add(slat);
-                    colorchangelan.add(slon);
-                    if(globalstop.contains("TEACHER")){
-                        Log.e("&&&&&&&7","$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$44");
-                        studentidselected.add(studentidgot + "-teacher");
+                    if(globalstoplist.size()>=2){
+                        for(int iii=0;iii<globalstoplist.size();iii++){
+                            String latlong=slatlist.get(iii)+","+slonlist.get(iii);
+                            globallatlng = new LatLng(dlatlist.get(iii), dlonlist.get(iii));
+                            selectedstudentsname.add(globalstoplist.get(iii));
+                            selectedstudents.add(latlong);
+                            colorchangelat.add(slatlist.get(iii));
+                            colorchangelan.add(slonlist.get(iii));
+                            if(globalstop.contains("TEACHER")){
+                                Log.e("&&&&&&&7","$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$44");
+                                studentidselected.add(studentidlist.get(iii) + "-teacher");
+                            }
+                            else{
+                                studentidselected.add(studentidlist.get(iii) + "-student");
+                            }
+                            Log.e("Stop name :", globalstoplist.get(iii));
+                            Log.e("Latitudes in listener", slatlist.get(iii));
+                            Log.e("Longitudes in listener", slonlist.get(iii));
+                            Log.e("Student Id", studentidlist.get(iii));
+                        }
+                        dlonlist.clear();
+                        dlatlist.clear();
+                        slatlist.clear();
+                        slonlist.clear();
+                        globalstoplist.clear();
+                        studentidlist.clear();
+                        Log.e("^^^^^^^^^^^","^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^if two");
+
+                        new progessdialogbox().execute();
+                        layout_MainMenu.getForeground().setAlpha( 0);
+                        pwindo.dismiss();
                     }
                     else{
-                        studentidselected.add(studentidgot + "-student");
+                        String latlong=slat+","+slon;
+                        globallatlng = new LatLng(dlat, dlon);
+                        selectedstudentsname.add(globalstop);
+                        selectedstudents.add(latlong);
+                        colorchangelat.add(slat);
+                        colorchangelan.add(slon);
+                        if(globalstop.contains("TEACHER")){
+                            Log.e("&&&&&&&7","$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$44");
+                            studentidselected.add(studentidgot + "-teacher");
+                        }
+                        else{
+                            studentidselected.add(studentidgot + "-student");
+                        }
+                        Log.e("Stop name :", globalstop);
+                        Log.e("Latitudes in listener", slat);
+                        Log.e("Longitudes in listener", slon);
+                        Log.e("Student Id", studentidgot);
+                        new progessdialogbox().execute();
+                        layout_MainMenu.getForeground().setAlpha( 0);
+                        pwindo.dismiss();
                     }
-                    Log.e("Stop name :", globalstop);
-                    Log.e("Latitudes in listener", slat);
-                    Log.e("Longitudes in listener", slon);
-                    Log.e("Student Id", studentidgot);
-                    new progessdialogbox().execute();
-                    pwindo.dismiss();
-                    fadePopup.dismiss();
-
                 }
             });
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dlonlist.clear();
+                    dlatlist.clear();
+                    slatlist.clear();
+                    slonlist.clear();
+                    globalstoplist.clear();
+                    studentidlist.clear();
                     layout_MainMenu.getForeground().setAlpha( 0);
                     pwindo.dismiss();
                     //fadePopup.dismiss();
@@ -1720,24 +2615,26 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
     private void removePopupWindow() {
         try {
 // We need to get the instance of the LayoutInflater
-            LayoutInflater inflater1 = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
+            /*LayoutInflater inflater1 = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final View layout1 = inflater1.inflate(R.layout.fadepopup,
                     (ViewGroup) findViewById(R.id.fadePopup));
             final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
-            //fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
+            *///fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);
             LayoutInflater inflater = (LayoutInflater) Student_Selection_Search_Admin_Navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_remove,
                     (ViewGroup) findViewById(R.id.popup_element));
 
-            pwindo = new PopupWindow(layout, 500,400, true);
+            pwindo = new PopupWindow(layout, 500,300, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
             layout_MainMenu.getForeground().setAlpha( 200);
             TextView studentnamedisply=(TextView)layout.findViewById(R.id.blueStudentnameremovetext);
+            TextView studentnamelistdisply=(TextView)layout.findViewById(R.id.txtremovestudentView);
             btnAddRemovePopup = (Button) layout.findViewById(R.id.btn_remove_popup);
             btnCloserRemovePopup=(Button) layout.findViewById(R.id.btn_closeremove_popup);
-            studentnamedisply.setText("   "+removestudent);
+            //studentnamedisply.setText("   "+removestudent);
+            studentnamelistdisply.setText("Selected Student: "+removestudent);
             studentnamedisply.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
             // btnClosePopup.setOnClickListener(cancel_button_click_listener);
             btnAddRemovePopup.setOnClickListener(new View.OnClickListener() {
@@ -1754,6 +2651,7 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                     colorchangelat.remove(removeposition);
                     colorchangelan.remove(removeposition);
                     studentidselected.remove(removeposition);
+                    lastdelete=1;
                     //globallatlng = new LatLng(dlat, dlon);
                     /*selectedstudentsname.add(globalstop);
                     selectedstudents.add(latlong);
@@ -1761,8 +2659,9 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
                     colorchangelan.add(slon);
                     studentidselected.add(studentidgot + "-student");*/
                     new progessdialogbox().execute();
+                    layout_MainMenu.getForeground().setAlpha( 0);
                     pwindo.dismiss();
-                    fadePopup.dismiss();
+                    //fadePopup.dismiss();
 
                 }
             });
@@ -1948,6 +2847,10 @@ public class Student_Selection_Search_Admin_Navigation extends AppCompatActivity
         }
         else if (id == R.id.studentlistnew) {
             Intent intent = new Intent(this, Student_List_Navigation.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.reportsfour) {
+            Intent intent = new Intent(this, Reports_Navigation.class);
             startActivity(intent);
         }
         else if (id == R.id.logout) {

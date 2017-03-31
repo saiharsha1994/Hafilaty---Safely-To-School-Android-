@@ -663,6 +663,10 @@ public class Student_List_Navigation extends AppCompatActivity
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             mDrawerLayout.closeDrawers();
         }
+        else if (id == R.id.reportsfour) {
+            Intent intent = new Intent(this, Reports_Navigation.class);
+            startActivity(intent);
+        }
         else if (id == R.id.logout) {
             db.delete("OneTimeLogi" +
                     "n", null, null);

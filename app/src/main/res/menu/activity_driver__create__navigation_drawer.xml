@@ -98,6 +98,13 @@
             android:title="@string/st_leave" />
     </group>
     <group android:checkableBehavior="single"
+        android:id="@+id/reportsfourgroup">
+        <item
+            android:id="@+id/reportsfour"
+            android:icon="@drawable/incident"
+            android:title="@string/st_reports" />
+    </group>
+    <group android:checkableBehavior="single"
         android:id="@+id/breakdownsgroup">
         <item
             android:id="@+id/breakdowns"

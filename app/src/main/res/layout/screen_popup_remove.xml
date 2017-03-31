@@ -6,7 +6,8 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/firstrelative">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -19,27 +20,29 @@
                 android:layout_gravity="center"
                 android:textSize="30dp"
                 android:textColor="@android:color/white"
-                android:text="Student Name"
+                android:text="@string/stv_remove_student"
                 android:gravity="center"
                 />
         </LinearLayout>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/secondrelative">
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center"
             android:layout_marginTop="100dp">
 
             <TextView
-                android:id="@+id/txtView"
+                android:id="@+id/txtremovestudentView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="20dp"
-                android:layout_marginLeft="50dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:textSize="25dp"
                 android:text="@string/stv_do_you_want_to_remove"
                 android:gravity="center"/>
             />
@@ -48,19 +51,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/secondrelative"
+        android:gravity="center_horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="60dp"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/btn_remove_popup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sb_delete"
-                android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
                 android:background="#2196f3"
                 android:padding="8dp"
