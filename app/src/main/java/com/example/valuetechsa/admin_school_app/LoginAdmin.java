@@ -1,11 +1,14 @@
 package com.example.valuetechsa.admin_school_app;
 
+import android.*;
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +17,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +56,10 @@ public class LoginAdmin extends AppCompatActivity {
     boolean threadloop=true;
     String adminid,adminname,schoolcordinate;
     String speedlimit;
+    final int MY_PERMISSIONS_REQUEST_Camera=1;
+    final int MY_PERMISSIONS_REQUEST_Coarse_Location=2;
+    final int MY_PERMISSIONS_REQUEST_Fine_Location=3;
+    final int MY_PERMISSIONS_REQUEST_Write_External_Storage=4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,9 +148,94 @@ public class LoginAdmin extends AppCompatActivity {
         btnLogin.setTypeface(tfAdam);
         btnForgotpassword.setTypeface(tfAdam);
         action.hide();
+        getPermissions();
         init();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+    }
+
+    public void getPermissions(){
+
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            //ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA);
+
+            if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_Camera);
+            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_Coarse_Location);
+            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_Fine_Location);
+            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_Write_External_Storage);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_Camera: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! do the
+                    // calendar task you need to do.
+
+                } else {
+
+                    cc.showAlertWithTitle(getResources().getString(R.string.alert), getResources().getString(R.string.permission_required));
+                }
+                return;
+            }
+            case MY_PERMISSIONS_REQUEST_Write_External_Storage: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! do the
+                    // calendar task you need to do.
+
+                } else {
+
+                    cc.showAlertWithTitle(getResources().getString(R.string.alert), getResources().getString(R.string.permission_required));
+                }
+                return;
+            }
+            case MY_PERMISSIONS_REQUEST_Fine_Location: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! do the
+                    // calendar task you need to do.
+
+                } else {
+
+                    cc.showAlertWithTitle(getResources().getString(R.string.alert), getResources().getString(R.string.permission_required));
+                }
+                return;
+            }
+            case MY_PERMISSIONS_REQUEST_Coarse_Location: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! do the
+                    // calendar task you need to do.
+
+                } else {
+
+                    cc.showAlertWithTitle(getResources().getString(R.string.alert), getResources().getString(R.string.permission_required));
+                }
+                return;
+            }
+
+        }
     }
 
     public void showAlertForLanguage()

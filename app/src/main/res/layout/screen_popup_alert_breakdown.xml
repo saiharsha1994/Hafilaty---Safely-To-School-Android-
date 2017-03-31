@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_element"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50sp"
+        android:orientation="horizontal"
+        android:background="@drawable/tablecolorblue">
+        <TextView
+            android:id="@+id/blueStudentnametexthawkeye"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:text="@string/stv_student_name"
+            android:layout_marginLeft="5sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70sp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/txtViewdrivername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginLeft="10sp"
+            android:text="Driver Name: Avinash Y" />
+        />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220sp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+        <Button
+            android:id="@+id/btn_close_popup_hawkeye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sb_resolve"
+
+            android:background="#2196f3"
+            android:padding="8sp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</RelativeLayout>
+
+

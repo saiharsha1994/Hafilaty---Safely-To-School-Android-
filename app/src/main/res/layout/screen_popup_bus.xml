@@ -30,19 +30,23 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50sp"
-        android:layout_marginBottom="30dp">
+        android:layout_marginTop="50sp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:orientation="horizontal">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30sp"
-                    android:layout_marginLeft="227sp"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
                     <TextView
                         android:id="@+id/busnametext"
                         android:layout_width="wrap_content"
@@ -52,6 +56,12 @@
                         android:gravity="center"
                         android:paddingRight="10dp"
                         />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="50sp"
@@ -59,96 +69,137 @@
                         android:singleLine="true"
                         android:id="@+id/busnameedit"
                         android:layout_marginLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:background="@drawable/spinnerborder"/>
                 </LinearLayout>
+            </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/bustext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:text="@string/stv_bus_type2"
+                        android:gravity="center"
+                        android:paddingRight="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <RelativeLayout
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/spinnerborder">
+                        <Spinner
+                            android:id="@+id/selectbustypespinnerdriver"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="200dp"
+                            android:layout_height="50dp"
+                            android:textSize="40sp"
+                            android:spinnerMode="dialog"
+                            android:gravity="center"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10sp"
-                android:layout_marginLeft="238sp">
-                <TextView
-                    android:id="@+id/bustext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:text="@string/stv_bus_type2"
-                    android:gravity="center"
-                    android:paddingRight="10dp"
-                    />
-                <RelativeLayout
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <Spinner
-                        android:id="@+id/selectbustypespinnerdriver"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="200dp"
-                        android:layout_height="50dp"
-                        android:textSize="40sp"
-                        android:spinnerMode="dialog"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
-            </LinearLayout>
+                >
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10sp"
-                    android:layout_marginLeft="143sp">
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
                     <TextView
                         android:id="@+id/chasisnumbertext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="30sp"
                         android:text="@string/stv_chassis_number2"
-                        android:gravity="center"
                         android:paddingRight="10dp"
                         />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="50sp"
                         android:minWidth="200sp"
                         android:singleLine="true"
                         android:layout_marginLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:id="@+id/chassisnoedit"
                         android:background="@drawable/spinnerborder"/>
-
                 </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10sp"
-                    android:layout_marginLeft="182sp">
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
                     <TextView
                         android:id="@+id/Platenametext"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="30sp"
                         android:text="@string/stv_plate_number2"
-                        android:gravity="center"
                         android:paddingRight="10dp"
                         />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="50sp"
                         android:minWidth="200sp"
                         android:singleLine="true"
                         android:layout_marginLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:id="@+id/platenameedit"
                         android:background="@drawable/spinnerborder"/>
                 </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10sp"
-                    android:layout_marginLeft="283sp">
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
                     <TextView
                         android:id="@+id/fahastext"
                         android:layout_width="wrap_content"
@@ -158,191 +209,272 @@
                         android:gravity="center"
                         android:paddingRight="10dp"
                         />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="50sp"
                         android:minWidth="200sp"
                         android:singleLine="true"
                         android:layout_marginLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:id="@+id/fahasedit"
                         android:background="@drawable/spinnerborder"/>
                 </LinearLayout>
+            </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="10sp"
-                android:layout_marginLeft="117sp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50sp"
-                    android:layout_marginLeft="40sp"
-                    android:id="@+id/licensebustext"
-                    android:textSize="30sp"
-                    android:text="@string/stv_upload_license"
-                    android:paddingRight="10dp"/>
-                <Button
-                    android:id="@+id/btn_uploadlicensebus"
-                    android:layout_width="wrap_content"
+                android:layout_marginTop="10sp">
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/sb_choose_file"
-                    android:background="#2196f3"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/white"/>
-                <TextView
-                    android:layout_width="300sp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10sp"
-                    android:id="@+id/uploadlicensebustext"
-                    android:textSize="20sp"
-                    android:text="@string/stv_no_file_chosen"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10sp"
-                android:layout_marginLeft="101sp">
-                <TextView
-                    android:id="@+id/licenseexpirebustext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:text="@string/stv_license_expiry_date"
-                    android:gravity="center"
-                    android:paddingRight="10dp"
-                    />
-                <EditText
-                    android:layout_width="200sp"
-                    android:layout_height="50sp"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/licenseexpirebusedit"
-                    android:focusable="false"
-                    android:singleLine="true"
-                    android:inputType="none"
-                    android:textIsSelectable="true"
-                    android:background="@drawable/spinnerborder"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10sp"
-                android:layout_marginLeft="68sp">
-                <TextView
-                    android:id="@+id/licenserenewalbustext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:text="@string/stv_license_renewal_date"
-                    android:gravity="center"
-                    android:paddingRight="10dp"
-                    />
-                <EditText
-                    android:layout_width="200sp"
-                    android:layout_height="50sp"
-                    android:textSize="20sp"
-                    android:id="@+id/licenserenewalbusedit"
-                    android:focusable="false"
-                    android:singleLine="true"
-                    android:inputType="none"
-                    android:layout_marginLeft="10dp"
-                    android:textIsSelectable="true"
-                    android:background="@drawable/spinnerborder"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="10sp"
-                android:layout_marginLeft="149sp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50sp"
-                    android:layout_marginLeft="40sp"
-                    android:id="@+id/mvpitext"
-                    android:textSize="30sp"
-                    android:text="@string/stv_upload_mvpi"
-                    android:paddingRight="10dp"/>
-                <Button
-                    android:id="@+id/btn_uploadmvpi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sb_choose_file"
-                    android:background="#2196f3"
-                    android:layout_marginLeft="10dp"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"/>
-                <TextView
-                    android:layout_width="300sp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10sp"
-                    android:id="@+id/uploadnamemvpitext"
-                    android:textSize="20sp"
-                    android:text="@string/stv_no_file_chosen"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10sp"
-                android:layout_marginLeft="132sp">
-                <TextView
-                    android:id="@+id/mvpiexpiretext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:text="@string/stv_mvpi_expiry_date"
-                    android:gravity="center"
-                    android:paddingRight="10dp"
-                    />
-                <EditText
-                    android:layout_width="200sp"
-                    android:layout_height="50sp"
-                    android:textSize="20sp"
-                    android:id="@+id/mvpiexpireedit"
-                    android:focusable="false"
-                    android:layout_marginLeft="10dp"
-                    android:singleLine="true"
-                    android:inputType="none"
-                    android:textIsSelectable="true"
-                    android:background="@drawable/spinnerborder"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/btn_add_popup_bus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sb_add_bus"
-                    android:layout_marginLeft="250sp"
-                    android:layout_marginTop="20sp"
-                    android:background="#2196f3"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"/>
-                    <Button
-                        android:id="@+id/btn_close_popup_bus"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/sb_cancel"
-                        android:layout_marginLeft="150sp"
+                        android:id="@+id/licensebustext"
+                        android:textSize="30sp"
+                        android:text="@string/stv_upload_license"
+                        android:paddingRight="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <Button
+                        android:id="@+id/btn_uploadlicensebus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sb_choose_file"
+                        android:background="#2196f3"
+                        android:padding="8dp"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/white"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10sp"
+                        android:id="@+id/uploadlicensebustext"
+                        android:textSize="20sp"
+                        android:text="@string/stv_no_file_chosen"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/licenseexpirebustext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:text="@string/stv_license_expiry_date"
+                        android:gravity="center"
+                        android:paddingRight="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <EditText
+                        android:layout_width="200sp"
+                        android:layout_height="50sp"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/licenseexpirebusedit"
+                        android:focusable="false"
+                        android:singleLine="true"
+                        android:inputType="none"
+                        android:textIsSelectable="true"
+                        android:paddingLeft="15dp"
+                        android:background="@drawable/spinnerborder"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/licenserenewalbustext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:text="@string/stv_license_renewal_date"
+                        android:gravity="center"
+                        android:paddingRight="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <EditText
+                        android:layout_width="200sp"
+                        android:layout_height="50sp"
+                        android:textSize="20sp"
+                        android:id="@+id/licenserenewalbusedit"
+                        android:focusable="false"
+                        android:singleLine="true"
+                        android:inputType="none"
+                        android:layout_marginLeft="10dp"
+                        android:textIsSelectable="true"
+                        android:background="@drawable/spinnerborder"
+                        android:paddingLeft="15dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50sp"
+                        android:id="@+id/mvpitext"
+                        android:textSize="30sp"
+                        android:text="@string/stv_upload_mvpi"
+                        android:paddingRight="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <Button
+                        android:id="@+id/btn_uploadmvpi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sb_choose_file"
+                        android:background="#2196f3"
+                        android:layout_marginLeft="10dp"
+                        android:padding="8dp"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10sp"
+                        android:id="@+id/uploadnamemvpitext"
+                        android:textSize="20sp"
+                        android:text="@string/stv_no_file_chosen"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10sp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+                    <TextView
+                        android:id="@+id/mvpiexpiretext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:text="@string/stv_mvpi_expiry_date"
+                        android:gravity="center"
+                        android:paddingRight="10dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <EditText
+                        android:layout_width="200sp"
+                        android:layout_height="50sp"
+                        android:textSize="20sp"
+                        android:id="@+id/mvpiexpireedit"
+                        android:focusable="false"
+                        android:layout_marginLeft="10dp"
+                        android:singleLine="true"
+                        android:inputType="none"
+                        android:textIsSelectable="true"
+                        android:background="@drawable/spinnerborder"
+                        android:paddingLeft="15dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right">
+                    <Button
+                        android:id="@+id/btn_add_popup_bus"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sb_add_bus"
                         android:layout_marginTop="20sp"
                         android:background="#2196f3"
                         android:padding="8dp"
                         android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:layout_marginRight="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="left">
+                    <Button
+                        android:id="@+id/btn_close_popup_bus"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sb_cancel"
+                        android:layout_marginTop="20sp"
+                        android:background="#2196f3"
+                        android:padding="8dp"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
                         android:textColor="@android:color/white"/>
                 </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

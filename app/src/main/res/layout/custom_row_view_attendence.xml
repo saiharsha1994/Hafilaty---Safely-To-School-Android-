@@ -4,89 +4,106 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/spinnerborder">
-    <TextView android:id="@+id/attendencestudentname"
-        android:layout_width="234.5dp"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:minHeight="50dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical|center_horizontal"
-        />
-    <LinearLayout
-        android:layout_width="1.5dp"
-        android:layout_height="match_parent" >
 
-        <View style="@style/Divider" />
-    </LinearLayout>
-    <TextView android:id="@+id/attendencestudentid"
-        android:minHeight="50dp"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|center_horizontal"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"/>
     <LinearLayout
-        android:layout_width="1.5dp"
-        android:layout_height="match_parent" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/attendencestudentname"
+            android:layout_width="0dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:minHeight="50dp"
+            android:layout_marginTop="5dp"
+            />
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent" >
 
-        <View style="@style/Divider" />
-    </LinearLayout>
-    <TextView android:id="@+id/attendenceparentname"
-        android:minHeight="50dp"
-        android:layout_width="228dp"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical|center_horizontal"/>
-    <LinearLayout
-        android:layout_width="1.5dp"
-        android:layout_height="match_parent" >
-
-        <View style="@style/Divider" />
-    </LinearLayout>
-    <TextView android:id="@+id/attendenceparentcontactno"
-        android:minHeight="50dp"
-        android:layout_width="156dp"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical|center_horizontal"/>
-    <LinearLayout
-        android:layout_width="1.5dp"
-        android:layout_height="match_parent" >
-
-        <View style="@style/Divider" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:orientation="vertical">
-    <ImageView android:id="@+id/attendencecheckinbox"
-        android:minHeight="40dp"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        />
+            <View style="@style/Divider" />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="1.5dp"
-        android:layout_height="match_parent" >
+        <TextView android:id="@+id/attendencestudentid"
+            android:minHeight="50dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"/>
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent" >
 
-        <View style="@style/Divider" />
-    </LinearLayout>
+            <View style="@style/Divider" />
+        </LinearLayout>
+        <TextView android:id="@+id/attendenceparentname"
+            android:minHeight="50dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical|center_horizontal"/>
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:orientation="vertical">
-    <ImageView android:id="@+id/attenddencecheckoubox"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical|center_horizontal"/>
+            <View style="@style/Divider" />
+        </LinearLayout>
+        <TextView android:id="@+id/attendenceparentcontactno"
+            android:minHeight="50dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical|center_horizontal"/>
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent" >
+
+            <View style="@style/Divider" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+            <ImageView android:id="@+id/attendencecheckinbox"
+                android:minHeight="40dp"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent" >
+
+            <View style="@style/Divider" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+            <ImageView android:id="@+id/attenddencecheckoubox"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:gravity="center_vertical|center_horizontal"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,344 +1,368 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Misbehaviour_Navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.valuetechsa.admin_school_app.Student_attendence">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="70dp">
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="2"
-            android:background="@drawable/tableborderlightblue">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_select_criteria"
-                    android:id="@+id/selectcriteria" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="@string/stv_transfer_from_route"
-                    android:id="@+id/transferfromroute" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="@string/stv_transfer_to_route"
-                    android:id="@+id/transfertoroute" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="@string/stv_teacher_student"
-                    android:id="@+id/selectdate" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <Spinner
-                        android:id="@+id/routefromspinner"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="180dp"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light"
-                        android:layout_height="45dp"
-                        android:textSize="40sp"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="55dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <Spinner
-                        android:id="@+id/routetospinner"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="180dp"
-                        android:layout_height="45dp"
-                        android:theme="@style/ThemeOverlay.AppCompat.Light"
-                        android:textSize="40sp"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="180dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="65dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/spinnerborder">
-                    <Spinner
-                        android:id="@+id/teacherstudenttransferspinner"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="180dp"
-                        android:layout_height="45dp"
-                        android:textSize="40sp"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
-                <Button
-                    android:layout_width="160dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:background="#2196f3"
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:onClick="selectedRoute"
-                    android:text="@string/sb_select"
-                    android:id="@+id/managetransfer" />
-            </LinearLayout>
-        </TableLayout>
-    </LinearLayout>
-
+    android:id="@+id/outerlayout"
+    android:foreground="@drawable/dimmer">
     <RelativeLayout
-        android:id="@+id/transferstudentmainview"
         android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:layout_marginTop="245dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TableLayout
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="2"
-            android:background="@drawable/tableborder">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_manage_transfer"
-                    android:id="@+id/transfermanage" />
-            </LinearLayout>
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="70dp"
+            android:id="@+id/header">
             <TableLayout
-                android:id="@+id/attendencetable"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="4">
-                <TableRow
-                    android:id="@+id/attedencerowid"
-                    android:background="@drawable/borderwithlightblue"
+                android:stretchColumns="2"
+                android:background="@drawable/tableborderlightblue">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_width="0sp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.3"
-                        android:gravity="center_vertical|center_horizontal">
-                    <CheckBox
-                        android:id="@+id/radiobuttunmaintransfer"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
                         android:textSize="20dp"
-                        android:minHeight="50dp"
-                        android:focusable="true"
-                        android:onClick="checkallmainmethod"
-                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_select_criteria"
+                        android:id="@+id/selectcriteria" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="3dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:text="@string/stv_transfer_from_route"
+                        android:id="@+id/transferfromroute"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:text="@string/stv_transfer_to_route"
+                        android:id="@+id/transfertoroute"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:text="@string/stv_teacher_student"
+                        android:id="@+id/selectdate"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
                         />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/spinnerborder"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+                        <Spinner
+                            android:id="@+id/routefromspinner"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="fill_parent"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light"
+                            android:layout_height="fill_parent"
+                            android:textSize="40sp"
+                            android:gravity="center"
+                            />
                     </RelativeLayout>
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
+                    <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:text="@string/stv_type"
-                        android:layout_weight="1.2"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:layout_gravity="center"
-                        android:textSize="20dp"
-                        android:id="@+id/typetextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/spinnerborder"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+                        <Spinner
+                            android:id="@+id/routetospinner"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light"
+                            android:textSize="40sp"
+                            android:gravity="center"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:text="@string/stv_name"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="20dp"
-                        android:id="@+id/studentidtextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/spinnerborder"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+                        <Spinner
+                            android:id="@+id/teacherstudenttransferspinner"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textSize="40sp"
+                            android:gravity="center"
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
+                            />
+                    </RelativeLayout>
+                    <Button
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:text="@string/stv_id"
-                        android:layout_weight="0.5"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:background="#2196f3"
+                        android:padding="8dp"
+                        android:textSize="20sp"
                         android:textColor="@android:color/white"
-                        android:textSize="20dp"
-                        android:id="@+id/idtextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:text="@string/stv_location"
-                        android:layout_weight="1.6"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="20dp"
-                        android:id="@+id/locationtextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5dp"
-                        android:layout_height="match_parent" >
-
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:text="@string/stv_contact_details"
-                        android:layout_weight="1.5"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="20dp"
-                        android:id="@+id/contactdetailstextbox" />
-                </TableRow>
+                        android:onClick="selectedRoute"
+                        android:text="@string/sb_select"
+                        android:id="@+id/managetransfer"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"/>
+                </LinearLayout>
             </TableLayout>
-        </TableLayout>
-    </RelativeLayout>
+        </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/listofstudents"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="345dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        android:background="@drawable/tableborderlightblue">
-
-        <ListView
-            android:id="@+id/transferlist"
-            android:layout_marginTop="0dp"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:id="@+id/transferstudentmainview"
             android:layout_width="match_parent"
-            android:divider="#000000"
-            android:clickable="true"
-            android:focusable="false">
-        </ListView>
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_below="@id/header"
+            android:layout_marginTop="10dp">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2"
+                android:background="@drawable/tableborder">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_manage_transfer"
+                        android:id="@+id/transfermanage" />
+                </LinearLayout>
+                <TableLayout
+                    android:id="@+id/attendencetable"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="4">
+                    <TableRow
+                        android:id="@+id/attedencerowid"
+                        android:background="@drawable/borderwithlightblue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-    </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0sp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:gravity="center_vertical|center_horizontal">
+                            <CheckBox
+                                android:id="@+id/radiobuttunmaintransfer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20dp"
+                                android:minHeight="50dp"
+                                android:focusable="true"
+                                android:onClick="checkallmainmethod"
+                                android:gravity="center_vertical|center_horizontal"
+                                />
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
 
-    <RelativeLayout
-        android:id="@+id/buttontransfer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="430dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp">
-        <Button
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_type"
+                            android:layout_weight="1.2"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:layout_gravity="center"
+                            android:textSize="20dp"
+                            android:id="@+id/typetextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_name"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            android:id="@+id/studentidtextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_id"
+                            android:layout_weight="0.5"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            android:id="@+id/idtextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_location"
+                            android:layout_weight="1.6"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            android:id="@+id/locationtextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:text="@string/stv_contact_details"
+                            android:layout_weight="1.5"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="20dp"
+                            android:id="@+id/contactdetailstextbox" />
+                    </TableRow>
+                </TableLayout>
+            </TableLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/listofstudents"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/transferstudentmainview"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:background="@drawable/tableborderlightblue">
+
+            <ListView
+                android:id="@+id/transferlist"
+                android:layout_marginTop="0dp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:divider="#000000"
+                android:clickable="true"
+                android:focusable="false">
+            </ListView>
+
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_marginLeft="700dp"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:background="#2196f3"
-            android:padding="8dp"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:onClick="transferstudentmethod"
-            android:text="@string/sb_transfer_selected"
-            android:id="@+id/sendmessage" />
+            android:layout_height="wrap_content"
+            android:id="@+id/buttontransfer"
+            android:layout_below="@id/listofstudents"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true">
 
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="#2196f3"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:onClick="transferstudentmethod"
+                android:text="@string/sb_transfer_selected"
+                android:id="@+id/sendmessage"
+                />
+        </RelativeLayout>
 
     </RelativeLayout>
-</RelativeLayout>
+</FrameLayout>
 

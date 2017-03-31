@@ -75,30 +75,47 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             JSONObject data = json.getJSONObject("data");
 
             String title = data.getString("title");
-            String driver_name = data.getString("driver_name");
             String message= data.getString("message");
             //boolean isBackground = data.getBoolean("is_background");
-            String bus_name = data.getString("bus_name");
+            String notification_message = data.getString("notification_message");
             String imageUrl = data.getString("image");
-            String timestamp = data.getString("timestamp");
+            String type = data.getString("type");
             //JSONObject payload = data.getJSONObject("payload");
 
             Log.e(TAG, "title: " + title);
-            Log.e(TAG, "driver_name: " + driver_name);
+            Log.e(TAG, "message: " + message);
             //Log.e(TAG, "isBackground: " + isBackground);
-            Log.e(TAG, "bus_name: " + bus_name);
+            Log.e(TAG, "notification_message: " + notification_message);
             Log.e(TAG, "imageUrl: " + imageUrl);
-            Log.e(TAG, "timestamp: " + timestamp);
+            Log.e(TAG, "type: " + type);
 
 
             if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
+                //Display Notification
+                /*Intent resultIntent = new Intent(getApplicationContext(), Hawkeye_navigation.class);
+                resultIntent.putExtra("title", title);
+                resultIntent.putExtra("message",message);
+                resultIntent.putExtra("notification_message",notification_message);
+                resultIntent.putExtra("type",type);
+
+                // check for image attachment
+                if (TextUtils.isEmpty(imageUrl)) {
+                    showNotificationMessage(getApplicationContext(), title, notification_message, resultIntent);
+                } else {
+                    // image is present, show notification with image
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, notification_message, resultIntent, imageUrl);
+                }*/
+
+
+
                 // app is in foreground, broadcast the push message
                 Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
                 pushNotification.putExtra("title", title);
                 pushNotification.putExtra("message",message);
-                pushNotification.putExtra("driver_name",driver_name);
-                pushNotification.putExtra("bus_name",bus_name);
-                pushNotification.putExtra("timestamp",timestamp);
+                pushNotification.putExtra("notification_message",notification_message);
+                pushNotification.putExtra("type",type);
+                pushNotification.putExtra("image",imageUrl);
+                //pushNotification.putExtra("timestamp",timestamp);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
                 // play notification sound
@@ -108,16 +125,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // app is in background, show the notification in notification tray
                 Intent resultIntent = new Intent(getApplicationContext(), Hawkeye_navigation.class);
                 resultIntent.putExtra("title", title);
-                resultIntent.putExtra("driver_name",driver_name);
-                resultIntent.putExtra("bus_name",bus_name);
-                resultIntent.putExtra("timestamp",timestamp);
+                resultIntent.putExtra("message",message);
+                resultIntent.putExtra("notification_message",notification_message);
+                resultIntent.putExtra("type",type);
 
                 // check for image attachment
                 if (TextUtils.isEmpty(imageUrl)) {
-                    showNotificationMessage(getApplicationContext(), title, message, resultIntent);
+                    showNotificationMessage(getApplicationContext(), title, notification_message, resultIntent);
                 } else {
                     // image is present, show notification with image
-                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, resultIntent, imageUrl);
+                    showNotificationMessageWithBigImage(getApplicationContext(), title, notification_message, resultIntent, imageUrl);
                 }
             }
         } catch (JSONException e) {

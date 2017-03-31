@@ -6,7 +6,8 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/toptitle">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50sp"
@@ -25,75 +26,118 @@
                 />
         </LinearLayout>
     </RelativeLayout>
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        >
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70sp"
-            android:layout_centerHorizontal="true">
-
-            <TextView
-                android:id="@+id/txtViewdrivername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_marginLeft="10sp"
-                android:text="Driver Name: Avinash Y"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/txtViewdrivercontact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_marginLeft="10sp"
-                android:text="Contact: 9876543210"
-                android:gravity="center"/>
-            />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:orientation="vertical"
-            android:layout_height="50sp"
-            android:layout_marginTop="140sp"
-            android:layout_centerHorizontal="true">
-            <TextView
-                android:id="@+id/txtalerttext"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:id="@+id/info"
+                android:layout_gravity="center"
+                >
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/hawkeyedriverpic"
+                    android:src="@drawable/profileimage"/>
+
+                <TextView
+                    android:id="@+id/txtViewdrivername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Driver Name: Avinash Y"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:id="@+id/txtViewtotalstudents"
+                    android:text="Total Students: 40"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Students Present: 20"
+                    android:id="@+id/txtViewprentstudents"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Students Absent: 2"
+                    android:id="@+id/txtViewabsentstudents"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Bus Speed: 30"
+                    android:id="@+id/txtViewspeed"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"/>
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_below="@id/info"
+                android:id="@+id/alerts">
+                <TextView
+                    android:id="@+id/txtalerttext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="#FF0000"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+                />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_marginLeft="10sp"
-                android:textColor="#FF0000"
-                android:gravity="center"/>
-            />
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_below="@id/alerts"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp">
+                <Button
+                    android:id="@+id/btn_close_popup_hawkeye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sb_close"
+
+                    android:background="#2196f3"
+                    android:padding="8sp"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="220sp"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_close_popup_hawkeye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sb_cancel"
-
-                android:background="#2196f3"
-                android:padding="8sp"
-                android:textSize="20sp"
-                android:textColor="@android:color/white"/>
-        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
 

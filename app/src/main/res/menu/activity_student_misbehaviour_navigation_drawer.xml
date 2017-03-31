@@ -63,13 +63,6 @@
             android:title="@string/st_accident" />
     </group>
     <group android:checkableBehavior="single"
-        android:id="@+id/breakdownsgroup">
-        <item
-            android:id="@+id/breakdowns"
-            android:icon="@drawable/logout1"
-            android:title="@string/st_breakdowns" />
-    </group>
-    <group android:checkableBehavior="single"
         android:id="@+id/contractgroup">
         <item
             android:id="@+id/contractcreation"

@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
+    android:background="#1976d2"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:background="#1976d2"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
@@ -12,11 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:layout_gravity="center" />
-
+        android:layout_gravity="center"
+        />
     <TextView
         android:id="@+id/drivermeritheader"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textColor="#FFFFFF"
@@ -24,9 +24,7 @@
         android:textSize="28sp"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="35dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,6 +32,4 @@
 
         <View style="@style/Dividernavi" />
     </LinearLayout>
-
-
 </LinearLayout>
