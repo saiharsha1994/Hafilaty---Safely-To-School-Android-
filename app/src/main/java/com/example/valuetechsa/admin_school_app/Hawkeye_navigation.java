@@ -33,6 +33,7 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Gravity;
@@ -49,11 +50,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,7 +81,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,9 +115,15 @@ public class Hawkeye_navigation extends AppCompatActivity
     ArrayList<String> buslat=new ArrayList<String>();
     ArrayList<String> buslong=new ArrayList<String>();
     ArrayList<String> busvechileno=new ArrayList<String>();
+    ArrayList<String> busmovementstatus=new ArrayList<String>();
     ArrayList<String> busroutename=new ArrayList<String>();
     ArrayList<String> busdrivername=new ArrayList<String>();
     ArrayList<String> busdriverno=new ArrayList<String>();
+    ArrayList<String> totalstudents=new ArrayList<String>();
+    ArrayList<String> presentstudents=new ArrayList<String>();
+    ArrayList<String> absentstudents=new ArrayList<String>();
+    ArrayList<String> speedofbus=new ArrayList<String>();
+    ArrayList<String> driverimage=new ArrayList<String>();
     ArrayList<String> drivernamefromserverhawkeye=new ArrayList<String>();
     ArrayList<String> driveridfromserverhawkeye=new ArrayList<String>();
     private BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -120,15 +133,23 @@ public class Hawkeye_navigation extends AppCompatActivity
     ArrayList<String> globalbusrouteno=new ArrayList<String>();
     ArrayList<String> globaldrivername=new ArrayList<String>();
     ArrayList<String> globaldriverno=new ArrayList<String>();
+    ArrayList<String> globaltotalstudents=new ArrayList<String>();
+    ArrayList<String> globalpresentstudents=new ArrayList<String>();
+    ArrayList<String> globalabsentstudents=new ArrayList<String>();
+    ArrayList<String> globalspeedofbus=new ArrayList<String>();
+    ArrayList<String> globaldriverimage=new ArrayList<String>();
+    ArrayList<String> globalbusmovementstatus=new ArrayList<String>();
+    ArrayList<String> busnameforreassign=new ArrayList<String>();
+    ArrayList<String> busidforreassign=new ArrayList<String>();
     ProgressDialog progressDialog1;
     private PopupWindow pwindo;
     String sheadertop;
-    String clickdrivername,clickdriverno;
+    String clickdrivername,clickdriverno,clickstotalstudents,clickstudentspresent,clickstudentsabsent,clickbusspeed,clickdriverimage;
     boolean clickschool=false;
     int checkinttag=1000000;
     int rout=0;
     int markerclick=0,turn=0;
-    String alert_title="",alert_message="",alert_driver="",alert_bus="",alert_timestamp="";
+    String alert_title="",alert_message="",alert_notification_message="",alert_type="",previous_alert_type="normal",frombusidintoserver="",tobusidintoserver="",tobusnameintoserver="";
     int speedlimit=35;
     int check=0;
     AsyncTask<Void,Void,Void> getBus;
@@ -150,22 +171,26 @@ public class Hawkeye_navigation extends AppCompatActivity
     int[] bordercrossed=new int[100000];
     int[] speedcrossed=new int[100000];
     int colorhangecount;
-    String nameuser,passuser,adminid,adminname,schoolcordinates;
+    String nameuser,passuser,adminid,adminname,schoolcordinates,schoolname,busspeedlimit;
+    int schoolfence;
     String[] schoolcordarray=new String[100000];
     int zoom=0;
     Typeface tfRobo;
     int stop=0;
     Button btnClosePopup,btnAlertPopup;
-    TextView topRow,drivernamehawkeyetextbox,drivercontactnohawkeyetextbox,alertredtextbox;
+    TextView topRow,drivernamehawkeyetextbox,alertredtextbox,totalstudentstextbox,presentstudentstextbox,absentstudentstextbox,busspeedtextbox;
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
-    private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog,progressDialog2;
     Handler mHandler;
     Runnable mHandlerTask;
     int alertShown=0;
     int oldsize=0;
     FrameLayout layout_MainMenu;
+    TextView brokendownBus;
+    Spinner reassignBusSelect;
+    ImageView imageDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,19 +292,7 @@ public class Hawkeye_navigation extends AppCompatActivity
                 passuser=cur.getString(2);
                 adminid=cur.getString(3);
                 adminname=cur.getString(4);
-                schoolcordinates=cur.getString(5);
-                Log.e("DATABASE",nameuser);
-                Log.e("DATABASE",passuser);
-                Log.e("DATABASE",adminid);
-                Log.e("DATABASE",adminname);
-                Log.e("DATABASE",schoolcordinates);
-                String schoolcordarray1[]=schoolcordinates.split("\\s*,\\s*");
-                schoolcordarray[0]=schoolcordarray1[0];
-                schoolcordarray[1]=schoolcordarray1[1];
-                Log.e("DATABASE",schoolcordarray[0]);
-                Log.e("DATABASE",schoolcordarray[1]);
-                schoollat=Double.parseDouble(schoolcordarray[0]);
-                schoollong=Double.parseDouble(schoolcordarray[1]);
+
 
             }
         }
@@ -295,31 +308,44 @@ public class Hawkeye_navigation extends AppCompatActivity
                     // new push notification is received
                     String title = intent.getStringExtra("title");
                     String message = intent.getStringExtra("message");
-                    String driver_name = intent.getStringExtra("driver_name");
-                    String bus_name = intent.getStringExtra("bus_name");
-                    String timestamp = intent.getStringExtra("timestamp");
-                    initiatePopupWindowhawkeyeAlert(title,driver_name,bus_name,timestamp);
+                    String notification_message = intent.getStringExtra("notification_message");
+                    String type = intent.getStringExtra("type");
+                    //String imageUrl= intent.getStringExtra("image");
+                    //String timestamp = intent.getStringExtra("timestamp");
+                    if(previous_alert_type.equalsIgnoreCase("normal")){
+                        if ((pwindo!=null)&&pwindo.isShowing())
+                            pwindo.dismiss();
+                        initiatePopupWindowhawkeyeAlert(title,message,notification_message,type);
+                    }
+                    else{
+                        if(!pwindo.isShowing())
+                            initiatePopupWindowhawkeyeAlert(title,message,notification_message,type);
+                    }
 
                     //Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+
 
                 }
             }
         };
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         speedlimit = Integer.parseInt(preferences.getString("speed_limit",""));
-        Log.e("speed",speedlimit+"");
+        Log.e("speed",speedlimit+"");*/
 
         Bundle extras = getIntent().getExtras();
         Log.e("","extras");
         if(extras !=null) {
             alert_title = extras.getString("title");
             alert_message = extras.getString("message");
-            alert_driver= extras.getString("driver_name");
-            alert_bus= extras.getString("bus_name");
-            alert_timestamp=extras.getString("timestamp");
+            alert_notification_message= extras.getString("notification_message");
+            alert_type= extras.getString("type");
+            //alert_timestamp=extras.getString("timestamp");
 
         }
+        new getSettingsFromServer().execute();
+        new getSpareBusFromServer().execute();
 
         new getDriverListFromServer().execute();
         new getdelay().execute();
@@ -400,7 +426,7 @@ public class Hawkeye_navigation extends AppCompatActivity
     }
 
     private void drawMarkerWithCircle(LatLng position){
-        double radiusInMeters = 50000.0;
+        double radiusInMeters = schoolfence*1000;
         int strokeColor = 0xffff0000; //red outline
         int shadeColor = 0x44ffffff; //opaque red fill
 
@@ -552,7 +578,7 @@ public class Hawkeye_navigation extends AppCompatActivity
                 progressDialog1.dismiss();
             }
             if(!(alert_title.isEmpty()))
-                initiatePopupWindowhawkeyeAlert(alert_title,alert_driver,alert_bus,alert_timestamp);
+                initiatePopupWindowhawkeyeAlert(alert_title,alert_message,alert_notification_message,alert_type);
         }
     }
 
@@ -563,6 +589,12 @@ public class Hawkeye_navigation extends AppCompatActivity
         protected void onPreExecute()
         {
             check=1;
+            totalstudents.clear();
+            driverimage.clear();
+            presentstudents.clear();
+            absentstudents.clear();
+            speedofbus.clear();
+            busmovementstatus.clear();
             busroutename.clear();
             busvechileno.clear();
             busdrivername.clear();
@@ -623,6 +655,30 @@ public class Hawkeye_navigation extends AppCompatActivity
                                     Log.e("+++",obj.getString("cur_speed"));
                                     String driverno=obj.getString("driver_mobile");
                                     Log.e("+++",obj.getString("driver_mobile"));
+                                    String status=obj.getString("status");
+                                    Log.e("+++",obj.getString("status"));
+                                    String total=obj.getString("no_of_students");
+                                    Log.e("+++",obj.getString("no_of_students"));
+                                    String present=obj.getString("no_of_present");
+                                    Log.e("+++",obj.getString("no_of_present"));
+                                    String absent=obj.getString("no_of_absent");
+                                    Log.e("+++",obj.getString("no_of_absent"));
+                                    String speed=obj.getString("cur_speed");
+                                    Log.e("+++",obj.getString("cur_speed"));
+                                    String image=obj.getString("driver_image");
+                                    Log.e("+++",obj.getString("driver_image"));
+                                    driverimage.add(image);
+                                    globaldriverimage.add(image);
+                                    totalstudents.add(total);
+                                    globaltotalstudents.add(total);
+                                    presentstudents.add(present);
+                                    globalpresentstudents.add(present);
+                                    absentstudents.add(absent);
+                                    globalabsentstudents.add(absent);
+                                    speedofbus.add(speed);
+                                    globalspeedofbus.add(speed);
+                                    busmovementstatus.add(status);
+                                    globalbusmovementstatus.add(status);
                                     busroutename.add(routename);
                                     globalbusroutename.add(routename);
                                     busvechileno.add(numberplate);
@@ -648,7 +704,7 @@ public class Hawkeye_navigation extends AppCompatActivity
                                     Log.e("after","sine");
                                     Double doublebusspeed=Double.parseDouble(busspeed);
                                     Log.e("DISTANCE",km+"");
-                                    if(km>50){
+                                    if(km>schoolfence){
                                         colorchangearray[j]=1;
                                         colorchangebusarray[j]=1;
                                         bordercrossed[j]=1;
@@ -841,7 +897,15 @@ public class Hawkeye_navigation extends AppCompatActivity
             Log.e(xl + "Latitudes in loop", buslat.get(i));
             Log.e(yl + "Longitudes in loop", buslong.get(i));
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(hcmus));
-            if (colorchangebusarray[i] == 0) {
+            if(busmovementstatus.get(i).equalsIgnoreCase("2")){
+                m=(mMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.black_bus))
+                        .title("test stop")
+                        .position(hcmus)));
+                m.setTag(i);
+                busallMarkers.add(m);
+            }
+            else if (colorchangebusarray[i] == 0&&busmovementstatus.get(i).equalsIgnoreCase("1")) {
                 m=(mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_bus))
                         .title("test stop")
@@ -849,7 +913,7 @@ public class Hawkeye_navigation extends AppCompatActivity
                 m.setTag(i);
                 busallMarkers.add(m);
             }
-            else{
+            else if(colorchangebusarray[i] == 1&&busmovementstatus.get(i).equalsIgnoreCase("1")){
                 m=(mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_bus))
                         .title("test stop")
@@ -877,7 +941,14 @@ public class Hawkeye_navigation extends AppCompatActivity
             CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
             if(buslatlist.size()==1) {
-                CameraUpdate cu2 = CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15F);
+                LatLngBounds.Builder builder2 = new LatLngBounds.Builder();
+                for (Marker marker : busallMarkers) {
+                    builder.include(marker.getPosition());
+                }
+                builder.include(latLng);
+                LatLngBounds bounds2 = builder.build();
+                int padding2 = 100; // offset from edges of the map in pixels
+                CameraUpdate cu2 = CameraUpdateFactory.newLatLngBounds(bounds2, padding2);
                 mMap.animateCamera(cu2);
             }
             else
@@ -897,7 +968,15 @@ public class Hawkeye_navigation extends AppCompatActivity
             Log.e(xl + "Latitudes in loop", buslat.get(i));
             Log.e(yl + "Longitudes in loop", buslong.get(i));
             //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hcmus,8));
-            if (colorchangebusarray[i] == 0) {
+            if(busmovementstatus.get(i).equalsIgnoreCase("2")){
+                m=(mMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.black_bus))
+                        .title("test stop")
+                        .position(hcmus)));
+                m.setTag(i);
+                busallMarkers.add(m);
+            }
+            else if (colorchangebusarray[i] == 0&&busmovementstatus.get(i).equalsIgnoreCase("1")) {
                 m=(mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_bus))
                         .title("test stop")
@@ -905,8 +984,8 @@ public class Hawkeye_navigation extends AppCompatActivity
                 m.setTag(i);
                 busallMarkers.add(m);
             }
-            else{
-                m=(mMap.addMarker(new MarkerOptions()
+            else if(colorchangebusarray[i] == 1&&busmovementstatus.get(i).equalsIgnoreCase("1")) {
+                m = (mMap.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_bus))
                         .title("test stop")
                         .position(hcmus)));
@@ -924,13 +1003,13 @@ public class Hawkeye_navigation extends AppCompatActivity
         zoom=1;
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
-        /*Marker m=(mMap.addMarker(new MarkerOptions()
-                .title("International Indian School Dammam")
+        Marker school=(mMap.addMarker(new MarkerOptions()
+                .title(schoolname)
                 .position(latLng)));
-        m.setTag(99999);
-        m.showInfoWindow();
+        school.setTag(99999);
+        school.showInfoWindow();
         clickschool=true;
-        drawMarkerWithCircle(latLng);*/
+        drawMarkerWithCircle(latLng);
         oldsize=buslatlist.size();
         if(buslatlist.size()==0)
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15F));
@@ -944,7 +1023,14 @@ public class Hawkeye_navigation extends AppCompatActivity
             CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
             if(oldsize==1) {
-                CameraUpdate cu2 = CameraUpdateFactory.newLatLngZoom(m.getPosition(), 15F);
+                LatLngBounds.Builder builder2 = new LatLngBounds.Builder();
+                for (Marker marker : busallMarkers) {
+                    builder.include(marker.getPosition());
+                }
+                builder.include(latLng);
+                LatLngBounds bounds2 = builder.build();
+                int padding2 = 100; // offset from edges of the map in pixels
+                CameraUpdate cu2 = CameraUpdateFactory.newLatLngBounds(bounds2, padding2);
                 mMap.animateCamera(cu2);
             }
             else
@@ -976,8 +1062,13 @@ public class Hawkeye_navigation extends AppCompatActivity
                 int id=globalcountall-(globalresponse);
                 int countid=id+checkinttag;
                 sheadertop=globalbusroutename.get(countid)+"("+globalbusrouteno.get(countid)+")";
+                clickbusspeed=globalspeedofbus.get(countid);
+                clickstotalstudents=globaltotalstudents.get(countid);
+                clickstudentspresent=globalpresentstudents.get(countid);
+                clickstudentsabsent=globalabsentstudents.get(countid);
                 clickdrivername=globaldrivername.get(countid);
                 clickdriverno=globaldriverno.get(countid);
+                clickdriverimage=globaldriverimage.get(countid);
                 //markerclick=1;
                 //turn=1;
                 /*sheadertop="111";
@@ -988,7 +1079,11 @@ public class Hawkeye_navigation extends AppCompatActivity
                 //new getMapDataToServerSingle().execute();
                 /*ExecutorService executor = Executors.newSingleThreadExecutor();
                 executor.submit(fivemins);*/
-                initiatePopupWindowhawkeye();
+                //Toast.makeText(Hawkeye_navigation.this,countid+"",Toast.LENGTH_SHORT).show();
+                if(globalbusmovementstatus.get(countid).equalsIgnoreCase("1"))
+                    initiatePopupWindowhawkeye();
+                else
+                    Toast.makeText(Hawkeye_navigation.this,getResources().getString(R.string.sj_bus_not_started_yet),Toast.LENGTH_SHORT).show();
             }
         return true;
     }
@@ -1090,6 +1185,7 @@ public class Hawkeye_navigation extends AppCompatActivity
 
     private void initiatePopupWindowhawkeye() {
         try {
+            previous_alert_type="normal";
 // We need to get the instance of the LayoutInflater
             LayoutInflater inflater1 = (LayoutInflater) Hawkeye_navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -1101,26 +1197,40 @@ public class Hawkeye_navigation extends AppCompatActivity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_hawkeye,
                     (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, 500,380, true);
+            pwindo = new PopupWindow(layout, 500,WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
             layout_MainMenu.getForeground().setAlpha(200);
             //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
             topRow=(TextView)layout.findViewById(R.id.blueStudentnametexthawkeye);
             drivernamehawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivername);
-            drivercontactnohawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivercontact);
             alertredtextbox=(TextView)layout.findViewById(R.id.txtalerttext);
+            totalstudentstextbox=(TextView)layout.findViewById(R.id.txtViewtotalstudents);
+            presentstudentstextbox=(TextView)layout.findViewById(R.id.txtViewprentstudents);
+            absentstudentstextbox=(TextView)layout.findViewById(R.id.txtViewabsentstudents);
+            busspeedtextbox=(TextView)layout.findViewById(R.id.txtViewspeed);
+            imageDriver=(ImageView)layout.findViewById(R.id.hawkeyedriverpic);
+
             drivernamehawkeyetextbox.setText(getResources().getString(R.string.stv_driver_name)+": "+clickdrivername);
-            drivercontactnohawkeyetextbox.setText(getResources().getString(R.string.stv_contact_no)+": "+clickdriverno);
+            totalstudentstextbox.setText(getResources().getString(R.string.stv_total_students)+": "+clickstotalstudents);
+            presentstudentstextbox.setText(getResources().getString(R.string.stv_present_students)+": "+clickstudentspresent);
+            absentstudentstextbox.setText(getResources().getString(R.string.stv_absent_students)+": "+clickstudentsabsent);
+            busspeedtextbox.setText(getResources().getString(R.string.stv_bus_speed)+": "+clickbusspeed);
+            Picasso.with(this)
+                    .load(Config.image+"uploads/driver_image/"+clickdriverimage)
+                    .into(imageDriver);
 
             topRow.setText(sheadertop);
             if(bordercrossed[checkinttag]==1 && speedcrossed[checkinttag]==1){
                 alertredtextbox.setText(getResources().getString(R.string.sj_bus_crossing_boundary_and_speeding));
+                alertredtextbox.setVisibility(View.VISIBLE);
             }
             else if(bordercrossed[checkinttag]==1){
                 alertredtextbox.setText(getResources().getString(R.string.sj_bus_crossing_boundary));
+                alertredtextbox.setVisibility(View.VISIBLE);
             }
             else if(speedcrossed[checkinttag]==1){
                 alertredtextbox.setText(getResources().getString(R.string.sj_speeding_alert));
+                alertredtextbox.setVisibility(View.VISIBLE);
             }
             btnClosePopup=(Button)layout.findViewById(R.id.btn_close_popup_hawkeye);
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
@@ -1139,42 +1249,52 @@ public class Hawkeye_navigation extends AppCompatActivity
 
     }
 
-    private void initiatePopupWindowhawkeyeAlert(String title,String driver, String bus, String timestamp) {
+    private void initiatePopupWindowhawkeyeAlert(String title,String message, String notification_message,final String type) {
         try {
-// We need to get the instance of the LayoutInflater
-            LayoutInflater inflater1 = (LayoutInflater) Hawkeye_navigation.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View layout1 = inflater1.inflate(R.layout.fadepopup,
-                    (ViewGroup) findViewById(R.id.fadePopup));
-            /*final PopupWindow fadePopup = new PopupWindow(layout1, Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels, false);
-            fadePopup.showAtLocation(layout1, Gravity.NO_GRAVITY, 0, 0);*/
+            previous_alert_type=type;
+            String busid="";
+            String busname="";
+
+            if(!type.equalsIgnoreCase("normal")){
+                String[] split= type.split("~");
+                busid=split[1];
+                busname=split[2];
+            }
+            Toast.makeText(Hawkeye_navigation.this,busid+busname,Toast.LENGTH_SHORT).show();
+            final String id=busid;
+            final String name=busname;
 
             LayoutInflater inflater = (LayoutInflater) Hawkeye_navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View layout = inflater.inflate(R.layout.screen_popup_alert,
-                    (ViewGroup) findViewById(R.id.popup_element));
-            pwindo = new PopupWindow(layout, 500,380, true);
+            View layout = inflater.inflate(R.layout.screen_popup_alert,(ViewGroup) findViewById(R.id.popup_element));
+            if(!type.equalsIgnoreCase("normal"))
+                layout = inflater.inflate(R.layout.screen_popup_alert_breakdown,(ViewGroup) findViewById(R.id.popup_element));
+            pwindo = new PopupWindow(layout, WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
             layout_MainMenu.getForeground().setAlpha(200);
             //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
             topRow=(TextView)layout.findViewById(R.id.blueStudentnametexthawkeye);
             drivernamehawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivername);
-            drivercontactnohawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivercontact);
-            alertredtextbox=(TextView)layout.findViewById(R.id.txtViewtimestamp);
-            if(driver.isEmpty())
+
+            if(message.isEmpty())
                 drivernamehawkeyetextbox.setVisibility(View.INVISIBLE);
             else
-                drivernamehawkeyetextbox.setText("Driver Name: "+driver);
-            drivercontactnohawkeyetextbox.setText("Bus Name: "+bus);
-            alertredtextbox.setText("Timestamp: "+timestamp);
+                drivernamehawkeyetextbox.setText(message);
             topRow.setText(title);
 
             btnClosePopup=(Button)layout.findViewById(R.id.btn_close_popup_hawkeye);
             btnClosePopup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    layout_MainMenu.getForeground().setAlpha(0);
-                    pwindo.dismiss();
+                    if(type.equalsIgnoreCase("normal")) {
+                        layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();
+                    }
+                    else {
+                        layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();
+                        initiatePopupWindowhawkeyeReassign(type,id,name);
+                    }
                     //fadePopup.dismiss();
 
                 }
@@ -1184,6 +1304,324 @@ public class Hawkeye_navigation extends AppCompatActivity
             e.printStackTrace();
         }
 
+    }
+
+
+    private void initiatePopupWindowhawkeyeReassign(String type,String busId, String busName) {
+        try {
+            frombusidintoserver="";
+            tobusnameintoserver="";
+            tobusidintoserver="";
+
+            LayoutInflater inflater = (LayoutInflater) Hawkeye_navigation.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.screen_popup_reassign,(ViewGroup) findViewById(R.id.popup_element));
+
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150,WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha(200);
+            //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
+
+            brokendownBus=(TextView)layout.findViewById(R.id.brokendownbus);
+            reassignBusSelect=(Spinner)layout.findViewById(R.id.selectreassignbusspinner);
+
+            brokendownBus.setText(busName+"");
+            frombusidintoserver=busId;
+
+            if(busidforreassign.isEmpty())
+                new getSpareBusFromServer().execute();
+
+            Toast.makeText(Hawkeye_navigation.this,busnameforreassign.size()+"",Toast.LENGTH_SHORT).show();
+
+            final String[] busnamefrom=new String[busnameforreassign.size()+1];
+            busnamefrom[0]=getResources().getString(R.string.sj_select_bus);
+            for(int i=1;i<=busnameforreassign.size();i++){
+                busnamefrom[i]=busnameforreassign.get(i-1);
+                Toast.makeText(Hawkeye_navigation.this,busnamefrom[i],Toast.LENGTH_SHORT).show();
+            }
+
+
+            ArrayAdapter<String> adapterbusname = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, busnamefrom) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+                public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                    View v =super.getDropDownView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+            };
+
+            adapterbusname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            reassignBusSelect.setAdapter(adapterbusname);
+
+
+            reassignBusSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String item = parent.getItemAtPosition(position).toString();
+                    tobusnameintoserver=item;
+
+                    Log.e("spinner selected for ad",item);
+                    for (int i = 0; i < busnameforreassign.size(); i++) {
+                        if (tobusnameintoserver.equals(busnameforreassign.get(i))) {
+                            tobusidintoserver = busidforreassign.get(i);
+
+                        }
+                    }
+
+                }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            btnClosePopup=(Button)layout.findViewById(R.id.btn_reassign_bus);
+            btnClosePopup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        /*layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();*/
+                    reassignBus();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void reassignBus(){
+
+        Toast.makeText(Hawkeye_navigation.this,frombusidintoserver+tobusidintoserver+tobusnameintoserver+"",Toast.LENGTH_SHORT).show();
+        if(tobusnameintoserver.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
+            Toast.makeText(Hawkeye_navigation.this, getResources().getString(R.string.sj_please_select_bus),
+                    Toast.LENGTH_LONG).show();
+        }
+
+        else
+            new reassignbustoserver().execute();
+
+
+    }
+
+
+    class reassignbustoserver extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected void onPreExecute(){
+            progressDialog2 = ProgressDialog.show(Hawkeye_navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+
+                Jsonfunctions sh = new Jsonfunctions();
+                ServiceModel reg = new ServiceModel();
+
+                Log.e("add",frombusidintoserver+" "+tobusidintoserver);
+
+                String url= Config.ip+"BusList_api/reassignBus/from_bus_id/"+frombusidintoserver+"/to_bus_id/"+tobusidintoserver;
+                String response;
+
+                try
+                {
+                    try
+                    {
+                        Log.e("url above service call",url);
+                        String jsonStr = sh.makeServiceCall(url,Jsonfunctions.GET);
+                        Log.e("url below service call",url);
+                        if (jsonStr != null) {
+                            try {
+                                JSONObject Jobj = new JSONObject(jsonStr);
+                                response=Jobj.getString("responsecode");
+                                if(Jobj.getString("responsecode").equals("1"))
+                                {
+                                    //JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+                                    runOnUiThread(new Runnable(){
+
+                                        @Override
+                                        public void run(){
+                                            //update ui here
+                                            // display toast here
+                                            Toast.makeText(Hawkeye_navigation.this, getResources().getString(R.string.sj_reassigned_successfully), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+
+                                }
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            Log.e("ServiceHandler", "Couldn't get any data from the url");
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            progressDialog2.dismiss();
+            layout_MainMenu.getForeground().setAlpha(0);
+            if(pwindo!=null&&pwindo.isShowing()) {
+                pwindo.dismiss();
+            }
+        }
+    }
+
+
+    class getSettingsFromServer extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+                try {
+                    Jsonfunctions sh = new Jsonfunctions();
+                    ServiceModel reg = new ServiceModel();
+                    Log.e("url", Config.ip + "Settings_api/listSettings");
+                    String jsonStr1 = sh.makeServiceCall(Config.ip + "Settings_api/listSettings", Jsonfunctions.GET);
+
+                    if (jsonStr1 != null) {
+                        try {
+                            JSONObject Jobj = new JSONObject(jsonStr1);
+
+                            if (Jobj.getString("responsecode").equals("1")) {
+                                JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+
+                                for (int j = 0; j < jsonArray.length(); j++) {
+
+                                    JSONObject obj = jsonArray.getJSONObject(j);
+                                    Log.e("+++", obj.getString("school_location"));
+                                    schoolcordinates=obj.getString("school_location");
+                                    Log.e("SETTINGS",schoolcordinates);
+                                    String schoolcordarray1[]=schoolcordinates.split("\\s*,\\s*");
+                                    schoolcordarray[0]=schoolcordarray1[0];
+                                    schoolcordarray[1]=schoolcordarray1[1];
+                                    Log.e("SETTINGS",schoolcordarray[0]);
+                                    Log.e("SETTINGS",schoolcordarray[1]);
+                                    schoollat=Double.parseDouble(schoolcordarray[0]);
+                                    schoollong=Double.parseDouble(schoolcordarray[1]);
+                                    Log.e("SETTINGS", obj.getString("school_name"));
+                                    schoolname=obj.getString("school_name");
+                                    Log.e("SETTINGS", obj.getString("school_fence"));
+                                    schoolfence=Integer.parseInt(obj.getString("school_fence"));
+                                    Log.e("SETTINGS", obj.getString("speed_limit"));
+                                    speedlimit=Integer.parseInt(obj.getString("speed_limit"));
+
+                                }
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.e("ServiceHandler", "Couldn't get any data from the url");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
+
+    class getSpareBusFromServer extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+                try {
+                    Jsonfunctions sh = new Jsonfunctions();
+                    ServiceModel reg = new ServiceModel();
+                    Log.e("url", Config.ip + "BusList_api/listSpareBuses");
+                    String jsonStr1 = sh.makeServiceCall(Config.ip + "BusList_api/listSpareBuses", Jsonfunctions.GET);
+
+                    if (jsonStr1 != null) {
+                        try {
+                            JSONObject Jobj = new JSONObject(jsonStr1);
+
+                            if (Jobj.getString("responsecode").equals("1")) {
+                                JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+
+                                for (int j = 0; j < jsonArray.length(); j++) {
+
+                                    JSONObject obj = jsonArray.getJSONObject(j);
+                                    Log.e("+++", obj.getString("bus_Id"));
+                                    String id = obj.getString("bus_Id");
+                                    busidforreassign.add(id);
+                                    Log.e("+++", obj.getString("name"));
+                                    String name = obj.getString("name");
+                                    busnameforreassign.add(name);
+
+                                }
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.e("ServiceHandler", "Couldn't get any data from the url");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 
 
@@ -1484,13 +1922,15 @@ public class Hawkeye_navigation extends AppCompatActivity
         if(extras !=null) {
             alert_title = extras.getString("title");
             alert_message = extras.getString("message");
-            alert_driver= extras.getString("driver_name");
-            alert_bus= extras.getString("bus_name");
-            alert_timestamp=extras.getString("timestamp");
+            alert_notification_message= extras.getString("notification_message");
+            alert_type= extras.getString("type");
+            //alert_timestamp=extras.getString("timestamp");
 
         }
-        if(!(alert_title.isEmpty()))
-            initiatePopupWindowhawkeyeAlert(alert_title,alert_driver,alert_bus,alert_timestamp);
+        if(!(alert_title.isEmpty())) {
+                initiatePopupWindowhawkeyeAlert(alert_title, alert_message, alert_notification_message, alert_type);
+
+        }
         alertShown=1;
     }
 }

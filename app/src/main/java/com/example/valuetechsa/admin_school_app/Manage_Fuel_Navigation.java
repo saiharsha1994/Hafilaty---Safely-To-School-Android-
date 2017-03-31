@@ -3,10 +3,12 @@ package com.example.valuetechsa.admin_school_app;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -25,12 +27,16 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SubMenu;
@@ -53,9 +59,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,6 +93,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -111,18 +120,33 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
     ArrayList<String> balancefromserver=new ArrayList<String>();
     ArrayList<String> drivernamefromserverfordropdown=new ArrayList<String>();
     ArrayList<String> driveridfromserverfordropdown=new ArrayList<String>();
+    ArrayList<ArrayList<String>> invoicelistfromserver=new ArrayList<ArrayList<String>>();
+    ArrayList<ArrayList<String>> invoicelistintoserver=new ArrayList<ArrayList<String>>();
+    ArrayList<Integer> invoicenumberfromserver=new ArrayList<Integer>();
+    ArrayList<Integer> invoicenumberintoserver=new ArrayList<Integer>();
+    ArrayList<Integer> currentinvoiceid=new ArrayList<Integer>();
+    int listcount=0;
+    int currentrowid=0,currentuploadid;
+    static boolean newinvoice=false;
 
     static String dateusergiven="empty";
     static String dateprintgiven="empty";
+    static EditText dateFrom;
+    static EditText dateTo;
+    static int datecheck=0;
+    RelativeLayout manage,listmanage;
+    LinearLayout outer;
+    View popuplayout;
+    TextView setinvoicename;
 
     int serverResponseCode = 0;
     CommonClass cc;
 
     ProgressDialog dialog = null;
 
-    String dateintoserver,driveridintoserver,amountgivenintoserver, drivernameintoserver,drivernameforadd,driveridforadd,amountspentintoserver,balanceintoserver,invoiceintoserver;
+    String dateintoserver,driveridintoserver,amountgivenintoserver, uploadedinvoicename,drivernameintoserver,drivernameforadd,driveridforadd,amountspentintoserver,balanceintoserver,invoiceintoserver,drivernameforfetch,driveridforfetch,datefromforfetch,datetoforfetch;
     static EditText dateedit,amountedit,amountgivenedit,amountspentedit;
-    Spinner drivernamespinner;
+    Spinner drivernamespinner,criteriadrivernamespinner;
 
     static Button btnAddRecord,btnUpdateRecord,btnUploadInvoice;
     int editfuelid=0,deletefuelid=0;
@@ -130,6 +154,18 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
     FrameLayout layout_MainMenu;
 
     MyCustomBasedFuelAdaper myCustomBasedFuelAdaper;
+
+
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    ArrayList<String> busnameforreassign=new ArrayList<String>();
+    ArrayList<String> busidforreassign=new ArrayList<String>();
+    TextView brokendownBus;
+    Spinner reassignBusSelect;
+    NotificationUtils notificationUtils;
+    TextView topRow,drivernamehawkeyetextbox;
+    String alert_title="",alert_message="",alert_notification_message="",alert_type="",previous_alert_type="normal",frombusidintoserver="",tobusidintoserver="",tobusnameintoserver="";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,6 +229,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         layout_MainMenu = (FrameLayout) findViewById( R.id.outerlayout);
         layout_MainMenu.getForeground().setAlpha( 0);
 
+        outer=(LinearLayout)findViewById(R.id.outerll);
+
         TextView TextViewNewFont = new TextView(Manage_Fuel_Navigation.this);
         TextViewNewFont.setText(getResources().getString(R.string.sj_manage_fuel));
         TextViewNewFont.setTextSize(32);
@@ -200,16 +238,107 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         tfAdam = Typeface.createFromAsset(Manage_Fuel_Navigation.this.getAssets(), "fonts/ADAM.CG PRO.OTF");
         TextViewNewFont.setTypeface(tfRobo);
 
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+                    String title = intent.getStringExtra("title");
+                    String message = intent.getStringExtra("message");
+                    String notification_message = intent.getStringExtra("notification_message");
+                    String type = intent.getStringExtra("type");
+                    String imageUrl = intent.getStringExtra("image");
+
+
+                    if(!type.equalsIgnoreCase("normal")){
+                        initiatePopupWindowhawkeyeAlert(title,message,notification_message,type);
+                    }
+
+                    //Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+
+
+                    else {
+                        //Display Notification
+                        Intent resultIntent = new Intent(getApplicationContext(), Hawkeye_navigation.class);
+                        resultIntent.putExtra("title", title);
+                        resultIntent.putExtra("message", message);
+                        resultIntent.putExtra("notification_message", notification_message);
+                        resultIntent.putExtra("type", type);
+
+                        // check for image attachment
+                        if (TextUtils.isEmpty(imageUrl)) {
+                            showNotificationMessage(getApplicationContext(), title, notification_message, resultIntent);
+                        } else {
+                            // image is present, show notification with image
+                            showNotificationMessageWithBigImage(getApplicationContext(), title, notification_message, resultIntent, imageUrl);
+                        }
+                    }
+
+                }
+            }
+        };
+
+        new getSpareBusFromServer().execute();
+
 
         android.support.v7.app.ActionBar action=getSupportActionBar();
         action.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         action.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         action.setCustomView(TextViewNewFont);
+
+        dateFrom=(EditText)findViewById(R.id.fueldatefrombox);
+        dateTo=(EditText)findViewById(R.id.fueldatetobox);
+
+        dateFrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datecheck=1;
+                showTruitonDatePickerDialog(view);
+            }
+        });
+
+        dateTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datecheck=2;
+                showTruitonDatePickerDialog(view);
+            }
+        });
+        manage = (RelativeLayout) findViewById(R.id.relativelayoutfuel);
+        listmanage=(RelativeLayout) findViewById(R.id.listmanage);
+
+        setLayoutInvisible();
         changeFont();
-        new getFuelListFromServer().execute();
+        new getDriversFromServer().execute();
+    }
+
+    public void setLayoutInvisible() {
+        if (manage.getVisibility() == View.VISIBLE) {
+            manage.setVisibility(View.GONE);
+        }
+        if (listmanage.getVisibility() == View.VISIBLE) {
+            listmanage.setVisibility(View.GONE);
+        }
+
+    }
+    public void setLayoutVisible() {
+        if (manage.getVisibility() == View.GONE) {
+            manage.setVisibility(View.VISIBLE);
+        }
+        if (listmanage.getVisibility() == View.GONE) {
+            listmanage.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void changeFont(){
+        TextView fueldatefrom=(TextView)findViewById(R.id.fueldatefromtext);
+        TextView fueldateto=(TextView)findViewById(R.id.fueldatetotext);
+        TextView fuelselectdriver=(TextView)findViewById(R.id.fuelselectdrivertext);
+
         TextView paymentlist=(TextView)findViewById(R.id.paymentlisttextbox);
         TextView date=(TextView)findViewById(R.id.fueldatetextbox);
         TextView drivername=(TextView)findViewById(R.id.drivernametextbox2);
@@ -218,7 +347,11 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         TextView ballance=(TextView)findViewById(R.id.balancetextbox);
         TextView options=(TextView)findViewById(R.id.editpaymenttextbox);
         Button addpayment=(Button)findViewById(R.id.addpayment);
+        Button viewrecords=(Button)findViewById(R.id.fuelviewrecords);
 
+        fueldatefrom.setTypeface(tfRobo);
+        fueldateto.setTypeface(tfRobo);
+        fuelselectdriver.setTypeface(tfRobo);
         paymentlist.setTypeface(tfRobo);
         date.setTypeface(tfRobo);
         drivername.setTypeface(tfRobo);
@@ -227,6 +360,9 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         ballance.setTypeface(tfRobo);
         options.setTypeface(tfRobo);
         addpayment.setTypeface(tfAdam);
+        viewrecords.setTypeface(tfAdam);
+        dateFrom.setTypeface(tfRobo);
+        dateTo.setTypeface(tfRobo);
     }
 
     class getFuelListFromServer extends AsyncTask<Void,Void,Void> {
@@ -234,6 +370,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         protected void onPreExecute(){
             progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_wait),
                     getResources().getString(R.string.sj_fetching_information), true);
+            listcount=0;
+            //currentinvoiceid=0;
 
         }
 
@@ -246,8 +384,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                 {
                     Jsonfunctions sh = new Jsonfunctions();
                     ServiceModel reg=new ServiceModel();
-                    Log.e("url", Config.ip+"PettyCash_api/listPettycash/for/fuel");
-                    String jsonStr1 = sh.makeServiceCall(Config.ip+"PettyCash_api/listPettycash/for/fuel",Jsonfunctions.GET);
+                    Log.e("url", Config.ip+"PettyCash_api/listPettycash/from_date/"+datefromforfetch+"/to_date/"+datetoforfetch+"/driver_id/"+driveridforfetch+"/for/fuel");
+                    String jsonStr1 = sh.makeServiceCall(Config.ip+"PettyCash_api/listPettycash/from_date/"+datefromforfetch+"/to_date/"+datetoforfetch+"/driver_id/"+driveridforfetch+"/for/fuel",Jsonfunctions.GET);
 
                     if (jsonStr1 != null)
                     {
@@ -260,7 +398,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                                 JSONArray jsonArray = Jobj.getJSONArray("result_arr");
 
                                 for (int j = 0; j < jsonArray.length(); j++){
-
+                                    listcount=listcount+1;
                                     JSONObject obj = jsonArray.getJSONObject(j);
                                     Log.e("+++",obj.getString("id"));
                                     String id=obj.getString("id");
@@ -293,14 +431,26 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                                         balancefromserver.add(balance);
                                     Log.e("+++",obj.getString("invoice_doc"));
                                     String invoice=obj.getString("invoice_doc");
-                                    if(balance.equalsIgnoreCase("null")||balance.isEmpty()){
+                                    if(invoice.equalsIgnoreCase("null")||invoice.isEmpty()){
                                         invoicefromserver.add("--");
+                                        invoicenumberfromserver.add(0);
+                                        invoicenumberintoserver.add(0);
+                                        currentinvoiceid.add(0);
+                                        ArrayList<String> temp = new ArrayList<String>();
+                                        invoicelistfromserver.add(temp);
+                                        invoicelistintoserver.add(temp);
                                     }
-                                    else
+                                    else {
                                         invoicefromserver.add(invoice);
-
-
-
+                                        String[] list= invoice.split("~");
+                                        invoicenumberfromserver.add(list.length);
+                                        invoicenumberintoserver.add(list.length);
+                                        ArrayList<String> temp = new ArrayList<String>();
+                                        Collections.addAll(temp,list);
+                                        invoicelistfromserver.add(temp);
+                                        invoicelistintoserver.add(temp);
+                                        currentinvoiceid.add(list.length-1);
+                                    }
 
                                 }
 
@@ -333,8 +483,17 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
         @Override
         protected void onPostExecute(Void result){
+
+            //new getDriversFromServer().execute();
+            if(idfromserver.size()>0){
+                setLayoutVisible();
+            }
+            else{
+                Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_no_records),
+                        Toast.LENGTH_LONG).show();
+                setLayoutInvisible();
+            }
             listgenerate();
-            new getDriversFromServer().execute();
             progressDialog2.dismiss();
         }
     }
@@ -473,7 +632,12 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
             dateusergiven = year+"-"+(s1)+"-"+s2;
 
-            dateedit.setText(dateusergiven);
+            if (datecheck==1)
+                dateFrom.setText(dateusergiven);
+            else if(datecheck==2)
+                dateTo.setText(dateusergiven);
+            else if(datecheck==3)
+                dateedit.setText(dateusergiven);
 
         }
     }
@@ -524,6 +688,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             dateedit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    datecheck=3;
                     showTruitonDatePickerDialog(v);
                 }
             });
@@ -673,9 +838,102 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
         @Override
         protected void onPostExecute(Void result){
-
+            getDropDownDriversList();
         }
     }
+
+    public void getDropDownDriversList(){
+        criteriadrivernamespinner=(Spinner)findViewById(R.id.fueldriverselectionspinner);
+
+        final String[] drivernamefrom=new String[drivernamefromserverfordropdown.size()+1];
+        drivernamefrom[0]=getResources().getString(R.string.sj_select_driver);
+        for(int i=1;i<=drivernamefromserverfordropdown.size();i++){
+            drivernamefrom[i]=drivernamefromserverfordropdown.get(i-1);
+        }
+
+
+        ArrayAdapter<String> adapterdrivername = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, drivernamefrom) {
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                ((TextView) v).setTypeface(externalFont);
+                ((TextView) v).setTextSize(20);
+                ((TextView) v).setMinHeight(70);
+                return v;
+            }
+            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                View v =super.getDropDownView(position, convertView, parent);
+                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                ((TextView) v).setTypeface(externalFont);
+                ((TextView) v).setTextSize(20);
+                ((TextView) v).setMinHeight(70);
+                return v;
+            }
+        };
+
+        adapterdrivername.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        criteriadrivernamespinner.setAdapter(adapterdrivername);
+
+
+        criteriadrivernamespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                drivernameforfetch=item;
+
+                Log.e("spinner selected for ad",item);
+                for (int i = 0; i < drivernamefromserverfordropdown.size(); i++) {
+                    if (drivernameforfetch.equals(drivernamefromserverfordropdown.get(i))) {
+                        driveridforfetch = driveridfromserverfordropdown.get(i);
+
+                    }
+                }
+
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+    }
+
+    public void viewRecord(View view){
+
+
+        datefromforfetch = dateFrom.getText().toString();
+        datetoforfetch = dateTo.getText().toString();
+
+        if(drivernameforfetch.equalsIgnoreCase(getResources().getString(R.string.sj_select_driver))){
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_driver),
+                    Toast.LENGTH_SHORT).show();
+        }
+        else if (datefromforfetch.isEmpty())
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_from_date), Toast.LENGTH_SHORT).show();
+
+        else if (datetoforfetch.isEmpty())
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_to_date), Toast.LENGTH_SHORT).show();
+        else {
+
+            idfromserver.clear();
+            datefromserver.clear();
+            driveridfromserver.clear();
+            drivernamefromserver.clear();
+            amountfromserver.clear();
+            amountspentfromserver.clear();
+            invoicefromserver.clear();
+            balancefromserver.clear();
+            /*invoicenumberfromserver.clear();
+            invoicenumberintoserver.clear();
+            invoicelistintoserver.clear();
+            invoicelistfromserver.clear();
+            currentinvoiceid.clear();*/
+
+            //Breakdowncount=0;
+
+            new getFuelListFromServer().execute();
+        }
+    }
+
+
+
 
     private void initiateeditPopupWindow(final int rownumber) {
         try {
@@ -688,11 +946,12 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             balanceintoserver="null";
             invoiceintoserver="null";
 
-
+            currentrowid=rownumber;
             LayoutInflater inflater = (LayoutInflater) Manage_Fuel_Navigation.this
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.screen_popup_fuel_edit,
                     (ViewGroup) findViewById(R.id.popup_element));
+            popuplayout=layout;
             pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150, WindowManager.LayoutParams.WRAP_CONTENT, true);
             pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
             pwindo.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -702,6 +961,16 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             drivernamespinner=(Spinner)layout.findViewById(R.id.selectdrivernamespinner);
             amountgivenedit=(EditText)layout.findViewById(R.id.amountgivenedit);
             amountspentedit=(EditText)layout.findViewById(R.id.amountspentedit);
+            outer=(LinearLayout)layout.findViewById(R.id.outerll);
+
+            /*String s="";
+            ArrayList<String> temp= new ArrayList<String>();
+            temp=invoicelistfromserver.get(rownumber);
+            for (int i=0;i<invoicenumberfromserver.get(rownumber);i++){
+                s=s+temp.get(i);
+            }
+            Toast.makeText(Manage_Fuel_Navigation.this,s,Toast.LENGTH_SHORT).show();*/
+
 
             dateedit.setText(datefromserver.get(rownumber));
 
@@ -715,6 +984,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             dateedit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    datecheck=3;
                     showTruitonDatePickerDialog(v);
                 }
             });
@@ -801,20 +1071,32 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                 }
             });
 
-            txtUploadInvoice=(TextView)layout.findViewById(R.id.uploadinvoicepettycashtext);
+            txtUploadInvoice=(TextView)layout.findViewById(R.id.uploadinvoicepettycashtext_0);
             if(!invoicefromserver.get(rownumber).equalsIgnoreCase("--")){
-                txtUploadInvoice.setText(invoicefromserver.get(rownumber));
-                invoiceintoserver=invoicefromserver.get(rownumber);
+                txtUploadInvoice.setText(invoicelistfromserver.get(rownumber).get(0));
+                for(int i=1;i<invoicenumberfromserver.get(rownumber);i++)
+                {
+                    addNewView(i,5+i-1);
+                    TextView tv = (TextView)layout.findViewWithTag("uploadinvoicepettycashtext_"+i);
+                    tv.setText(invoicelistfromserver.get(rownumber).get(i));
+                }
             }
 
-            btnUploadInvoice=(Button)layout.findViewById(R.id.btn_uploadinvoicepettycash);
+            /*for(int i=1;i<invoicenumberfromserver.get(rownumber);i++)
+            {
+                addNewView(i);
+                TextView tv = (TextView)layout.findViewWithTag("uploadinvoicepettycashtext_"+i);
+                tv.setText(invoicelistfromserver.get(rownumber).get(i));
+            }*/
+
+            /*btnUploadInvoice=(Button)layout.findViewById(R.id.btn_uploadinvoicepettycash_0);
             btnUploadInvoice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.e("+++","yes clicked");
                     uploadfirst();
                 }
-            });
+            });*/
 
 
         } catch (Exception e) {
@@ -852,7 +1134,18 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
     }
 
-    public void uploadfirst(){
+    public void uploadfirst(View view){
+
+        String tag=view.getTag().toString();
+        int id=Integer.parseInt(tag.split("_")[2]);
+        Toast.makeText(Manage_Fuel_Navigation.this,id+"",Toast.LENGTH_SHORT).show();
+        setinvoicename=(TextView)popuplayout.findViewWithTag("uploadinvoicepettycashtext_"+id);
+        if(id==currentinvoiceid.get(currentrowid)&&id>(invoicenumberintoserver.get(currentrowid)-1))
+            newinvoice=true;
+        else
+            newinvoice=false;
+        currentuploadid=id;
+        Toast.makeText(Manage_Fuel_Navigation.this,newinvoice+"",Toast.LENGTH_SHORT).show();
         Intent intent1 = new Intent(this, FileChooser.class);
         startActivityForResult(intent1,REQUEST_PATH);
     }
@@ -865,7 +1158,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                     Log.e("+++",data.getStringExtra("GetFileName")+"+++++++++++++++++++++++++++++++++++++++++++++++++++");
                     String curFileName = data.getStringExtra("GetFileName");
                     String curFileName1 = data.getStringExtra("GetPath");
-                    txtUploadInvoice.setText(curFileName);
+                    setinvoicename.setText(curFileName);
                     String invoicevaluepath=curFileName1+"/"+curFileName;
                 Log.e("path",invoicevaluepath);
                     uploadInvoiceTheard(invoicevaluepath);
@@ -977,8 +1270,8 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                             JSONObject ResObj = jsonObj.getJSONObject("upload_data");
 
                             Log.e("file_name","!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ResObj.getString("file_name"));
-                                invoiceintoserver=ResObj.getString("file_name");
-                                Log.e("into",""+invoiceintoserver);
+                                uploadedinvoicename=ResObj.getString("file_name");
+                                Log.e("into",""+uploadedinvoicename);
                             //ImagePath=Config.Uploadsip+"Image/"+ResObj.getString("file_name");
                         }
                     }
@@ -999,8 +1292,27 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
                         public void run() {
 
                             Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_upload_complete), Toast.LENGTH_SHORT).show();
+                            if(newinvoice==true) {
+                                invoicelistintoserver.get(currentrowid).add(uploadedinvoicename);
+                                invoicenumberintoserver.set(currentrowid, invoicenumberintoserver.get(currentrowid) + 1);
+                                Toast.makeText(Manage_Fuel_Navigation.this, uploadedinvoicename + "--" + invoicenumberintoserver.get(currentrowid) + "--" + invoicelistintoserver.get(currentrowid).get(invoicenumberintoserver.get(currentrowid) - 1), Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                invoicelistintoserver.get(currentrowid).set(currentuploadid,uploadedinvoicename);
+                            }
                         }
                     });
+                    /*if(newinvoice==true){
+                        invoicelistintoserver.get(currentrowid).add(setinvoicename.getText().toString());
+                        invoicenumberintoserver.set(currentrowid,invoicenumberintoserver.get(currentrowid)+1);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+
+
+                            }
+                        });
+                        //Toast.makeText(Manage_Fuel_Navigation.this,setinvoicename.getText().toString()+"--"+invoicenumberintoserver.get(currentrowid),Toast.LENGTH_SHORT).show();
+                    }*/
                 }
                 //close the streams //
                 fileInputStream.close();
@@ -1144,6 +1456,14 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
         protected void onPreExecute(){
             progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_wait),
                     getResources().getString(R.string.sj_fetching_information), true);
+            invoiceintoserver=invoicelistintoserver.get(currentrowid).get(0);
+            for(int i=1;i<invoicenumberintoserver.get(currentrowid);i++){
+                if(invoicelistintoserver.get(currentrowid).get(i).equalsIgnoreCase("--"))
+                    continue;
+                else
+                    invoiceintoserver=invoiceintoserver+"~"+invoicelistintoserver.get(currentrowid).get(i);
+            }
+            Toast.makeText(Manage_Fuel_Navigation.this,invoiceintoserver,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -1155,7 +1475,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
                 url= Config.ip+"PettyCash_api/editPettyCash/date/"+ URLEncoder.encode(dateintoserver,"UTF-8")+"/driver_id/"+URLEncoder.encode(driveridintoserver,"UTF-8")+
                         "/amount_given/"+URLEncoder.encode(amountgivenintoserver,"UTF-8")+"/amount_spend/"+URLEncoder.encode(amountspentintoserver,"UTF-8")+"/balance/"+URLEncoder.encode(balanceintoserver,"UTF-8")+"/invoice_doc/"+URLEncoder.encode(invoiceintoserver,"UTF-8")+
-                        "/pc_id/"+editfuelid;
+                        "/pc_id/"+editfuelid+"/amount_for/fuel";
 
 
                 try
@@ -1296,6 +1616,499 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
             progressDialog2.dismiss();
         }
     }
+
+
+
+    private void initiatePopupWindowhawkeyeAlert(String title,String message, String notification_message,final String type) {
+        try {
+            previous_alert_type=type;
+            String busid="";
+            String busname="";
+
+            if(!type.equalsIgnoreCase("normal")){
+                String[] split= type.split("~");
+                busid=split[1];
+                busname=split[2];
+            }
+            //Toast.makeText(Hawkeye_navigation.this,busid+busname,Toast.LENGTH_SHORT).show();
+            final String id=busid;
+            final String name=busname;
+
+            LayoutInflater inflater = (LayoutInflater) Manage_Fuel_Navigation.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.screen_popup_alert,(ViewGroup) findViewById(R.id.popup_element));
+            if(!type.equalsIgnoreCase("normal"))
+                layout = inflater.inflate(R.layout.screen_popup_alert_breakdown,(ViewGroup) findViewById(R.id.popup_element));
+            pwindo = new PopupWindow(layout, WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha(200);
+            //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
+            topRow=(TextView)layout.findViewById(R.id.blueStudentnametexthawkeye);
+            drivernamehawkeyetextbox=(TextView)layout.findViewById(R.id.txtViewdrivername);
+
+            if(message.isEmpty())
+                drivernamehawkeyetextbox.setVisibility(View.INVISIBLE);
+            else
+                drivernamehawkeyetextbox.setText(message);
+            topRow.setText(title);
+
+            Button btnClosePopup=(Button)layout.findViewById(R.id.btn_close_popup_hawkeye);
+            btnClosePopup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(type.equalsIgnoreCase("normal")) {
+                        layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();
+                    }
+                    else {
+                        layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();
+                        initiatePopupWindowhawkeyeReassign(type,id,name);
+                    }
+                    //fadePopup.dismiss();
+
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private void initiatePopupWindowhawkeyeReassign(String type,String busId, String busName) {
+        try {
+            frombusidintoserver="";
+            tobusnameintoserver="";
+            tobusidintoserver="";
+
+            LayoutInflater inflater = (LayoutInflater) Manage_Fuel_Navigation.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.screen_popup_reassign,(ViewGroup) findViewById(R.id.popup_element));
+
+            pwindo = new PopupWindow(layout, Resources.getSystem().getDisplayMetrics().widthPixels-150,WindowManager.LayoutParams.WRAP_CONTENT, true);
+            pwindo.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            layout_MainMenu.getForeground().setAlpha(200);
+            //Log.e("Lets Check",busroutename.get(checkinttag)+"("+busvechileno.get(checkinttag)+")");
+
+            brokendownBus=(TextView)layout.findViewById(R.id.brokendownbus);
+            reassignBusSelect=(Spinner)layout.findViewById(R.id.selectreassignbusspinner);
+
+            brokendownBus.setText(busName+"");
+            frombusidintoserver=busId;
+
+            if(busidforreassign.isEmpty())
+                new getSpareBusFromServer().execute();
+
+           // Toast.makeText(Hawkeye_navigation.this,busnameforreassign.size()+"",Toast.LENGTH_SHORT).show();
+
+            final String[] busnamefrom=new String[busnameforreassign.size()+1];
+            busnamefrom[0]=getResources().getString(R.string.sj_select_bus);
+            for(int i=1;i<=busnameforreassign.size();i++){
+                busnamefrom[i]=busnameforreassign.get(i-1);
+                //Toast.makeText(Hawkeye_navigation.this,busnamefrom[i],Toast.LENGTH_SHORT).show();
+            }
+
+
+            ArrayAdapter<String> adapterbusname = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, busnamefrom) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+                public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                    View v =super.getDropDownView(position, convertView, parent);
+                    Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/ROBOTO-LIGHT.TTF");
+                    ((TextView) v).setTypeface(externalFont);
+                    ((TextView) v).setTextSize(20);
+                    ((TextView) v).setMinHeight(70);
+                    return v;
+                }
+            };
+
+            adapterbusname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            reassignBusSelect.setAdapter(adapterbusname);
+
+
+            reassignBusSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String item = parent.getItemAtPosition(position).toString();
+                    tobusnameintoserver=item;
+
+                    Log.e("spinner selected for ad",item);
+                    for (int i = 0; i < busnameforreassign.size(); i++) {
+                        if (tobusnameintoserver.equals(busnameforreassign.get(i))) {
+                            tobusidintoserver = busidforreassign.get(i);
+
+                        }
+                    }
+
+                }
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            Button btnClosePopup=(Button)layout.findViewById(R.id.btn_reassign_bus);
+            btnClosePopup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        /*layout_MainMenu.getForeground().setAlpha(0);
+                        pwindo.dismiss();*/
+                    reassignBus();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void reassignBus(){
+
+        //Toast.makeText(Hawkeye_navigation.this,frombusidintoserver+tobusidintoserver+tobusnameintoserver+"",Toast.LENGTH_SHORT).show();
+        if(tobusnameintoserver.equalsIgnoreCase(getResources().getString(R.string.sj_select_bus))){
+            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_select_bus),
+                    Toast.LENGTH_LONG).show();
+        }
+
+        else
+            new reassignbustoserver().execute();
+
+
+    }
+
+
+    class reassignbustoserver extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected void onPreExecute(){
+            progressDialog2 = ProgressDialog.show(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_please_wait),
+                    getResources().getString(R.string.sj_fetching_information), true);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+
+                Jsonfunctions sh = new Jsonfunctions();
+                ServiceModel reg = new ServiceModel();
+
+                Log.e("add",frombusidintoserver+" "+tobusidintoserver);
+
+                String url= Config.ip+"BusList_api/reassignBus/from_bus_id/"+frombusidintoserver+"/to_bus_id/"+tobusidintoserver;
+                String response;
+
+                try
+                {
+                    try
+                    {
+                        Log.e("url above service call",url);
+                        String jsonStr = sh.makeServiceCall(url,Jsonfunctions.GET);
+                        Log.e("url below service call",url);
+                        if (jsonStr != null) {
+                            try {
+                                JSONObject Jobj = new JSONObject(jsonStr);
+                                response=Jobj.getString("responsecode");
+                                if(Jobj.getString("responsecode").equals("1"))
+                                {
+                                    //JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+                                    runOnUiThread(new Runnable(){
+
+                                        @Override
+                                        public void run(){
+                                            //update ui here
+                                            // display toast here
+                                            Toast.makeText(Manage_Fuel_Navigation.this, getResources().getString(R.string.sj_reassigned_successfully), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+
+                                }
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            Log.e("ServiceHandler", "Couldn't get any data from the url");
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result){
+            progressDialog2.dismiss();
+            layout_MainMenu.getForeground().setAlpha(0);
+            if(pwindo!=null&&pwindo.isShowing()) {
+                pwindo.dismiss();
+            }
+        }
+    }
+
+
+
+    class getSpareBusFromServer extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+                try {
+                    Jsonfunctions sh = new Jsonfunctions();
+                    ServiceModel reg = new ServiceModel();
+                    Log.e("url", Config.ip + "BusList_api/listSpareBuses");
+                    String jsonStr1 = sh.makeServiceCall(Config.ip + "BusList_api/listSpareBuses", Jsonfunctions.GET);
+
+                    if (jsonStr1 != null) {
+                        try {
+                            JSONObject Jobj = new JSONObject(jsonStr1);
+
+                            if (Jobj.getString("responsecode").equals("1")) {
+                                JSONArray jsonArray = Jobj.getJSONArray("result_arr");
+
+                                for (int j = 0; j < jsonArray.length(); j++) {
+
+                                    JSONObject obj = jsonArray.getJSONObject(j);
+                                    Log.e("+++", obj.getString("bus_Id"));
+                                    String id = obj.getString("bus_Id");
+                                    busidforreassign.add(id);
+                                    Log.e("+++", obj.getString("name"));
+                                    String name = obj.getString("name");
+                                    busnameforreassign.add(name);
+
+                                }
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.e("ServiceHandler", "Couldn't get any data from the url");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+    public void addMoreInvoice(View view){
+        /*TextView tv=new TextView(Manage_Fuel_Navigation.this);
+        tv.setLayoutParams( new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        tv.setText("testing");
+        outer.addView(tv,5);*/
+
+        /*String tag=view.getTag().toString();
+        int idtoadd=Integer.parseInt(tag.split("_")[2]);*/
+        //Toast.makeText(Manage_Fuel_Navigation.this,currentrowid+"",Toast.LENGTH_SHORT).show();
+        TextView temp=(TextView)popuplayout.findViewWithTag("uploadinvoicepettycashtext_"+currentinvoiceid.get(currentrowid));
+        //Toast.makeText(Manage_Fuel_Navigation.this,currentrowid+"",Toast.LENGTH_SHORT).show();
+        if(temp!=null&&temp.getText().equals(getResources().getString(R.string.stv_no_file_chosen)))
+            Toast.makeText(Manage_Fuel_Navigation.this,getResources().getString(R.string.sj_please_upload_first),Toast.LENGTH_SHORT).show();
+        else {
+            int idtoadd = currentinvoiceid.get(currentrowid) + 1;
+            LinearLayout ll=(LinearLayout) popuplayout.findViewById(R.id.addmorelayout);
+            int position= outer.indexOfChild(ll)-1;
+            currentinvoiceid.set(currentrowid, idtoadd);
+            //Toast.makeText(Manage_Fuel_Navigation.this, idtoadd + "", Toast.LENGTH_SHORT).show();
+            addNewView(idtoadd, position+1);
+        }
+
+    }
+
+    public void addNewView(int id,int position){
+        //OUTER
+        LinearLayout wrap =new LinearLayout(Manage_Fuel_Navigation.this);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(0,dptopx(10),0,0);
+
+        wrap.setLayoutParams(layoutParams);
+        wrap.setTag("uploadinvoiceview_"+id);
+        wrap.setOrientation(LinearLayout.HORIZONTAL);
+
+
+        //LEFT
+        LinearLayout left =new LinearLayout(Manage_Fuel_Navigation.this);
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT,1);
+        left.setLayoutParams(layoutParams2);
+
+
+        //RIGHT
+        LinearLayout right =new LinearLayout(Manage_Fuel_Navigation.this);
+        LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT,1);
+        right.setLayoutParams(layoutParams3);
+
+        //RIGHT INNER
+        Button click= new Button(Manage_Fuel_Navigation.this);
+        LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams4.setMargins(dptopx(10),0,0,0);
+        click.setPadding(dptopx(8),dptopx(8),dptopx(8),dptopx(8));
+        click.setLayoutParams(layoutParams4);
+        click.setTag("btn_uploadinvoicepettycash_"+id);
+        click.setText(getResources().getString(R.string.sb_choose_file));
+        click.setBackgroundColor(Color.parseColor("#2196f3"));
+        click.setTextColor(Color.WHITE);
+        click.setTextSize(dptopx(20));
+        click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadfirst(view);
+            }
+        });
+
+        TextView tv=new TextView(Manage_Fuel_Navigation.this);
+        LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(
+                dptopx(200), LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams5.setMargins(dptopx(10),0,0,0);
+        tv.setLayoutParams(layoutParams5);
+        tv.setText(getResources().getString(R.string.stv_no_file_chosen));
+        tv.setTag("uploadinvoicepettycashtext_"+id);
+        tv.setMaxLines(1);
+        tv.setTextSize(dptopx(20));
+
+
+        ImageView iv=new ImageView(Manage_Fuel_Navigation.this);
+        LinearLayout.LayoutParams layoutParams6 = new LinearLayout.LayoutParams(
+                dptopx(30), dptopx(30));
+        layoutParams6.gravity=Gravity.CENTER_VERTICAL;
+        layoutParams6.setMargins(dptopx(10),0,0,0);
+        iv.setLayoutParams(layoutParams6);
+        iv.setImageResource(R.drawable.multiply2);
+        iv.setTag("removeinvoicepettycash_"+id);
+        iv.setPadding(dptopx(5),dptopx(5),dptopx(5),dptopx(5));
+        iv.setBackgroundResource(R.drawable.spinnerborder);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeInvoice(view);
+            }
+        });
+
+
+
+        //ADDING VIEWS
+        right.addView(click,0);
+        right.addView(tv,1);
+        right.addView(iv,2);
+
+        wrap.addView(left,0);
+        wrap.addView(right,1);
+
+        outer.addView(wrap,position);
+    }
+
+
+    public int dptopx(int dp){
+        Resources r = Manage_Fuel_Navigation.this.getResources();
+        int px = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                r.getDisplayMetrics()
+        );
+        return  px;
+    }
+
+    public void removeInvoice(View view){
+        String tag=view.getTag().toString();
+        int id=Integer.parseInt(tag.split("_")[1]);
+        LinearLayout ll=(LinearLayout) popuplayout.findViewWithTag("uploadinvoiceview_"+id);
+        TextView temp=(TextView)popuplayout.findViewWithTag("uploadinvoicepettycashtext_"+id);
+        Toast.makeText(Manage_Fuel_Navigation.this,temp.getText(),Toast.LENGTH_SHORT).show();
+        if (temp.getText().equals(getResources().getString(R.string.stv_no_file_chosen))){
+            currentinvoiceid.set(currentrowid,currentinvoiceid.get(currentrowid)-1);
+        }
+        else {
+            invoicelistintoserver.get(currentrowid).set(id, "--");
+        }
+        //invoicenumberintoserver.set(currentrowid,invoicenumberintoserver.get(currentrowid)-1);
+        outer.removeView(ll);
+    }
+
+
+
+    /**
+     * Showing notification with text only
+     */
+    private void showNotificationMessage(Context context, String title, String message, Intent intent) {
+        notificationUtils = new NotificationUtils(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notificationUtils.showNotificationMessage(title, message, intent);
+    }
+
+    /**
+     * Showing notification with text and image
+     */
+    private void showNotificationMessageWithBigImage(Context context, String title, String message, Intent intent, String imageUrl) {
+        notificationUtils = new NotificationUtils(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notificationUtils.showNotificationMessage(title, message, intent, imageUrl);
+    }
+
+
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationUtils.clearNotifications(getApplicationContext());
+
+    }
+
+
+    @Override
+    public void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
+
 
 
 
@@ -1505,6 +2318,7 @@ public class Manage_Fuel_Navigation extends AppCompatActivity
 
                     }
                     else if(item.equalsIgnoreCase("Edit")){
+                        Log.e("spinner position",position+"");
                         initiateeditPopupWindow(position);
                     }
                     if(item.equalsIgnoreCase("Delete")){

@@ -51,14 +51,14 @@
         <RelativeLayout
             android:id="@+id/relativelayoutdrivercreeation"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_below="@id/adddrivers"
             android:paddingLeft="10sp"
             android:paddingRight="10sp">
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:stretchColumns="2">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -175,7 +175,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="220sp"
+            android:layout_below="@id/relativelayoutdrivercreeation"
             android:layout_marginBottom="1sp"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"

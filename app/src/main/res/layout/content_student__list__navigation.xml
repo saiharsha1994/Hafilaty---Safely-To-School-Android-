@@ -1,155 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Student_Misbehaviour_Navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="70sp"
-    android:background="#ffffff" >
-
+    android:id="@+id/outerlayout"
+    android:foreground="@drawable/dimmer"
+    >
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:background="@drawable/spinnerborder">
-        <Spinner
-            android:id="@+id/studentlistspinneroption"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp">
+
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
             android:layout_marginTop="5dp"
-            android:layout_width="130dp"
-            android:layout_height="35dp"
-            android:textSize="25sp"
             android:gravity="center"
-            />
-    </RelativeLayout>
+            android:background="@drawable/spinnerborder">
+            <Spinner
+                android:id="@+id/studentlistspinneroption"
+                android:layout_marginTop="5dp"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:textSize="25sp"
+                android:gravity="center"
+                />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativelayoutstudentlistcreeation"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50sp"
-        android:paddingLeft="10sp"
-        android:paddingRight="10sp">
-        <TableLayout
+        <RelativeLayout
+            android:id="@+id/relativelayoutstudentlistcreeation"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="2">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:orientation="horizontal"
-                android:background="@drawable/tablecolorblue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0sp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="10sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:text="@string/stv_Student_List"
-                    android:id="@+id/studentlistlisttextbox" />
-            </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:layout_marginTop="5dp">
             <TableLayout
-                android:id="@+id/leaeonetable"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
-                android:stretchColumns="8">
-                <TableRow
-                    android:id="@+id/leaveonerowid"
-                    android:background="@drawable/borderwithlightblue"
+                android:layout_height="wrap_content"
+                android:stretchColumns="2">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="50sp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
                     <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_Student_List_name"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="10sp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:textSize="20sp"
-                        android:id="@+id/studentlistnametextbox"
-                        />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                        android:textColor="@android:color/white"
+                        android:text="@string/stv_Student_List"
+                        android:id="@+id/studentlistlisttextbox" />
+                </LinearLayout>
+                <TableLayout
+                    android:id="@+id/leaeonetable"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:stretchColumns="8">
+                    <TableRow
+                        android:id="@+id/leaveonerowid"
+                        android:background="@drawable/borderwithlightblue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_Student_List_name"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/studentlistnametextbox"
+                            />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_Student_List_class"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/studentlistclasstextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_Student_List_class"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/studentlistclasstextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_Student_List_section"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/studentlistsectiontextbox" />
-                    <LinearLayout
-                        android:layout_width="1.5sp"
-                        android:layout_height="match_parent" >
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_Student_List_section"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/studentlistsectiontextbox" />
+                        <LinearLayout
+                            android:layout_width="1.5sp"
+                            android:layout_height="match_parent" >
 
-                        <View style="@style/Divider" />
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="50sp"
-                        android:text="@string/stv_Student_List_parents_no"
-                        android:layout_weight="1.5"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:textSize="20sp"
-                        android:id="@+id/studentlistmobilenotextbox" />
-                </TableRow>
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_height="50sp"
+                            android:text="@string/stv_Student_List_parents_no"
+                            android:layout_weight="1.5"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textSize="20sp"
+                            android:id="@+id/studentlistmobilenotextbox" />
+                    </TableRow>
+                </TableLayout>
             </TableLayout>
-        </TableLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/studentlistlist"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="150sp"
-        android:layout_marginBottom="1sp"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
-        android:paddingLeft="0sp"
-        android:paddingRight="0sp">
-
-        <ListView
-            android:id="@+id/studentlistselectedlist"
-            android:layout_marginTop="0sp"
-            android:layout_height="match_parent"
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/studentlistlist"
             android:layout_width="match_parent"
-            android:clickable="true"
-            android:longClickable="true"
-            android:divider="#000000">
-        </ListView>
+            android:layout_height="match_parent"
+            android:layout_below="@id/relativelayoutstudentlistcreeation"
+            android:layout_marginBottom="1sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:paddingLeft="0sp"
+            android:paddingRight="0sp">
+
+            <ListView
+                android:id="@+id/studentlistselectedlist"
+                android:layout_marginTop="0sp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:longClickable="true"
+                android:divider="#000000">
+            </ListView>
+        </RelativeLayout>
+
+
     </RelativeLayout>
-
-
-</RelativeLayout>
+</FrameLayout>

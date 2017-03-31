@@ -1,7 +1,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Student_Misbehaviour_Navigation"
+    tools:context=".Manage_Fuel_Navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/outerlayout"
@@ -9,11 +9,199 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Button
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:paddingTop="70sp"
+            android:id="@+id/header">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tableborderlightblue">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/tablecolorblue">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0sp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="10sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/selectcriteriabreakdowns"
+                        android:text="@string/stv_select_criteria"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5sp"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:text="@string/stv_date_from"
+                        android:id="@+id/fueldatefromtext"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:layout_marginBottom="5sp"
+
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:text="@string/stv_date_to"
+                        android:gravity="center_vertical"
+                        android:id="@+id/fueldatetotext"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5sp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:text="@string/stv_select_driver"
+                        android:id="@+id/fuelselectdrivertext"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:layout_marginBottom="5sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="20dp">
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/fueldatefrombox"
+                            android:focusable="false"
+                            android:singleLine="true"
+                            android:inputType="none"
+                            android:textIsSelectable="true"
+                            android:background="@drawable/spinnerborder"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:paddingLeft="15dp"/>
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/fueldatetobox"
+                            android:focusable="false"
+                            android:singleLine="true"
+                            android:inputType="none"
+                            android:textIsSelectable="true"
+                            android:background="@drawable/spinnerborder"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:paddingLeft="15dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/spinnerborder"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            >
+                            <Spinner
+                                android:id="@+id/fueldriverselectionspinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="40sp"
+                                android:gravity="center"
+                                android:layout_marginTop="3dp"
+                                />
+                        </RelativeLayout>
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="center"
+                            android:background="#2196f3"
+                            android:padding="8sp"
+                            android:textSize="20sp"
+                            android:onClick="viewRecord"
+                            android:textColor="@android:color/white"
+                            android:text="@string/sb_view_records"
+                            android:id="@+id/fuelviewrecords"
+                            android:layout_weight="1"
+                            />
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="center"
+                            android:background="#2196f3"
+                            android:padding="8sp"
+                            android:textSize="20sp"
+                            android:onClick="getpopup"
+                            android:textColor="@android:color/white"
+                            android:text="@string/sb_add_payment"
+                            android:id="@+id/addpayment"
+                            android:layout_weight="1"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </TableLayout>
+        </LinearLayout>
+        <!--<Button
             android:layout_width="wrap_content"
             android:layout_height="45sp"
             android:layout_marginLeft="60sp"
-            android:layout_marginTop="70sp"
             android:layout_marginRight="10dp"
             android:gravity="center"
             android:layout_alignParentRight="true"
@@ -23,7 +211,8 @@
             android:onClick="getpopup"
             android:textColor="@android:color/white"
             android:text="@string/sb_add_payment"
-            android:id="@+id/addpayment" />
+            android:id="@+id/addpayment"
+            android:layout_below="@id/header"/>-->
         <!--
         <View
             android:layout_width="match_parent"
@@ -49,16 +238,16 @@
             android:background="@android:color/darker_gray"/>-->
 
         <RelativeLayout
-            android:id="@+id/relativelayoutbuscreeation"
+            android:id="@+id/relativelayoutfuel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/addpayment"
+            android:layout_below="@id/header"
             android:paddingLeft="10sp"
             android:paddingRight="10sp">
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:stretchColumns="2">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,12 +381,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="220sp"
+            android:layout_below="@id/relativelayoutfuel"
             android:layout_marginBottom="1sp"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
             android:paddingLeft="0sp"
-            android:paddingRight="0sp">
+            android:paddingRight="0sp"
+            android:id="@+id/listmanage">
 
             <ListView
                 android:id="@+id/paymentcreatedlist"
